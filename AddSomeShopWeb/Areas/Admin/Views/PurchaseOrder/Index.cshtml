@@ -1,0 +1,41 @@
+﻿@model List<PurchaseOrder>
+
+<div class="container">
+    <div class="row pt-4 pb-5">
+        <!-- Title -->
+        <div class="col-lg-8 col-sm-12 text-start mb-3 mb-sm-0">
+            <h2 class="text-primary">PurchaseOrder List</h2>
+        </div>
+
+        <!-- Create Button -->
+        <div class="col-lg-2 col-sm-4 text-center mb-3 mb-sm-0">
+            <a asp-area="Admin" asp-controller="PurchaseOrder" asp-action="Create" class="btn btn-primary">
+                <i class="bi bi-cart"></i> Purchase Order
+            </a>
+        </div>
+
+        <!-- Export Button -->
+        <div class="col-lg-2 col-sm-4 text-center mb-3 mb-sm-0">
+            <a href="#" class="btn btn-success">
+                <i class="bi bi-box-arrow-up"></i> Export
+            </a>
+        </div>
+    </div>
+
+
+    <table id="tblpurchaseOrderData" class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Supplier</th>
+                <th>Payment Term</th>
+                <th>Created On</th>
+                <th>Created By</th>
+                <th></th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+@section Scripts{
+    <script src="~/js/purchaseorder.js"></script>
+}

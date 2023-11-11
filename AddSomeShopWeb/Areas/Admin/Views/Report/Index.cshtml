@@ -1,0 +1,105 @@
+﻿@model List<ABC.Models.Product>
+
+@{
+    var orderDetails = (List<ABC.Models.OrderDetail>)ViewBag.OrderDetails;
+}
+
+
+
+<div class="container">
+    <!--Title-->
+    <div class="row pt-4 pb-3">
+        <div class="col-lg-6 col-sm-12 text-start mb-3 mb-sm-0">
+            <h2 class="text-primary">Reports & Analytics</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-8">
+            <div class="row">
+                <div class="col-6">
+                    <div class="alert alert-dismissible alert-success">
+                        <p>Sales Revenue</p>
+                        <strong>Php</strong> @ViewBag.SalesRevenue
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="alert alert-dismissible alert-success">
+                        <p>Gross Profit</p>
+                        <strong>Php</strong> @ViewBag.Profit
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="alert alert-dismissible alert-success">
+                        <span>
+                            <p>No. of Items Sold</p> @ViewBag.NumberOfItemsSold
+                        </span>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="alert alert-dismissible alert-success">
+                        <span>
+                            <p>Purchase Cost</p> @ViewBag.TotalCostPrice
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4">
+
+            <table class="table table-active scrollable-table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Best Seller</th>
+                        <th>Qty.</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var product in Model)
+                    {
+                        var totalSold = (int)orderDetails.Where(detail => detail.ProductId == product.Id).Sum(detail => detail.Count);
+                        var totalPrice = orderDetails
+                        .Where(detail => detail.ProductId == product.Id)
+                        .Sum(detail => detail.Product != null ? (detail.Product.RetailPrice * detail.Count) : 0);
+
+                        <tr>
+                            <td><img src="@product.ImageUrl" alt="Product Image" width="50" height="50"></td>
+                            <td>@product.productName</td>
+                            <td>@totalSold</td>
+                            <td>@String.Format("{0:C}", totalPrice)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row pt-2 pb-2">
+        <div class="col-12">
+            <div class="row pb-2">
+                <h4 class="text-primary">Sales & Purchase</h4>
+                <hr />
+            </div>
+            <div class="row">
+                <div class="chart1">
+                    <canvas id="salesChart"
+                            data-sales-revenue="@ViewBag.SalesRevenue"
+                            data-total-cost-price="@ViewBag.TotalCostPrice"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="//cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+    <script src="~/js/salesrep.js"></script>
+}
+

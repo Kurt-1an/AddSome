@@ -1,0 +1,146 @@
+﻿@model UserManagement
+
+<div class="container">
+    <form method="post">
+
+        <!--New User-->
+        <div class="row pt-4 pb-3" id="topbar">
+
+            <!-- Title -->
+            <div class="col-10">
+                <h2 class="text-primary">New User</h2>
+            </div>
+
+            <!-- Save Button -->
+            <div class="col-lg-2 col-sm-6 text-center mb-3 mb-sm-0 d-flex justify-content-center align-items-center">
+                <button type="submit" class="btn btn-success"><i class="bi bi-floppy"></i> Save</button>
+            </div>
+
+        </div>
+
+        <!--Breadcrumb-->
+        <div class="row pb-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="UserManagement" asp-action="Index">User List</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">New User</li>
+                </ol>
+            </nav>
+        </div>
+
+        <!--Customer Information-->
+        <div class="row pt-4 pb-3">
+            <div class="col-12">
+                <div class="border p-3 container shadow">
+
+                    <!--Title-->
+                    <div class="row pb-2">
+                        <h4 class="text-primary">User Information</h4>
+                        <hr />
+                    </div>
+
+                    <!-- UserID -->
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="input-group mb-3">
+                                <label class="input-group-text" id="inputGroup-sizing-two">User ID:</label>
+                                <input class="form-control text-muted" placeholder="Auto-generetad user ID" aria-describedby="inputGroup-sizing-one" disabled>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- First Name -->
+                        <div class="col-6">
+                            <div class="input-group mb-3">
+                                <label asp-for="FirstName" class="input-group-text" id="inputGroup-sizing-two"></label>
+                                <input asp-for="FirstName" type="text" class="form-control" aria-describedby="inputGroup-sizing-one" required>
+                            </div>
+                        </div>
+
+                        <!-- Last Name -->
+                        <div class="col-6">
+                            <div class="input-group mb-3">
+                                <label asp-for="LastName" class="input-group-text" id="inputGroup-sizing-two"></label>
+                                <input asp-for="LastName" type="text" class="form-control" aria-describedby="inputGroup-sizing-two" required>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!--Contact Number-->
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="input-group mb-3">
+                                <label asp-for="ContactNumber" class="input-group-text" id="inputGroup-sizing-three"></label>
+                                <input asp-for="ContactNumber" type="text" class="form-control" aria-describedby="inputGroup-sizing-three" required>
+                            </div>
+                        </div>
+
+                            <div class="col-6">
+                                <div class="input-group mb-3">
+                                    <label asp-for="Address" class="input-group-text" id="inputGroup-sizing-four"></label>
+                                    <input asp-for="Address" type="tel" class="form-control" aria-describedby="inputGroup-sizing-four" required>
+                                </div>
+                            </div>
+                    </div>
+
+
+                    <!-- AccessLevel -->
+                    <div class="row">
+                        <div class="input-group mb-3">
+                            <label asp-for="AccessLevel" class="input-group-text" for="exampleSelect1"></label>
+                            <select asp-for="AccessLevel" class="form-select" id="exampleSelect1" required>
+                                <option>Admin</option>
+                                <option>Employee</option>
+                                <option>Rider</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Authentication-->
+        <div class="row pt-4 pb-3">
+            <div class="col-12">
+                <div class="border p-3 container shadow">
+
+                    <!--Title-->
+                    <div class="row pb-2">
+                        <h4 class="text-primary">Authentication</h4>
+                        <hr />
+                    </div>
+
+
+                    <div class="row">
+                        <!-- Email Address -->
+                        <div class="col-6">
+                            <div class="input-group mb-3">
+                                <label asp-for="Email" class="input-group-text" id="inputGroup-sizing-two"></label>
+                                <input asp-for="Email" type="text" class="form-control" aria-describedby="inputGroup-sizing-one" required>
+                            </div>
+                        </div>
+
+                        <!-- Password -->
+                        <div class="col-6">
+                            <div class="input-group mb-3">
+                                <label asp-for="Password" class="input-group-text" id="inputGroup-sizing-two"></label>
+                                <input asp-for="Password" type="password" class="form-control" aria-describedby="inputGroup-sizing-two" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Back on top Button -->
+        <div class="col-lg-2 col-sm-6 text-center mb-3 mb-sm-0 position-fixed" style="bottom: 20px; right: 20px;">
+            <!-- Back Button -->
+            <a href="#" class="btn btn-secondary rounded-circle">
+                <i class="bi bi-arrow-up"></i>
+            </a>
+        </div>
+    </form>
+</div>
+

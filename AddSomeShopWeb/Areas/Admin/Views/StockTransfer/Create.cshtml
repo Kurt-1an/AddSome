@@ -1,0 +1,122 @@
+﻿@model StockTransfer
+
+<div class="container">
+	<form method="post" id="transferForm">
+        <!--stock transfer-->
+        <div class="row pt-4 pb-3" id="topbar">
+            <!-- Title -->
+            <div class="col-lg-8 col-sm-12 text-start mb-3 mb-sm-0">
+                <h2 class="text-primary">Transfer Stock</h2>
+            </div>
+
+            <!-- Save Button -->
+            <div class="col-lg-2 col-sm-6 text-center mb-3 mb-sm-0">
+                <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Save</button>
+            </div>
+
+            <!-- Export Button -->
+            <div class="col-lg-2 col-sm-6 text-center mb-3 mb-sm-0">
+                <a href="#" class="btn btn-success">
+                    <i class="bi bi-box-arrow-up"></i> Export
+                </a>
+            </div>
+        </div>
+
+        <!--Breadcrumb-->
+        <div class="row pb-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="StockTransfer" asp-action="Index">Stock Transfer</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">New Stock Transfer</li>
+                </ol>
+            </nav>
+        </div>
+
+        <div class="row pb-2">
+            <div class="col-12">
+                <div class="border p-3 container shadow">
+                    <!--Title-->
+                    <div class="row pb-2">
+                        <h4 class="text-primary">Information</h4>
+                        <hr />
+                    </div>
+
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="input-group mb-3">
+                                <label asp-for="sourceLocation" class="input-group-text" for="source-loc"></label>
+                                <select asp-for="sourceLocation" class="form-select" id="source-loc">
+                                    <option>Addsome Business Corporation</option>
+                                    <option>Ahead Biz Computers</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="input-group mb-3">
+                                <label asp-for="destinationLocation" class="input-group-text" for="destination-loc"></label>
+                                <select asp-for="destinationLocation" class="form-select" id="destination-loc">
+                                    <option>Addsome Business Corporation</option>
+                                    <option>Ahead Biz Computers</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Product/s to adjust stock-->
+        <div class="row pb-2">
+            <div class="col-12">
+                <div class="border p-3 container shadow">
+                    <!--Title-->
+                    <div class="row pb-2">
+                        <h4 class="text-primary">Product</h4>
+                        <hr />
+                    </div>
+
+                    <div class="row pb-2">
+                        <div class="col-6">
+                            <label for="productSearch">Search for a Product:</label>
+                            <select id="productSearch" class="form-control"></select>
+                        </div>
+                    </div>
+
+                    <div class="row pb-2">
+                        <table id="tblData" class="table table-bordered table-striped table-hover" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Product Name</th>
+                                    <th>Cost Price</th>
+                                    <th>In Stock</th>
+                                    <th>Quantity to transfer</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="selectedProducts">
+                                <!-- Selected products will be added here -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="row pb-2 pt-2">
+                        <div class="input-group mb3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-sizing-default">Total</span>
+                            </div>
+                            <input type="number" class="form-control" id="totaldisplay" aria-label="total" aria-describedby="inputGroup-sizing-default" readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+	</form>
+</div>
+
+
+@section Scripts{
+	<script src="~/js/stocktransfer.js"></script>
+}

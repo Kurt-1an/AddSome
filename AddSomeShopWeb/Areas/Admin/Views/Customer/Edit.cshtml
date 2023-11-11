@@ -1,0 +1,226 @@
+﻿@model Customer
+
+<div class="container">
+    <form method="post">
+
+        <!--edit Customer-->
+        <div class="row pt-4 pb-3" id="topbar">
+
+            <!-- Title -->
+            <div class="col-10">
+                <h2 class="text-primary">Edit Customer</h2>
+            </div>
+
+
+            <!-- update Button -->
+            <div class="col-lg-2 col-sm-6 text-center mb-3 mb-sm-0">
+                <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+            
+        </div>
+
+        <!--Breadcrumb-->
+        <div class="row pb-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Customer" asp-action="Index">Customer List</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">New Customer</li>
+                </ol>
+            </nav>
+        </div>
+
+        <!--Customer Information-->
+        <div class="row pt-4 pb-3">
+            <div class="col-12">
+                <div class="border p-3 container shadow">
+
+                    <!--Title-->
+                    <div class="row pb-2">
+                        <h4 class="text-primary">Customer Information</h4>
+                        <hr />
+                    </div>
+
+                    <div class="row">
+                        <!-- First Name -->
+                        <div class="col-6">
+                            <div class="input-group mb-3">
+                                <label asp-for="FirstName" class="input-group-text" id="inputGroup-sizing-two"></label>
+                                <input asp-for="FirstName" type="text" class="form-control" aria-describedby="inputGroup-sizing-one" required>
+                            </div>
+                        </div>
+
+                        <!-- Last Name -->
+                        <div class="col-6">
+                            <div class="input-group mb-3">
+                                <label asp-for="LastName" class="input-group-text" id="inputGroup-sizing-two"></label>
+                                <input asp-for="LastName" type="text" class="form-control" aria-describedby="inputGroup-sizing-two" required>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!--Email Address-->
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="input-group mb-3">
+                                <label asp-for="EmailAddress" class="input-group-text" id="inputGroup-sizing-three"></label>
+                                <input asp-for="EmailAddress" type="text" class="form-control" aria-describedby="inputGroup-sizing-three" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Number -->
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="input-group mb-3">
+                                <label asp-for="ContactNumber" class="input-group-text" id="inputGroup-sizing-four"></label>
+                                <input asp-for="ContactNumber" type="tel" class="form-control" aria-describedby="inputGroup-sizing-four" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Customer Type -->
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="input-group mb-3">
+                                <label asp-for="Type" class="input-group-text" for="exampleSelect1"></label>
+                                <select asp-for="Type" class="form-select" id="exampleSelect1" required>
+                                    <option>Walk-In</option>
+                                    <option>Chat-based</option>
+                                    <option>On-Call</option>
+                                    <option>Website</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Billing Address -->
+                    <div class="row pb-2">
+                        <h4 class="text-primary">Billing Address</h4>
+                        <hr />
+                    </div>
+
+                    <div class="row">
+                        <!-- Apt./Suite/Unit no. -->
+                        <div class="col-6">
+                            <div class="input-group mb-3">
+                                <label asp-for="ApSuUn" class="input-group-text" id="inputGroup-sizing-two"></label>
+                                <input asp-for="ApSuUn" type="text" class="form-control" aria-describedby="inputGroup-sizing-one" required>
+                            </div>
+                        </div>
+
+                        <!-- Street/Subdivision -->
+                        <div class="col-6">
+                            <div class="input-group mb-3">
+                                <label asp-for="StreetorSubd" class="input-group-text" id="inputGroup-sizing-three"></label>
+                                <input asp-for="StreetorSubd" type="text" class="form-control" aria-describedby="inputGroup-sizing-three" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- Barangay -->
+                        <div class="col-6">
+                            <div class="input-group mb-3">
+                                <label asp-for="Barangay" class="input-group-text" id="inputGroup-sizing-four"></label>
+                                <input asp-for="Barangay" type="tel" class="form-control" aria-describedby="inputGroup-sizing-four" required>
+                            </div>
+                        </div>
+
+                        <!-- City -->
+                        <div class="col-6">
+                            <div class="input-group mb-3">
+                                <label asp-for="City" class="input-group-text" id="inputGroup-sizing-two"></label>
+                                <input asp-for="City" type="text" class="form-control" aria-describedby="inputGroup-sizing-two" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- Province -->
+                        <div class="col-6">
+                            <div class="input-group mb-3">
+                                <label asp-for="Province" class="input-group-text" id="inputGroup-sizing-three"></label>
+                                <input asp-for="Province" type="text" class="form-control" aria-describedby="inputGroup-sizing-three" required>
+                            </div>
+                        </div>
+
+                        <!-- Zip Code -->
+                        <div class="col-6">
+                            <div class="input-group mb-3">
+                                <label asp-for="ZipCode" class="input-group-text" id="inputGroup-sizing-four"></label>
+                                <input asp-for="ZipCode" type="tel" class="form-control" aria-describedby="inputGroup-sizing-four" required>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Purchases -->
+        <div class="row pt-4 pb-3">
+            <div class="col-12">
+                <div class="border p-3 container shadow">
+                    <!--Title-->
+                    <div class="row pb-2">
+                        <h4 class="text-primary">Purchases</h4>
+                        <hr />
+                    </div>
+
+                    <!-- Total -->
+                    <div style="text-align: right;">
+                        <h5 class="heading-label mx-6 pl-2">Total: ₱ </h5>
+                    </div>
+
+                    <!-- Customer Purchase Table -->
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>Product Name</th>
+                                <th>SKU</th>
+                                <th>Retail Price</th>
+                                <th>Quantity</th>
+                                <th>Date & Time</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- to be added content -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+        <!--Additional Notes-->
+        <div class="row pt-4 pb-3">
+            <div class="col-12">
+                <div class="border p-3 container shadow">
+                    <!--Title-->
+                    <div class="row pb-2">
+                        <h4 class="text-primary">Additional Notes</h4>
+                        <hr />
+                    </div>
+
+                    <!--Description-->
+                    <div class="row">
+                        <div class="input-group mb-3">
+                            <textarea class="form-control" style="height: 100px"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Back on top Button -->
+        <div class="col-lg-2 col-sm-6 text-center mb-3 mb-sm-0 position-fixed" style="bottom: 20px; right: 20px;">
+            <!-- Back Button -->
+            <a href="#" class="btn btn-secondary rounded-circle">
+                <i class="bi bi-arrow-up"></i>
+            </a>
+        </div>
+    </form>
+</div>

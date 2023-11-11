@@ -1,0 +1,49 @@
+﻿@* <script>
+    var barcode = '';
+
+    document.addEventListener('keydown', function (evt) {
+        if (evt.key !== 'Enter') {
+            barcode += evt.key;
+            handleBarcode(barcode);
+        }
+    });
+
+    function handleBarcode(scanned_barcode) {
+        // You can handle the barcode value here (e.g., display it on the page)
+        document.querySelector('#BarcodeInput').innerHTML = scanned_barcode;
+    }
+
+    // Prevent the form from submitting on Enter key press
+    document.addEventListener('keypress', function (evt) {
+        if (evt.key === 'Enter') {
+            evt.preventDefault();
+        }
+    });
+</script> *@
+
+<script>
+    var barcode = '';
+
+    document.addEventListener('keydown', function (evt) {
+        if (evt.key !== 'Enter') {
+            barcode += evt.key;
+            handleBarcode(barcode);
+        }
+    });
+
+    function handleBarcode(scanned_barcode) {
+        // You can handle the barcode value here (e.g., display it on the page)
+        document.querySelector('#BarcodeInput').innerHTML = scanned_barcode;
+    }
+
+    // Prevent the form from submitting on Enter key press in input fields
+    document.addEventListener('keypress', function (evt) {
+        if (evt.key === 'Enter' && evt.target.tagName !== 'TEXTAREA') {
+            evt.preventDefault();
+        }
+    });
+
+</script>
+
+
+

@@ -1,0 +1,27 @@
+﻿<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        // Assuming your form has an ID of 'myForm'
+        $('#myForm').on('submit', function (e) {
+            e.preventDefault(); // Prevent the form from submitting immediately
+            $('#confirmationModal').modal('show'); // Show the modal
+        });
+
+        // Handle the confirmation button click
+        $('#confirmSubmit').click(function () {
+            $('#myForm').off('submit').submit(); // Unbind the 'submit' event and submit the form
+        });
+
+        // Handle the cancel button click
+        $('#cancelSubmit').click(function () {
+            $('#confirmationModal').modal('hide'); // Close the modal
+        });
+
+        // Handle the cancel button click
+        $('#cancelSubmitX').click(function () {
+            $('#confirmationModal').modal('hide'); // Close the modal
+        });
+    });
+</script>

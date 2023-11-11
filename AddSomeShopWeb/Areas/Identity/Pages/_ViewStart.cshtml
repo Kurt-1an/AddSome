@@ -1,0 +1,9 @@
+﻿
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+
+    if (User.IsInRole(SD.Role_Admin))
+    {
+        Layout = "/Views/Shared/_AdminLayout.cshtml";
+    }
+}

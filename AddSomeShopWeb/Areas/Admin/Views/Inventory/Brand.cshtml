@@ -1,0 +1,65 @@
+﻿<div class="container">
+    <form method="post">
+        <!--New Product-->
+        <div class="row pt-4 pb-3">
+            <!-- Title -->
+            <div class="col-lg-8 col-sm-12 text-start mb-3 mb-sm-0">
+                <h2 class="text-primary">New Brand</h2>
+            </div>
+
+            <!-- Export Button -->
+            <div class="col-lg-2 col-sm-6 text-center mb-3 mb-sm-0">
+                <a href="#" class="btn btn-success">
+                    <i class="bi bi-floppy"></i> Save
+                </a>
+            </div>
+
+            <!-- Delete Button -->
+            <div class="col-lg-2 col-sm-6 text-center mb-3 mb-sm-0">
+                <a href="#" class="btn btn-primary">
+                    <i class="bi bi-floppy"></i> Save as draft
+                </a>
+            </div>
+        </div>
+
+        <!--Breadcrumb-->
+        <div class="row pb-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Inventory" asp-action="Index">Product List</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Brand</li>
+                </ol>
+            </nav>
+        </div>
+
+        <!--Brand Information-->
+        <div class="row pt-4 pb-3">
+            <div class="col-12">
+                <div class="border p-3 container shadow">
+                    <!--Title-->
+                    <div class="row pb-2">
+                        <h4 class="text-primary">Brand Information</h4>
+                        <hr />
+                    </div>
+
+                    <!--Brand Information-->
+                    <div class="row">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="inputGroup-brand-name">Barcode</span>
+                            <input type="text" class="form-control" aria-describedby="inputGroup-brand-name">
+                        </div>
+                    </div>
+
+                    <!--Brand Description-->
+                    <div class="row">
+                        <div class="input-group mb-3">
+                            <label class="input-group-text">Description <span class="text-danger">*</span></label>
+                            <textarea class="form-control" style="height: 100px"></textarea>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,44 @@
+﻿/* Styles for the small box */
+.small-box {
+    border-radius: 0.25rem;
+    box-shadow: 0 0 1px rgba(0,0,0,.125), 0 1px 3px rgba(0,0,0,.2);
+    display: block;
+    margin-bottom: 5px;
+    position: relative;
+}
+
+    .small-box .inner {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding-top: 10px;
+        padding-left: 1rem;
+        font-size: 15px;
+        color: white;
+        font-weight: bold;
+    }
+
+    .small-box .small-box-footer {
+        background-color: rgba(0, 0, 0, 0.1);
+        color: white;
+        display: block;
+        padding: 3px 0;
+        position: relative;
+        text-align: center;
+    }
+
+.chart1 {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 300px;
+}
+
+.chart2 {
+    display: block;
+    position: relative;
+    width: 90%;
+    height: 90%;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}

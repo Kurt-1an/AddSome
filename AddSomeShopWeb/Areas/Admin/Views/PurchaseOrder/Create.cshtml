@@ -1,0 +1,226 @@
+﻿@model PurchaseOrder
+
+<div class="container">
+    <form method="post" id="myForm">
+        <!--New Product-->
+        <div class="row pt-4 pb-3" id="topbar">
+            <!-- Title -->
+            <div class="col-lg-8 col-sm-12 text-start mb-3 mb-sm-0">
+                <h2 class="text-primary">New PO</h2>
+            </div>
+
+
+            <!-- Save Button -->
+            <div class="col-lg-2 col-sm-6 text-center mb-3 mb-sm-0">
+                <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Save and Send</button>
+            </div>
+
+            <!-- Export Button -->
+            <div class="col-lg-2 col-sm-6 text-center mb-3 mb-sm-0">
+                <a href="#" class="btn btn-success">
+                    <i class="bi bi-box-arrow-up"></i> Export
+                </a>
+            </div>
+        </div>
+
+        <!--Breadcrumb-->
+        <div class="row pb-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="PurchaseOrder" asp-action="Index">Purchase Order</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">New Po</li>
+                </ol>
+            </nav>
+        </div>
+
+        <!--Information-->
+        <div class="row pb-2">
+            <div class="col-12">
+                <div class="border p-3 container shadow">
+                    <!--Title-->
+                    <div class="row pb-2">
+                        <h4 class="text-primary">Information</h4>
+                        <hr />
+                    </div>
+
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="input-group mb-3">
+                                <label asp-for="SupplierName" class="input-group-text" for="supplier-name"></label>
+                                <select asp-for="SupplierName" class="form-select" id="supplier-name">
+                                    <option>Supplier 1</option>
+                                    <option>Supplier 2</option>
+                                    <option>Supplier 3</option>
+                                    <option>Supplier 4</option>
+                                    <option>Supplier 5</option>
+                                </select>
+                            </div>
+
+                            <div class="input-group mb-3">
+                                <label asp-for="ShipmentPreference" class="input-group-text" for="shipment-preference"></label>
+                                <select asp-for="ShipmentPreference" class="form-select" id="shipment-preference">
+                                    <option>Shipment Preference 1</option>
+                                    <option>Shipment Preference 2</option>
+                                    <option>Shipment Preference 3</option>
+                                    <option>Shipment Preference 4</option>
+                                    <option>Shipment Preference 5</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="input-group mb-3">
+                                <label asp-for="PaymentTerm" class="input-group-text" for="payment-term"></label>
+                                <select asp-for="PaymentTerm" class="form-select" id="payment-term">
+                                    <option>Payment Term 1</option>
+                                    <option>Payment Term 2</option>
+                                    <option>Payment Term 3</option>
+                                </select>
+                            </div>
+
+                            <div class="input-group mb-3">
+                                <label asp-for="ExpectedDeliveryDate" class="input-group-text" id="ExpectedDeliveryDate"></label>
+                                <input asp-for="ExpectedDeliveryDate" type="datetime-local" class="form-control" aria-describedby="ExpectedDeliveryDate">
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-group mb-3">
+                            <label asp-for="LocationDelivery" class="input-group-text" id="LocationDelivery"></label>
+                            <input asp-for="LocationDelivery" type="text" class="form-control" aria-describedby="LocationDelivery">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <h5 class="text-primary">Contact Person</h5>
+
+                        <div class="col-6">
+                            <div class="input-group mb-3">
+                                <label asp-for="EmployeeName" class="input-group-text" id="employee-name"></label>
+                                <input asp-for="EmployeeName" type="text" class="form-control" aria-describedby="employee-name">
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="input-group mb-3">
+                                <label asp-for="ContactNumber" class="input-group-text" id="contact-number"></label>
+                                <input asp-for="ContactNumber" type="tel" class="form-control" aria-describedby="contact-number">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <!--Product/s to adjust stock-->
+        <div class="row pb-2">
+            <div class="col-12">
+                <div class="border p-3 container shadow">
+                    <!--Title-->
+                    <div class="row pb-2">
+                        <h4 class="text-primary">Product</h4>
+                        <hr />
+                    </div>
+
+                    <div class="row pb-2">
+                        <div class="col-6">
+                            <label for="productSearch">Search for a Product:</label>
+                            <select id="productSearch" class="form-control"></select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Table for purchased-->
+        <div class="row pb-2">
+            <div class="col-12">
+                <div class="border p-3 container shadow">
+                    <!--Title-->
+                    <div class="row pb-2">
+                        <h4 class="text-primary">Products</h4>
+                        <hr />
+                    </div>
+
+                    <div class="row pb-2">
+                        <table id="tblData" class="table table-bordered table-striped table-hover" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Name</th>
+                                    <th>Cost</th>
+                                    <th>Qty</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="selectedProducts">
+                                <!-- Selected products will be added here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Additional Note-->
+        <div class="row pb-2">
+            <div class="col-12">
+                <div class="border p-3 container shadow">
+                    <!--Title-->
+                    <div class="row pb-2">
+                        <h4 class="text-primary">Additional Note</h4>
+                        <hr />
+                    </div>
+
+                    <div class="row">
+                        <div class="input-group mb-3">
+                            <textarea asp-for="AdditionalNote" class="form-control" style="height: 100px"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Back on top Button -->
+        <div class="col-lg-2 col-sm-6 text-center mb-3 mb-sm-0 position-fixed" style="bottom: 20px; right: 20px;">
+            <!-- Back Button -->
+            <a href="#" class="btn btn-secondary rounded-circle">
+                <i class="bi bi-arrow-up"></i>
+            </a>
+        </div>
+    </form>
+
+    <!--Modal-->
+    <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmationModalLabel">Confirm Submission</h5>
+                    <button type="button" class="close" id="cancelSubmitX" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to submit this form?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="cancelSubmit">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="confirmSubmit">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+@section Scripts{
+    <script src="~/js/purchsearch.js"></script>
+}
+

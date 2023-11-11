@@ -1,0 +1,39 @@
+﻿@model List<StockTransfer>
+
+<div class="container">
+    <div class="row pt-4 pb-5">
+        <!-- Title -->
+        <div class="col-lg-8 col-sm-12 text-start mb-3 mb-sm-0">
+            <h2 class="text-primary">Stock Transfer</h2>
+        </div>
+
+        <!-- Create Button -->
+        <div class="col-lg-2 col-sm-4 text-center mb-3 mb-sm-0">
+            <a asp-area="Admin" asp-controller="StockTransfer" asp-action="Create" class="btn btn-primary">
+                <i class="bi bi-plus-lg"></i> Stock Transfer
+            </a>
+        </div>
+
+        <!-- Export Button -->
+        <div class="col-lg-2 col-sm-4 text-center mb-3 mb-sm-0">
+            <a href="#" class="btn btn-success">
+                <i class="bi bi-box-arrow-up"></i> Export
+            </a>
+        </div>
+    </div>
+
+
+    <table id="tblstocktransferData" class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Number of Transferred Products</th>
+                <th>Transferred Quantity</th>
+                <th>Source </th>
+                <th>Destination </th>
+                <th>Transfer Date</th>
+                <th></th>
+            </tr>
+        </thead>
+    </table>
+</div>

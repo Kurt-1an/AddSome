@@ -1,0 +1,47 @@
+﻿@model List<Supplier> 
+
+<div class="container-fluid">
+    <div class="row pt-4 pb-5">
+        <!-- Title -->
+        <div class="col-lg-8 col-sm-12 text-start mb-3 mb-sm-0">
+            <h2 class="text-primary">Suppliers </h2>
+        </div>
+
+        <!-- New Supplier Button -->
+        <div class="col-lg-2 col-sm-4 text-center mb-3 mb-sm-0">
+            <div class="dropdown d-flex justify-content-center">
+                <a class="btn btn-primary" role="button" asp-area="Admin" asp-controller="Supplier" asp-action="Create">
+                    <i class="bi bi-plus-square"></i> New Supplier
+                </a>
+            </div>
+        </div>
+
+        <!-- Export Button -->
+        <div class="col-lg-2 col-sm-4 text-center mb-3 mb-sm-0">
+            <a href="#" class="btn btn-success">
+                <i class="bi bi-box-arrow-up"></i> Export
+            </a>
+        </div>
+    </div>
+
+    <!-- Supplier Table -->
+    <table id="tblsupplierData" class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Company Name</th>
+                <th>Email Address</th>
+                <th>Contact Number</th>
+                <th>Address</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
+        </thead>
+    </table>
+
+</div>
+
+
+@section Scripts{
+    <script src="~/js/supplier.js"></script>
+}
+

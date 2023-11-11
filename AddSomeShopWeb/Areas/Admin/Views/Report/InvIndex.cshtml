@@ -1,0 +1,51 @@
+﻿
+<script src="//cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+<script src="~/js/reportindex.js"></script>
+
+<div class="container">
+    <!--Title-->
+    <div class="row pt-4 pb-3">
+        <div class="col-lg-6 col-sm-12 text-start mb-3 mb-sm-0">
+            <h2 class="text-primary">Inventory Report</h2>
+        </div>
+    </div>
+    <div class="row pt-2 pb-2">
+        <div class="col-4">
+            <div class="alert alert-dismissible alert-success">
+                <p>Total Products</p>
+                <h4>@ViewBag.TotalProducts</h4>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="alert alert-dismissible alert-info">
+                <p>Total Categories</p>
+                <h4>@ViewBag.TotalCategories</h4>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="alert alert-dismissible alert-warning">
+                <p>No. of Purchase Orders Created</p>
+                <h4>@ViewBag.TotalPurOrders</h4>
+            </div>
+        </div>
+    </div>
+    <div class="row pt-2 pb-2">
+        <div class="col-12">
+            <div class="row pb-2">
+                <h4 class="text-primary">Inventory Levels</h4>
+                <hr />
+            </div>
+            <div class="row">
+                <div class="chart2">
+                    <canvas id="inventoryChart"
+                            data-instock-products="@ViewBag.InstockProducts"
+                            data-low-stock-products="@ViewBag.LowStockProducts"
+                            data-out-of-stock-products="@ViewBag.OutOfStockProducts"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

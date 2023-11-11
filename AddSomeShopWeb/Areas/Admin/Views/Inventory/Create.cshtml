@@ -1,0 +1,362 @@
+﻿<div class="container">
+    <form method="post">
+        <!--New Product-->
+        <div class="row pt-4 pb-3" id="topbar">
+            <!-- Title -->
+            <div class="col-lg-8 col-sm-12 text-start mb-3 mb-sm-0">
+                <h2 class="text-primary">New Product</h2>
+            </div>
+
+
+            <!-- Export Button -->
+            <div class="col-lg-2 col-sm-6 text-center mb-3 mb-sm-0">
+                <a href="#" class="btn btn-success">
+                    <i class="bi bi-floppy"></i> Save
+                </a>
+            </div>
+
+            <!-- Delete Button -->
+            <div class="col-lg-2 col-sm-6 text-center mb-3 mb-sm-0">
+                <a href="#" class="btn btn-primary">
+                    <i class="bi bi-floppy"></i> Save as draft
+                </a>
+            </div>
+        </div>
+
+        <!--Breadcrumb-->
+        <div class="row pb-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Inventory" asp-action="Index">Product List</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Data</li>
+                </ol>
+            </nav>
+        </div>
+
+        <!--Product Images-->
+        <div class="row pt-4 pb-3">
+            <div class="col-12">
+                <div class="border p-3 container shadow">
+                    <!--Title-->
+                    <div class="row pb-2">
+                        <h4 class="text-primary">Product Images</h4>
+                        <hr />
+                    </div>
+
+                    <!--Product Images-->
+                    <div class="row">
+                        <div class="col-4">
+                            <label for="formFileone" class="form-label mt-2">For Inventory <span class="text-danger">*</span></label>
+                            <input class="form-control" type="file" id="formFileone">
+                        </div>
+
+                        <div class="col-2">
+                            <div class="mb-2 rounded-3 d-flex align-items-center justify-content-center" style="font-size: 5em">
+                                <i class="bi bi-image"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Product Images-->
+                    <div class="row">
+                        <div class="col-4">
+                            <label for="formFiletwo" class="form-label mt-2">For Website <span class="text-danger">*</span></label>
+                            <input class="form-control" type="file" id="formFiletwo">
+                        </div>
+
+                        <div class="col-2">
+                            <div class="mb-2 rounded-3 d-flex align-items-center justify-content-center" style="font-size: 5em">
+                                <i class="bi bi-image"></i>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="mb-2 rounded-3 d-flex align-items-center justify-content-center" style="font-size: 5em">
+                                <i class="bi bi-image"></i>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="mb-2 rounded-3 d-flex align-items-center justify-content-center" style="font-size: 5em">
+                                <i class="bi bi-image"></i>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Product Information-->
+        <div class="row pt-4 pb-3">
+            <div class="col-12">
+                <div class="border p-3 container shadow">
+                    <!--Title-->
+                    <div class="row pb-2">
+                        <h4 class="text-primary">Product Information</h4>
+                        <hr />
+                    </div>
+
+                    <!--Barcode-->
+                    <div class="row">
+                        <div class="col-10">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="inputGroup-sizing-one">Barcode</span>
+                                <input type="text" class="form-control" aria-describedby="inputGroup-sizing-one">
+                            </div>
+                        </div>
+
+                        <div class="col-2">
+                            <a asp-controller="Category" asp-action="Index" class="btn btn-primary form-control">
+                                Scan
+                            </a>
+                        </div>
+                    </div>
+
+                    <!--Product SKU-->
+                    <div class="row">
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" id="inputGroup-sizing-two">Product SKU <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" aria-describedby="inputGroup-sizing-two">
+                        </div>
+                    </div>
+
+                    <!--Product Name-->
+                    <div class="row">
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" id="inputGroup-sizing-three">Product Name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" aria-describedby="inputGroup-sizing-three">
+                        </div>
+                    </div>
+
+                    <!--Category & Sub-->
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="input-group mb-3">
+                                <label class="input-group-text" id="inputGroup-sizing-four">Category <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" aria-describedby="inputGroup-sizing-four">
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="input-group mb-3">
+                                <label class="input-group-text" id="inputGroup-sizing-five">Sub-category <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" aria-describedby="inputGroup-sizing-five">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Supplier & Brand-->
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="input-group mb-3">
+                                <label class="input-group-text" id="inputGroup-sizing-four">Supplier <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" aria-describedby="inputGroup-sizing-four">
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="input-group mb-3">
+                                <label class="input-group-text" id="inputGroup-sizing-five">Brand <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" aria-describedby="inputGroup-sizing-five">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Warehouse-->
+                    <div class="row">
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" id="inputGroup-sizing-three">Warehouse <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" aria-describedby="inputGroup-sizing-three">
+                        </div>
+                    </div>
+
+                    <!--Description-->
+                    <div class="row">
+                        <div class="input-group mb-3">
+                            <label class="input-group-text">Description <span class="text-danger">*</span></label>
+                            <textarea class="form-control" style="height: 100px"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Pricing & Waranty-->
+        <div class="row pt-4 pb-3">
+            <div class="col-6">
+                <!--Pricing-->
+
+                <div class="border p-3 container shadow">
+                    <!--Title-->
+                    <div class="row pb-2">
+                        <h4 class="text-primary">Pricing</h4>
+                        <hr />
+                    </div>
+
+                    <!--Cost Price-->
+                    <div class="row">
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" id="inputGroup-sizing-two">Cost Price <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" aria-describedby="inputGroup-sizing-two">
+                        </div>
+                    </div>
+
+                    <!--Retail Price-->
+                    <div class="row">
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" id="inputGroup-sizing-two">Retail Price <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" aria-describedby="inputGroup-sizing-two">
+                        </div>
+                    </div>
+                </div>
+
+
+                <!--Warranty-->
+                <div class="border p-3 container mt-3 shadow">
+                    <div class="row pb-2">
+                        <h4 class="text-primary">Warranty</h4>
+                        <hr />
+                    </div>
+
+                    <!--Type-->
+                    <div class="row">
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="exampleSelect1">Type <span class="text-danger">*</span></label>
+                            <select class="form-select" id="exampleSelect1">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!--Duration-->
+                    <div class="row">
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="exampleSelect1">Duration <span class="text-danger">*</span></label>
+                            <select class="form-select" id="exampleSelect1">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!--Duration-->
+                    <div class="row">
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="exampleSelect1">PProvider <span class="text-danger">*</span></label>
+                            <select class="form-select" id="exampleSelect1">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 my-auto">
+                <div class="border p-3 container shadow">
+                    <!--Title-->
+                    <div class="row pb-2">
+                        <h4 class="text-primary">Inventory</h4>
+                        <hr />
+                    </div>
+
+                    <!--Stock Quantity-->
+                    <div class="row">
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" id="inputGroup-sizing-two">Stock Quantity <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" aria-describedby="inputGroup-sizing-two">
+                        </div>
+                    </div>
+
+                    <!--Min. Stock Quantity-->
+                    <div class="row">
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" id="inputGroup-sizing-three">Min. Stock Quantity <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" aria-describedby="inputGroup-sizing-three">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Product Specifications-->
+        <div class="row pt-4 pb-3">
+            <div class="col-12">
+                <div class="border p-3 container shadow">
+                    <!--Title-->
+                    <div class="row pb-2">
+                        <h4 class="text-primary">Product Specifications</h4>
+                        <hr />
+                    </div>
+
+                    <!--Spec 1-->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="inputGroup-sizing-one">Specification #1</span>
+                                <input type="text" class="form-control" aria-describedby="inputGroup-sizing-one">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Spec 2-->
+                    <div class="row">
+                        <div class="col-112">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="inputGroup-sizing-one">Specification #2</span>
+                                <input type="text" class="form-control" aria-describedby="inputGroup-sizing-one">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Spec 3-->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="inputGroup-sizing-one">Specification #3</span>
+                                <input type="text" class="form-control" aria-describedby="inputGroup-sizing-one">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Additional Notes-->
+        <div class="row pt-4 pb-3">
+            <div class="col-12">
+                <div class="border p-3 container shadow">
+                    <!--Title-->
+                    <div class="row pb-2">
+                        <h4 class="text-primary">Additional Notes</h4>
+                        <hr />
+                    </div>
+
+                    <!--Description-->
+                    <div class="row">
+                        <div class="input-group mb-3">
+                            <textarea class="form-control" style="height: 100px"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Back on top Button -->
+        <div class="col-lg-2 col-sm-6 text-center mb-3 mb-sm-0 position-fixed" style="bottom: 20px; right: 20px;">
+            <!-- Back Button -->
+            <a href="#" class="btn btn-secondary rounded-circle">
+                <i class="bi bi-arrow-up"></i>
+            </a>
+        </div>
+    </form>
+</div>

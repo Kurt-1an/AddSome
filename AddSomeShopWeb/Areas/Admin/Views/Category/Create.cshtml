@@ -1,0 +1,70 @@
+﻿@model Category
+
+<form method="post" id="myForm">
+	<div class="border p-3 mt-4 container">
+
+		<!--Title-->
+		<div class="row pb-2">
+			<h2 class="text-primary">Create Category</h2>
+			<hr/>
+		</div>
+
+		<!--Displays the list of mistakes-->
+		<div asp-validation-summary="ModelOnly"></div>
+
+		<!--Input Field One-->
+		<div class="mb-3 row">
+			<label asp-for="Name" class="col-form-label" for="inputCategory"></label>
+			<input asp-for="Name" class="form-control" placeholder="Ex. Cellphone, Cables..." id="inputCategory">
+			<span asp-validation-for="Name" class="text-danger"></span>
+		</div>
+
+		<!--Input Field Two-->
+		<div class="mb-3 row">
+			<label asp-for="DisplayOrder" class="col-form-label" for="inputOrder"></label>
+			<input asp-for="DisplayOrder" class="form-control" placeholder="Ex. 1, 2..." id="inputOrder">
+			<span asp-validation-for="DisplayOrder" class="text-danger"></span>
+		</div>
+
+		<!--Buttons-->
+		<div class="row">
+			<div class="col-6 col-md-3">
+				<button type="submit" class="btn btn-outline-primary form-control">Create</button>
+			</div>
+
+			<div class="col-6 col-md-3">
+				<a asp-controller="Category" asp-action="Index" class="btn btn-outline-secondary form-control">
+					Back
+				</a>
+			</div>
+		</div>
+	</div>
+</form>
+
+<!--Modal-->
+<div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="confirmationModalLabel">Confirm Submission</h5>
+				<button type="button" class="close" id="cancelSubmitX" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				Are you sure you want to submit this form?
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" id="cancelSubmit">Cancel</button>
+				<button type="button" class="btn btn-primary" id="confirmSubmit">Confirm</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+@section Scripts{
+	@{
+		<partial name="_ValidationScriptsPartial"/>
+		<partial name="_ConfirmationModalScript" />
+	}
+}

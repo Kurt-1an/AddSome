@@ -1,0 +1,52 @@
+﻿@model List<Product> 
+
+<div class="container">
+    <div class="row pt-4 pb-5">
+        <!-- Title -->
+        <div class="col-lg-8 col-sm-12 text-start mb-3 mb-sm-0">
+            <h2 class="text-primary">Product List</h2>
+        </div>
+
+        <!-- Dropdown Button -->
+        <div class="col-lg-2 col-sm-4 text-center mb-3 mb-sm-0">
+            <div class="dropdown d-flex justify-content-center">
+                <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="true">
+                    <i class="bi bi-plus-square"></i> Add
+                </a>
+
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <li><a class="dropdown-item" asp-area="Admin" asp-controller="Product" asp-action="Upsert">Product</a></li>
+                    <li>
+                        <a class="dropdown-item" asp-area="Admin" asp-controller="Category" asp-action="Index">Category</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+        <!-- Export Button -->
+        <div class="col-lg-2 col-sm-4 text-center mb-3 mb-sm-0">
+            <a href="#" class="btn btn-success">
+                <i class="bi bi-box-arrow-up"></i> Export
+            </a>
+        </div>
+    </div>
+
+    <table id="tblData" class="table table-bordered table-striped table-hover " action="width:100%">
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Barcode</th>
+                <th>Cost Price</th>
+                <th>Retail Price</th>
+                <th>Stock Qty</th>
+                <th>Supplier</th>
+                <th></th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+@section Scripts{
+    <script src="~/js/product.js"></script>
+}

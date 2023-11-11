@@ -1,0 +1,190 @@
+﻿@model Supplier
+
+<div class="container">
+    <form method="post">
+
+        <!--New Supplier-->
+        <div class="row pt-4 pb-3" id="topbar">
+
+            <!-- Title -->
+            <div class="col-8">
+                <h2 class="text-primary">New Supplier</h2>
+            </div>
+
+
+            <!-- Delete Button -->
+            <div class="col-lg-2 col-sm-6 text-end mb-3 mb-sm-0">
+                <button type="submit" class="btn btn-danger"><i class="bi bi-trash-fill"></i> Delete</button>
+            </div>
+        </div>
+
+        <!--Breadcrumb-->
+        <div class="row pb-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="People" asp-action="SupplierIndex">Supplier List</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">New Supplier</li>
+                </ol>
+            </nav>
+        </div>
+
+        <!--Supplier Information-->
+        <div class="row pt-4 pb-3">
+            <div class="col-12">
+                <div class="border p-3 container shadow">
+
+                    <!--Title-->
+                    <div class="row pb-2">
+                        <h4 class="text-primary">Supplier Information</h4>
+                        <hr />
+                    </div>
+
+                    <!-- Company Name -->
+                    <div class="row">
+                        <div class="input-group mb-3">
+                            <label asp-for="supplierCompanyName" class="input-group-text" id="inputGroup-sizing-two" ></label>
+                            <input asp-for="supplierCompanyName" type="text" class="form-control" aria-describedby="inputGroup-sizing-one" disabled>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- Contact Number-->
+                        <div class="col-6">
+                            <div class="input-group mb-3">
+                                <label asp-for="supplierContactNumber" class="input-group-text" id="inputGroup-sizing-two"></label>
+                                <input asp-for="supplierContactNumber" type="text" class="form-control" aria-describedby="inputGroup-sizing-two" disabled>
+                            </div>
+
+                            <!---Email Address-->
+                            <div class="input-group mb-3">
+                                <label asp-for="supplierEmail" class="input-group-text" id="inputGroup-sizing-three"></label>
+                                <input asp-for="supplierEmail" type="text" class="form-control" aria-describedby="inputGroup-sizing-three" disabled>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <!-- Description-->
+                            <div class="input-group">
+                                <label asp-for="supplierDescription" class="input-group-text"></label>
+                                <textarea asp-for="supplierDescription" class="form-control" style="height: 100px" disabled></textarea>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-3">
+                                <!--Status-->
+                                <div class="input-group mb-3">
+                                    <label asp-for="supplierStatus" class="input-group-text" for="exampleSelect1"></label>
+                                    <select asp-for="supplierStatus" class="form-select" id="exampleSelect1" disabled>
+                                        <option>Active</option>
+                                        <option>Inactive</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Billing Address -->
+        <div class="row pb-2">
+            <h4 class="text-primary">Billing Address</h4>
+            <hr />
+        </div>
+
+        <div class="row">
+            <!-- Lot and Blk no. -->
+            <div class="col-6">
+                <div class="input-group mb-3">
+                    <label asp-for="supplierLotBlk" class="input-group-text" id="inputGroup-sizing-two"></label>
+                    <input asp-for="supplierLotBlk" type="text" class="form-control" aria-describedby="inputGroup-sizing-one" disabled>
+                </div>
+            </div>
+
+            <!-- Street/Subdivision -->
+            <div class="col-6">
+                <div class="input-group mb-3">
+                    <label asp-for="supplierStreetSubdv" class="input-group-text" id="inputGroup-sizing-three"></label>
+                    <input asp-for="supplierStreetSubdv" type="text" class="form-control" aria-describedby="inputGroup-sizing-three" disabled>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Barangay -->
+            <div class="col-6">
+                <div class="input-group mb-3">
+                    <label asp-for="supplierBarangay" class="input-group-text" id="inputGroup-sizing-four"></label>
+                    <input asp-for="supplierBarangay" type="tel" class="form-control" aria-describedby="inputGroup-sizing-four" disabled>
+                </div>
+            </div>
+
+            <!-- City -->
+            <div class="col-6">
+                <div class="input-group mb-3">
+                    <label asp-for="supplierCity" class="input-group-text" id="inputGroup-sizing-two"></label>
+                    <input asp-for="supplierCity" type="text" class="form-control" aria-describedby="inputGroup-sizing-two" disabled>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Province -->
+            <div class="col-6">
+                <div class="input-group mb-3">
+                    <label asp-for="supplierProvince" class="input-group-text" id="inputGroup-sizing-three"></label>
+                    <input asp-for="supplierProvince" type="text" class="form-control" aria-describedby="inputGroup-sizing-three" disabled>
+                </div>
+            </div>
+
+            <!-- Zip Code -->
+            <div class="col-6">
+                <div class="input-group mb-3">
+                    <label asp-for="supplierZipCode" class="input-group-text" id="inputGroup-sizing-four"></label>
+                    <input asp-for="supplierZipCode" type="tel" class="form-control" aria-describedby="inputGroup-sizing-four" disabled>
+                </div>
+            </div>
+        </div>
+
+
+        <!--Additional Notes-->
+        <div class="row pt-4 pb-3">
+            <div class="col-12">
+                <div class="border p-3 container shadow">
+                    <!--Title-->
+                    <div class="row pb-2">
+                        <h4 class="text-primary">Additional Notes</h4>
+                        <hr />
+                    </div>
+
+                    <!--Description-->
+                    <div class="row">
+                        <div class="input-group mb-3">
+                            <textarea asp-for="supplierNote" class="form-control" style="height: 100px" disabled></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Back on top Button -->
+        <div class="col-lg-2 col-sm-6 text-center mb-3 mb-sm-0 position-fixed" style="bottom: 20px; right: 20px;">
+            <!-- Back Button -->
+            <a href="#" class="btn btn-secondary rounded-circle">
+                <i class="bi bi-arrow-up"></i>
+            </a>
+        </div>
+    </form>
+</div>
+
+
+
+@section Scripts{
+    @{
+        <partial name="_ConfirmationModalScript" />
+        <partial name="_BarcodeScript" />
+    }
+}
+

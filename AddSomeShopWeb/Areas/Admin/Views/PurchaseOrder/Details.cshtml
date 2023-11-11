@@ -1,0 +1,59 @@
+﻿@model PurchaseOrder
+
+<div class="container">
+    <input asp-for="Id" hidden />
+    <!--New Product-->
+    <div class="row pt-4 pb-3" id="topbar">
+        <!-- Title -->
+        <div class="col-lg-8 col-sm-12 text-start mb-3 mb-sm-0">
+            <h2 class="text-primary">PO Details</h2>
+        </div>
+
+        <!-- Export Button -->
+        <div class="col-lg-2 col-sm-6 text-center mb-3 mb-sm-0">
+            <a href="#" class="btn btn-success">
+                <i class="bi bi-box-arrow-up"></i> Export
+            </a>
+        </div>
+    </div>
+
+    <!--Breadcrumb-->
+    <div class="row pb-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="PurchaseOrder" asp-action="Index">Purchase Order</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Details</li>
+            </ol>
+        </nav>
+    </div>
+
+    <!--Information-->
+    <div class="row pb-2">
+        <div class="col-12">
+            <div class="border p-3 container shadow">
+                <!--Title-->
+                <div class="row pb-2">
+                    <h4 class="text-primary">Order Details</h4>
+                    <hr />
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>Buyer:</strong> @Model.SupplierName</p>
+                        <p><strong>Assigned to:</strong> @Model.EmployeeName</p>
+                        <p><strong>Payment Term:</strong> @Model.PaymentTerm</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Order Date:</strong> @Model.ExpectedDeliveryDate</p>
+                        <p><strong>Expected Delivery:</strong> @Model.ExpectedDeliveryDate</p>
+                        <p><strong>Location:</strong> @Model.LocationDelivery</p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <!--table-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

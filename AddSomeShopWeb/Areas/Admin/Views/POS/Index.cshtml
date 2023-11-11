@@ -1,0 +1,433 @@
+﻿@model ShoppingCartVM
+
+
+<link rel="stylesheet" type="text/css" href="~/css/PosIndex.css">
+
+<div class="container-fluid">
+
+	<!-- TITLE -->
+	<div class="row pt-4 pb-2">
+		<div class="col-lg-8 col-sm-12 text-start mb-3 mb-sm-0">
+			<h2 class="text-primary">Point of Sales</h2>
+		</div>
+		<div class="col-lg-4 col-sm-4 mb-3 mb-sm-0 justify-content-between">
+			<button id="newSaleButton" class="btn btn-success"> New Sale</button>
+		</div>
+	</div>
+
+	<!--========================
+		 CUSTOMER INFO CONTAINER
+		========================-->
+	<div class="accordion-item">
+		<h2 class="accordion-header" id="headingOne">
+			<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+				<h5>Customer Information</h5>
+			</button>
+		</h2>
+		<div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+			<div class="accordion-body">
+				<div class="col-sm-12 pt-2 pb-3">
+
+					<div class="row">
+						<div class="col-6">
+							<input type="text" class="form-control" id="firstName" placeholder="First Name" required />
+						</div>
+						<div class="col-6">
+							<input type="text" class="form-control" id="lastName" placeholder="Last Name" required />
+						</div>
+					</div>
+					<div class="row pt-2 pb-1">
+						<div class="col-6">
+							<input type="email" class="form-control" id="emailAdd" placeholder="Email address" />
+						</div>
+						<div class="col-6">
+							<input type="tel" class="form-control" id="contactNum" placeholder="Contact Number" required />
+						</div>
+					</div>
+					<div class="row pt-3 pb-1 justify-content-center">
+						<div class="row pb-1">
+							<h7>Billing Address</h7>
+						</div>
+						<div class="row pt-1 pb-1">
+							<div class="col-4">
+								<input type="text" class="form-control" id="houseNum" placeholder="Apt./Suite/Unit/House #" />
+							</div>
+							<div class="col-4">
+								<input type="text" class="form-control" id="streetName" placeholder="Street or Subdiv." required />
+							</div>
+							<div class="col-4">
+								<input type="text" class="form-control" id="brgy" placeholder="Barangay" required />
+							</div>
+						</div>
+						<div class="row pt-1 pb-2">
+							<div class="col-4">
+								<input type="text" class="form-control" id="cityName" placeholder="City" />
+							</div>
+							<div class="col-4">
+								<input type="text" class="form-control" id="provinceName" placeholder="Province" required />
+							</div>
+							<div class="col-4">
+								<input type="text" class="form-control" id="zipCode" maxlength="4" placeholder="Zip Code" required />
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+	<!--========================
+		SEARCH PRODUCT CONTAINER
+		========================-->
+	<div class="row pt-2 pb-4">
+		<div class="col-sm-8 pt-2 pb-3">
+			<div class="border p-3 container shadow">
+				<div class="row pb-1">
+					<h5>Products</h5> <hr />
+				</div>
+
+				<div class="row pb-1">
+					<!--SEARCH BAR-->
+					<div class="col-12">
+						<label for="productSearch">Search for a Product:</label>
+						<select id="productSearch" class="form-control"></select>
+					</div>
+				</div>
+
+				<!--DISPLAY SELECTED ITEMS-->
+				<div class="row justify-content-center pt-4 pb-3">
+					<div class="col-sm-12">
+						<table class="table table-striped table-sm" id="tbProduct">
+							<thead>
+								<tr>
+									<th></th>
+									<th>Product</th>
+									<th>Quantity</th>
+									<th>Price</th>
+									<th>Total</th>
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+
+		<!--========================
+		  START OF DETAILS CONTAINER
+		========================-->
+		<div class="col-sm-4 pt-2 pb-3">
+			<div class="border p-3 container shadow justify-content-center">
+				<div class="row pb-1">
+					<h5>Details</h5>
+					<hr />
+				</div>
+
+				<!--Order Summary-->
+				<div class="col-12">
+
+					<h5 class="text-primary text-start">Order Summary:</h5>
+
+					<!--========================
+						ORDER DETAIL GOES HERE
+					========================-->
+				</div>
+
+				<div class="row pb-1">
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="inputGroup-sizing-default">Store</span>
+						</div>
+						<input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+					</div>
+				</div>
+
+				<!--SALES TYPE-->
+				<div class="row pb-5">
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<label class="input-group-text" for="inputGroupSelect01">Sales</label>
+						</div>
+						<select class="custom-select" id="inputGroupSelect01">
+							<option selected disabled>- Choose Sales Channel -</option>
+							<option value="1">Walk-in</option>
+							<option value="2">On-call</option>
+							<option value="3">Chat-based</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="row pt-5 pb-3">
+					<div class="input-group mb-2">
+						<div class="input-group-prepend">
+							<button class="btn btn-outline-primary btn-sm" type="button" id="addDiscount">+ Discount</button>
+						</div>
+						<input type="text" id="discountinputdisplay" class="form-control form-control-sm" readonly>
+						<button class="btn btn-danger btn-sm" id="removeDiscountBtn"> X </button>
+					</div>
+					<div class="input-group mb-2">
+						<div class="input-group-prepend">
+							<button class="btn btn-outline-primary btn-sm" type="button" id="openChargeModalButton">+ Charge</button>
+						</div>
+						<input type="text" id="chargeinputdisplay" class="form-control form-control-sm" readonly>
+						<button class="btn btn-danger btn-sm" id="removeChargeBtn"> X </button>
+					</div>
+					<div class="input-group mt-1 mb-2">
+						<div class="input-group-prepend input-group-lg">
+							<span class="input-group-text">Total</span>
+						</div>
+						<input type="text" class="form-control form-control-lg" id="totalAmountInput" value="0" readonly>
+					</div>
+				</div>
+
+				<!--========================
+						  BUTTONS
+				========================-->
+				<div class="row pt-1 px-2">
+					<button type="button" class="btn btn-success" id="opencashmodal">
+						Cash Payment
+					</button>
+				</div>
+				<div class="row pb-2 pt-2 px-2">
+					<button type="button" class="btn btn-success" id="openbankmodal">
+						Bank Transfer
+					</button>
+				</div>
+				<div class="row pt-2 pb-3 justify-content-center">
+					<div class="col-lg-6 d-flex flex-column">
+						<button type="button" asp-action="StartProcessing" class="btn btn-warning" id="holdTransactionBtn">
+							Hold Transaction
+						</button>
+					</div>
+					<div class="col-lg-6 d-flex flex-column">
+						<button type="button" class="btn btn-danger" id="cancelTransactionBtn">
+							Cancel Transaction
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+<!--========================
+	   START MODALS
+========================-->
+<!-- QUANTITY  -->
+<div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="productModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="productModalLabel">Add Quantity</h5>
+				<button type="button" class="close" id="qtyclose" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body text-center justify-content-center">
+				
+				<!--SELECTED PRODUCT-->
+				<p>Selected Product:</p>
+				<h6><span id="selectedProductName"></span></h6>
+
+				<div class="form-group" id="quantityInputDiv" style="display: none;">
+					<label for="quantity">Quantity:</label>
+					<input type="number" class="form-control pt-3" id="quantity" placeholder="Enter quantity" aria-label="Quantity" aria-describedby="quan">
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" id="addProductButton">Add Product</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- DISCOUNT -->
+<div class="modal fade" id="discountModal" tabindex="-1" role="dialog" aria-labelledby="discountModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="discountModalLabel">Discount</h5>
+				<button type="button" class="close" id="closeDiscount" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<p>Choose discount amount for this transaction:</p>
+				</div>
+				<div class="row">
+					<div class="input-group">
+						<div class="input-group-text">
+							<input class="form-check-input mt-0" type="radio" name="discount-type" id="percentRadio" value="percent">
+						</div>
+						<input type="number" class="form-control" id="percentInput" placeholder="Enter discount percentage (E.g. 10)">
+					</div>
+				</div>
+				<div class="row pt-3 pb-3">
+					<div class="input-group">
+						<div class="input-group-text">
+							<input class="form-check-input mt-0" type="radio" name="discount-type" id="amountRadio" value="amount">
+						</div>
+						<input type="number" class="form-control" id="amountInput" placeholder="Enter discount amount (E.g. ₱200)">
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" id="applyDiscountButton">Apply Discount</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- CHARGE -->
+<div class="modal fade" id="chargeModal" tabindex="-1" role="dialog" aria-labelledby="chargeModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="chargeModalLabel">Additional Charge</h5>
+				<button type="button" class="close" id="closeModal" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="row pt-2 pb-1">
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="inputGroup-sizing-default">Service Fee</span>
+						</div>
+						<input type="number" class="form-control" id="service-fee-input" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+						<button class="btn btn-primary" type="button" id="button-service" onclick="calculateTotalCharge()"><i class="bi bi-plus"></i></button>
+					</div>
+				</div>
+				<div class="row pt-2 pb-1">
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="inputGroup-sizing-default">Delivery Fee</span>
+						</div>
+						<input type="number" class="form-control" id="delivery-fee-input" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+						<button class="btn btn-primary" type="button" id="button-del" onclick="calculateTotalCharge()"><i class="bi bi-plus"></i></button>
+					</div>
+				</div>
+				<div class="row pt-4 pb-4 text-center">
+					<p>Charge to be added in the total amount is:</p>
+					<input type="text" class="form-control btncustom-width" id="total-charge-display" readonly>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" id="addChargeButton">Add Charge</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- CASH PAYMENT -->
+<div class="modal fade" id="cashModal" tabindex="-1" role="dialog" aria-labelledby="cashModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="cashModalLabel">Cash Payment</h5>
+				<button type="button" class="close" id="closecashmodal" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="row pt-4 pb-4 justify-content-center">
+					<div class="row pb-2 px-3 justify-content-center">
+						<input type="text" class="form-control btncustom-width" id="total-amounttopay-display" placeholder="Total amount to pay" readonly>
+					</div>
+					<div class="row pt-3 pb-4 ">
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text csslabel" id="inputGroup-sizing-default">Amount tendered</span>
+							</div>
+							<input type="number" class="form-control form-control-lg" id="tenderedamountInput" placeholder="0.00" required />
+							<button class="btn btn-primary btn-lg" type="button" id="button-cash" onclick="calculateTotalChange()">Calculate</button>
+						</div>
+					</div>
+					<div class="row">
+						<input type="number" class="form-control" id="changeInput" placeholder="Change" readonly />
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary">Save & Issue Receipt</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- BANK TRANSFER -->
+<div class="modal fade" id="bankModal" tabindex="-1" role="dialog" aria-labelledby="bankModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-xl" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="bankModalLabel">Bank Transfer</h5>
+				<button type="button" class="close" id="closebankmodal" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="row pb-2">
+					<div class="col-6">
+						<input type="number" class="form-control" id="floatingInput" placeholder="Reference #" required />
+					</div>
+					<div class="col-6">
+						<input type="text" class="form-control" id="floatingInput" placeholder="Sender's account name" required />
+					</div>
+				</div>
+				<div class="row pb-2">
+					<div class="col-6">
+						<input type="text" class="form-control" id="floatingInput" placeholder="Name of the bank" required />
+					</div>
+					<div class="col-6">
+						<input type="text" class="form-control" id="floatingInput" placeholder="Receiver's account name" required />
+					</div>
+				</div>
+				<div class="row pt-4 pb-4 justify-content-center">
+					<div class="row pb-2 px-3 justify-content-center">
+						<input type="text" class="form-control btncustom-width" id="totalAmountinBank" placeholder="Total amount to pay" readonly>
+					</div>
+					<div class="row pt-3 pb-4">
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text csslabel" id="inputGroup-sizing-default">Amount tendered</span>
+							</div>
+							<input type="number" class="form-control form-control-lg" id="banktenderedamount" placeholder="0.00" required />
+							<button class="btn btn-primary btn-lg " type="button" id="button-bank" onclick="calculateTotalBank() ">Calculate</button>
+						</div>
+					</div>
+					<div class="row">
+						<input type="number" class="form-control" id="bankchange" placeholder="Change" readonly />
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary">Save & Issue Receipt</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--========================
+	   START MODALS
+========================-->
+
+
+
+<!--Scripts-->
+@section Scripts{
+	<script src="~/js/posindex.js"></script>
+}
+

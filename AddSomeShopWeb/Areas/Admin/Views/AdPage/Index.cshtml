@@ -1,0 +1,193 @@
+﻿@model ABC.Models.ViewModels.DashboardViewModel
+
+<link rel="stylesheet" href="~/css/dashboard.css" />
+
+<script src="//cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+<script src="~/js/dashboard.js"></script>
+
+
+<div class="container-fluid">
+    <div class="row pt-4 pb-3">
+        <div class="col-lg-6 col-sm-12 text-start mb-3 mb-sm-0">
+            <h2 class="text-primary">Dashboard</h2>
+        </div>
+    </div>
+    <div class="row pb-1">
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-success">
+                <div class="inner">
+                    <h2>
+                        @Model.TotalCustomers
+                    </h2>
+
+                    <p>No. of Customers</p>
+                </div>
+                <a asp-area="Admin" asp-controller="Customer" asp-action="Index" class="small-box-footer">More info <i class="bi bi-arrow-right-circle"></i></a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-warning">
+                <div class="inner">
+                    <h2>
+                        @Model.TotalUnprocessedOrders <!-- Ang bibilangin neto eh yung mga order na nasa "To process" stat palang -->
+                    </h2>
+
+                    <p>Orders to Process</p>
+                </div>
+                <a asp-area="Admin" asp-controller="Order" asp-action="Index" class="small-box-footer">More info <i class="bi bi-arrow-right-circle"></i></a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-info">
+                <div class="inner">
+                    <h2>
+                        @Model.OrdersOutForDelivery
+                    </h2>
+
+                    <p>Orders to Deliver</p>  <!-- connect mo dito yung method para sa orders bale dapat TotalOrders or kung anong naming ang gusto mo -->
+                    <!-- Ang bibilangin neto eh yung mga order na nasa "To deliver" stat palang -->
+                </div>
+                <a asp-area="Admin" asp-controller="" asp-action="" class="small-box-footer">More info <i class="bi bi-arrow-right-circle"></i></a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-danger">
+                <div class="inner">
+                    <h2>
+                        @Model.CanceledOrders
+                    </h2>
+
+                    <p>Cancelled Orders</p>
+                    <!-- Ang bibilangin neto eh yung mga nacancel sa loob ng isang buwan, kahit anong sales channel pa yan kasama sa bilang neto-->
+                </div>
+                <a asp-area="Admin" asp-controller="" asp-action="" class="small-box-footer">More info <i class="bi bi-arrow-right-circle"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row pt-2 pb-1">
+        <div class="col-12">
+            <div class="border p-3 container shadow">
+                <!--Title-->
+                <div class="row pb-2">
+                    <h4 class="text-primary">Sales Overview</h4>
+                    <hr />
+                </div>
+                <div class="row">
+                    <div class="chart1">
+                        <canvas id="linechart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row pt-3 pb-1">
+        <div class="col-6">
+            <div class="border p-3 container shadow">
+                <!--Title-->
+                <div class="row pb-2">
+                    <h4 class="text-primary">Inventory</h4>
+                    <hr />
+                </div>
+                <div class="row">
+                    <!-- Small boxes with centered content -->
+                    <div class="col-5 mx-auto">
+                        <div class="small-box bg-success">
+                            <div class="inner text-center">
+                                <h2>@Model.TotalProducts</h2>
+                                <p>Active Products</p>
+                            </div>
+                            <a asp-area="Admin" asp-controller="Product" asp-action="Index" class="small-box-footer text-center">More info <i class="bi bi-arrow-right-circle"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-5 mx-auto">
+                        <div class="small-box bg-info">
+                            <div class="inner text-center">
+                                <h2>@Model.TotalCategories</h2>
+                                <p>No. of Categories</p>
+                            </div>
+                            <a asp-area="Admin" asp-controller="Category" asp-action="Index" class="small-box-footer text-center">More info <i class="bi bi-arrow-right-circle"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-5 mx-auto">
+                        <div class="small-box bg-warning ">
+                            <div class="inner">
+                                <h2>
+                                    @Model.LowStockProductCount
+                                </h2>
+
+                                <p>Low Stock Products</p>
+                            </div>
+
+                            <a asp-area="Admin" asp-controller="Product" asp-action="Index" class="small-box-footer">More info <i class="bi bi-arrow-right-circle"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-5 mx-auto">
+                        <div class="small-box bg-danger">
+                            <div class="inner">
+                                <h2>
+                                    @Model.OutofStockProductCount
+                                </h2>
+
+                                <p>Out of Stock Products</p>
+                            </div>
+
+                            <a asp-area="Admin" asp-controller="Product" asp-action="Index" class="small-box-footer">More info <i class="bi bi-arrow-right-circle"></i></a>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="border p-3 container shadow">
+                <!--Title-->
+                <div class="row pb-2">
+                    <h4 class="text-primary">Sales Earnings by Channel</h4>
+                    <hr />
+                </div>
+                <div class="row">
+                    <div class="chart2">
+                        <canvas id="piechart" ></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row pt-3 pb-3">
+        <div class="col-12">
+            <div class="border p-3 container shadow">
+                <!-- Title -->
+                <div class="row pb-2">
+                    <h4 class="text-primary">Bestseller Products</h4>
+                    <hr />
+                </div>
+                <!-- Table -->
+                <div class="row">
+                    <table class="table table-bordered table-striped col-7">
+                        <thead>
+                            <tr>
+                                <th>Product Name</th>
+                                <th>Purchase Frequency</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>try</td> 
+                                <td>10 agad</td> 
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

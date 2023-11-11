@@ -1,0 +1,30 @@
+﻿@if (TempData["toastAdd"] != null)
+{
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+	<script type="text/javascript">
+		toastr.success('@TempData["toastAdd"]'); 
+	</script>
+	
+}
+
+@if (TempData["toastUpd"] != null)
+{
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+	<script type="text/javascript">
+		toastr.success('@TempData["toastUpd"]');
+	</script>
+}
+
+@if (TempData["toastDel"] != null)
+{
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+	<script type="text/javascript">
+		toastr.info('@TempData["toastDel"]');
+	</script>
+}

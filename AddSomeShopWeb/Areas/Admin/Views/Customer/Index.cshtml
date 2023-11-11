@@ -1,0 +1,84 @@
+﻿@model List<Customer> 
+
+<div class="container-fluid">
+    <div class="row pt-4 pb-3">
+        <!-- Title -->
+        <div class="col-8 text-start mb-3 mb-sm-0">
+            <h2 class="text-primary">Customers </h2>
+        </div>
+
+		<!-- New Customer Button-->
+        <div class="col-2 text-center mb-3 mb-sm-0">
+            <div class="d-flex justify-content-center">
+                <a class="btn btn-primary" asp-area="Admin" asp-controller="Customer" asp-action="Create" role="button">
+                    <i class="bi bi-plus-square"></i> New Customer
+                </a>
+            </div>
+        </div>
+
+
+        <!-- Export Button -->
+        <div class="col-2 text-center mb-3 mb-sm-0">
+            <a href="#" class="btn btn-success">
+                <i class="bi bi-box-arrow-up"></i> Export
+            </a>
+        </div>
+
+    </div>
+
+    <div class="row pt-4 pb-3">
+        <!-- Search Bar -->
+        <div class="col-12">
+            <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-search"></i></button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Customer Purchase Table -->
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th></th>
+                <th>ID</th>
+                <th>Customer Name</th>
+                <th>Email Address</th>
+                <th>Billing Address</th>
+                <th>Type</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model)
+            {
+                <tr>
+                    <td></td>
+                    <td>@obj.Id</td>
+                    <td>@obj.FirstName @obj.LastName</td>
+                    <td>@obj.EmailAddress</td>
+                    <td>@obj.ApSuUn @obj.StreetorSubd @obj.Barangay @obj.City @obj.Province @obj.ZipCode</td>
+                    <td>@obj.Type</td>
+                    
+
+                    <td>
+                        <div class="w-80 btn-group d-flex justify-content-center align-items-center" role="group">
+                            <a asp-controller="Customer" asp-action="Edit" asp-route-id="@obj.Id" class="btn btn-outline-dark btn-sm">
+                                <i class="bi bi-pencil-square"></i> Edit
+                            </a>
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class="w-30 btn-group d-flex justify-content-center align-items-center" role="group">
+                            <a asp-controller="Customer" asp-action="Delete" asp-route-id="@obj.Id" class="btn btn-outline-danger btn-sm">
+                                <i class="bi bi-trash-fill"></i> Delete
+                            </a>
+                        </div>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
