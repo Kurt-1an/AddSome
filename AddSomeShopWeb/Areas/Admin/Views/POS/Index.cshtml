@@ -106,6 +106,7 @@
 							<thead>
 								<tr>
 									<th></th>
+									<th>ID</th>
 									<th>Product</th>
 									<th>Quantity</th>
 									<th>Price</th>
@@ -113,6 +114,7 @@
 								</tr>
 							</thead>
 							<tbody>
+								<!-- Selected items will be dynamically added here -->
 							</tbody>
 						</table>
 					</div>
@@ -167,6 +169,10 @@
 					</div>
 				</div>
 
+
+				<!--========================
+						  DISCOUNT
+				========================-->
 				<div class="row pt-5 pb-3">
 					<div class="input-group mb-2">
 						<div class="input-group-prepend">
@@ -175,6 +181,11 @@
 						<input type="text" id="discountinputdisplay" class="form-control form-control-sm" readonly>
 						<button class="btn btn-danger btn-sm" id="removeDiscountBtn"> X </button>
 					</div>
+
+
+					<!--========================
+							  CHARGE
+					========================-->
 					<div class="input-group mb-2">
 						<div class="input-group-prepend">
 							<button class="btn btn-outline-primary btn-sm" type="button" id="openChargeModalButton">+ Charge</button>
@@ -182,6 +193,11 @@
 						<input type="text" id="chargeinputdisplay" class="form-control form-control-sm" readonly>
 						<button class="btn btn-danger btn-sm" id="removeChargeBtn"> X </button>
 					</div>
+
+
+					<!--========================
+							  TOTAL
+					========================-->
 					<div class="input-group mt-1 mb-2">
 						<div class="input-group-prepend input-group-lg">
 							<span class="input-group-text">Total</span>
@@ -343,6 +359,7 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
+
 			<div class="modal-body">
 				<div class="row pt-4 pb-4 justify-content-center">
 					<div class="row pb-2 px-3 justify-content-center">
@@ -363,7 +380,7 @@
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-primary">Save & Issue Receipt</button>
+				<button type="button" class="btn btn-primary" id="saveButton">Save &amp; Issue Receipt</button>
 			</div>
 		</div>
 	</div>

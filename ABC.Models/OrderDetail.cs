@@ -27,7 +27,7 @@ namespace ABC.Models
         public Product Product { get; set; }
 
         public double? Charge { get; set; }
-        public double? discount { get; set; }
+        public double? Discount { get; set; }
 
         public int Count {  get; set; }
         public double Price {  get; set; }

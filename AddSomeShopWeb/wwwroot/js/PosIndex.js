@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
     $('#productSearch').select2({
         ajax: {
-            url: '/Admin/POS/GetPakyu',
+            url: '/Admin/POS/GetProduct',
             dataType: 'json',
             delay: 250,
             data: function (params) {
@@ -44,6 +44,44 @@
             total += quantity * retailPrice;
         });
         $('#totalAmountInput').val(total.toFixed(2)); // Display the total with 2 decimal places
+
+
+
+        // Add event listener to the Save button
+        $('#saveButton').click(function () {
+            // Get the values from the discount and charge input fields
+            var discount = $('#discountinputdisplay').val();
+            var charge = $('#chargeinputdisplay').val();
+            var total = $('#totalAmountInput').val();
+            
+
+            // Get the selected items from the table
+            var selectedItems = [];
+            $('#tbProduct tbody tr').each(function () {
+                var product = $(this).find('td:nth-child(2)').text();
+                var quantity = $(this).find('td:nth-child(3)').text();
+                var price = $(this).find('td:nth-child(4)').text();
+                var total = $(this).find('td:nth-child(5)').text();
+
+                selectedItems.push({
+                    product: product,
+                    quantity: quantity,
+                    price: price,
+                    total: total
+                });
+            });
+
+            // Perform an AJAX request to the controller action
+            $.ajax({
+                url: '/Admin/POS/Summary',
+                method: 'POST',
+                data: {
+                    discount: discount,
+                    charge: charge,
+                    selectedItems: selectedItems
+                }
+            });
+        });
     }
 
 
@@ -53,54 +91,67 @@
         var selectedProductName = $('#selectedProductName').text();
 
         if (quantity && selectedProductName) {
-            // Check if the quantity exceeds the current stock
             $.ajax({
-                url: '/Admin/POS/CheckStock',
+                url: '/Admin/POS/AddProduct',
                 method: 'GET',
                 data: { productName: selectedProductName, quantity: quantity },
-                success: function (isStockAvailable) {
-                    if (isStockAvailable) {
-                        // Continue with the rest of your existing code
-                        $.ajax({
-                            url: '/Admin/POS/GetRetailPrice',
-                            method: 'GET',
-                            data: { productName: selectedProductName },
-                            success: function (retailPrice) {
-                                if (retailPrice !== null) {
-                                    // Calculate the total
-                                    var total = quantity * retailPrice;
+                success: function (response) {
+                    if (response.success) {
+                        var product = response.product;
+                        var total = quantity * product.retailPrice;
+                        var newRow = $('<tr>');
+                        newRow.append($('<td><button type="button" class="btn btn-danger btn-sm btn-remove">Remove</button></td>'));
+                        newRow.append($('<td>' + product.id + '</td>'));
+                        newRow.append($('<td>' + product.text + '</td>'));
+                        newRow.append($('<td>' + quantity + '</td>'));
+                        newRow.append($('<td>' + product.retailPrice + '</td>'));
+                        newRow.append($('<td>' + total + '</td>'));
+                        $('#tbProduct tbody').append(newRow);
+                        $('#productModal').modal('hide');
+                        updateTotalAmount();
 
-                                    var newRow = $('<tr>');
-                                    newRow.append($('<td><button type="button" class="btn btn-danger btn-sm btn-remove">Remove</button></td>'));
-                                    newRow.append($('<td>' + selectedProductName + '</td>'));
-                                    newRow.append($('<td>' + quantity + '</td>'));
-                                    newRow.append($('<td>' + retailPrice + '</td>'));
-                                    newRow.append($('<td>' + total + '</td>'));
-
-                                    $('#tbProduct tbody').append(newRow);
-
-                                    $('#productModal').modal('hide');
-
-                                    updateTotalAmount(); // Update the total amount
-                                } else {
-                                    alert('Retail price not available for the selected product. Please check your product data.');
-                                }
-                            },
-                            error: function () {
-                                alert('An error occurred while fetching the retail price. Please try again later.');
-                            }
-                        });
-
+                        // Add the product to the shopping cart
+                        addToShoppingCart(product.id, quantity);
                     } else {
-                        alert('Insufficient stock for the selected product. Please adjust the quantity.');
+                        alert(response.message);
                     }
                 },
                 error: function () {
-                    alert('An error occurred while checking stock. Please try again later.');
+                    alert('An error occurred. Please try again later.');
                 }
             });
         }
     });
+
+    // Function to add the selected product to the shopping cart
+    function addToShoppingCart(productId, quantity) {
+        $.ajax({
+            url: '/Admin/POS/AddToCart',
+            method: 'POST',
+            data: { productId: productId, quantity: quantity },
+            success: function (cartResponse) {
+                console.log('Server Response:', cartResponse);
+
+                if (cartResponse && cartResponse.success) {
+                    // Handle success: Maybe update UI, show messages, etc.
+                    alert('Product added to the shopping cart successfully!');
+                } else {
+                    // Handle error or undefined response
+                    var errorMessage = cartResponse && cartResponse.message ? cartResponse.message : 'An undefined error occurred.';
+                    alert('Error: ' + errorMessage);
+                }
+            },
+            error: function (error) {
+                console.error('Error adding to the shopping cart:', error);
+                alert('Error adding to the shopping cart. Please try again later.');
+            }
+        });
+    }
+
+
+
+
+
 
     $('#qtyclose').on('click', function () {
         $('#productModal').modal('hide');
@@ -300,8 +351,11 @@ function formatResults(data) {
                     <p style="font-weight: bolder;margin:2px">${data.text}</p>
                     <p style="margin:2px">${data.retailPrice}</p>
                 </td>
+                <td style="text-align: right;">
+                    <p style="margin:2px">${data.qty}</p>
+                </td>
             </tr>
-         </table>`
+        </table>`
     );
 
     return container;

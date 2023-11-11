@@ -45,6 +45,7 @@ namespace AddSomeShopWeb.Areas.CustomerArea.Controllers
             return View(productList);
         }
 
+        //Details Button
         public IActionResult Details(int productId)
         {
             ShoppingCart cart = new()
