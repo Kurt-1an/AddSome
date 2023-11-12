@@ -28,8 +28,10 @@ namespace ABC.Models
         [ValidateNever]
         public ApplicationUser ApplicationUser { get; set; }
 
+		public double? Charge { get; set; }
+		public double? Discount { get; set; }
 
-        [NotMapped]
+		[NotMapped]
         public double Price { get; set; }
     }
 }

@@ -78,6 +78,7 @@ namespace AddSomeShopWeb.Areas.CustomerArea.Controllers
 			return View(ShoppingCartVM);
         }
 
+        //Place Order Button
 		[HttpPost]
 		[ActionName("Summary")]
 		public IActionResult SummaryPOST()

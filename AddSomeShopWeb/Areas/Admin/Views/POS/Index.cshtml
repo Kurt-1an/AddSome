@@ -1,4 +1,5 @@
-﻿@model ShoppingCartVM
+﻿@using System.Globalization;
+@model ShoppingCartVM
 
 
 <link rel="stylesheet" type="text/css" href="~/css/PosIndex.css">
@@ -136,14 +137,13 @@
 				</div>
 
 				<!--Order Summary-->
-				<div class="col-12">
-
+				<div class="col-12 pb-2">
 					<h5 class="text-primary text-start">Order Summary:</h5>
-
-					<!--========================
-						ORDER DETAIL GOES HERE
-					========================-->
 				</div>
+
+			
+
+
 
 				<div class="row pb-1">
 					<div class="input-group mb-3">
@@ -253,7 +253,7 @@
 				</button>
 			</div>
 			<div class="modal-body text-center justify-content-center">
-				
+
 				<!--SELECTED PRODUCT-->
 				<p>Selected Product:</p>
 				<h6><span id="selectedProductName"></span></h6>
@@ -359,7 +359,6 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-
 			<div class="modal-body">
 				<div class="row pt-4 pb-4 justify-content-center">
 					<div class="row pb-2 px-3 justify-content-center">
@@ -440,11 +439,9 @@
 <!--========================
 	   START MODALS
 ========================-->
-
-
-
 <!--Scripts-->
 @section Scripts{
 	<script src="~/js/posindex.js"></script>
+
 }
 

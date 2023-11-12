@@ -39,21 +39,22 @@
         var total = 0;
         $('#tbProduct tbody tr').each(function () {
             var row = $(this);
-            var quantity = parseInt(row.find('td:eq(2)').text()); // Assuming the quantity is in the 3rd column
-            var retailPrice = parseFloat(row.find('td:eq(3)').text()); // Assuming the retail price is in the 4th column
+            var quantity = parseInt(row.find('td:eq(3)').text()); // Assuming the quantity is in the 3rd column
+            var retailPrice = parseFloat(row.find('td:eq(4)').text()); // Assuming the retail price is in the 4th column
             total += quantity * retailPrice;
         });
         $('#totalAmountInput').val(total.toFixed(2)); // Display the total with 2 decimal places
 
 
 
-        // Add event listener to the Save button
+        /* ====================
+                SAVE BUTTON
+            ===================== */
         $('#saveButton').click(function () {
             // Get the values from the discount and charge input fields
             var discount = $('#discountinputdisplay').val();
             var charge = $('#chargeinputdisplay').val();
             var total = $('#totalAmountInput').val();
-            
 
             // Get the selected items from the table
             var selectedItems = [];
@@ -71,17 +72,27 @@
                 });
             });
 
-            // Perform an AJAX request to the controller action
-            $.ajax({
-                url: '/Admin/POS/Summary',
-                method: 'POST',
-                data: {
-                    discount: discount,
-                    charge: charge,
-                    selectedItems: selectedItems
-                }
-            });
+            
+            //$.ajax({
+            //    type: 'POST',
+            //    url: '/Admin/POS/Summary',
+            //    data: {
+            //        discount: discount,
+            //        charge: charge,
+            //        total: total,
+            //        selectedItems: selectedItems
+            //    },
+            //    success: function (data) {
+            //        // Redirect to the order confirmation page after successful processing
+            //        window.location.href = '/Admin/POS/OrderConfirmation/' + data.id; // Update with your controller and action
+            //    },
+            //    error: function () {
+            //        // Handle any errors that occur during the AJAX request
+            //        alert('Error processing the order.');
+            //    }
+            //});
         });
+
     }
 
 
@@ -100,7 +111,7 @@
                         var product = response.product;
                         var total = quantity * product.retailPrice;
                         var newRow = $('<tr>');
-                        newRow.append($('<td><button type="button" class="btn btn-danger btn-sm btn-remove">Remove</button></td>'));
+                        newRow.append($('<td><button type="button" class="btn btn-danger btn-sm btn-remove" data-cart-id="' + product.id + '">Remove</button></td>'));
                         newRow.append($('<td>' + product.id + '</td>'));
                         newRow.append($('<td>' + product.text + '</td>'));
                         newRow.append($('<td>' + quantity + '</td>'));
@@ -110,8 +121,11 @@
                         $('#productModal').modal('hide');
                         updateTotalAmount();
 
-                        // Add the product to the shopping cart
-                        addToShoppingCart(product.id, quantity);
+                        // Add the product to the shopping cart with a callback function
+                        addToShoppingCart(product.id, quantity, function (shoppingCartId) {
+                            // Update the data-cart-id attribute
+                            $('.btn-remove[data-cart-id="' + product.id + '"]').attr('data-cart-id', shoppingCartId);
+                        });
                     } else {
                         alert(response.message);
                     }
@@ -123,8 +137,10 @@
         }
     });
 
+
+
     // Function to add the selected product to the shopping cart
-    function addToShoppingCart(productId, quantity) {
+    function addToShoppingCart(productId, quantity, callback) {
         $.ajax({
             url: '/Admin/POS/AddToCart',
             method: 'POST',
@@ -133,8 +149,10 @@
                 console.log('Server Response:', cartResponse);
 
                 if (cartResponse && cartResponse.success) {
-                    // Handle success: Maybe update UI, show messages, etc.
-                    alert('Product added to the shopping cart successfully!');
+                    // Call the callback function with the ShoppingCartID
+                    if (callback && typeof callback === 'function') {
+                        callback(cartResponse.shoppingCartId);
+                    }
                 } else {
                     // Handle error or undefined response
                     var errorMessage = cartResponse && cartResponse.message ? cartResponse.message : 'An undefined error occurred.';
@@ -150,18 +168,42 @@
 
 
 
-
-
-
     $('#qtyclose').on('click', function () {
         $('#productModal').modal('hide');
     });
 
-    // Handle the "Remove" button click event using event delegation
-    $('#tbProduct').on('click', '.btn-remove', function () {
-        $(this).closest('tr').remove();
-        updateTotalAmount(); // Update the total amount
+    // Add event listener for remove buttons
+    $(document).on('click', '.btn-remove', function () {
+        var cartId = $(this).data('cart-id');
+        var button = $(this); // Store the reference to $(this)
+
+        if (cartId && confirm('Are you sure you want to remove this item?')) {
+            $.ajax({
+                url: '/Admin/POS/Remove',
+                method: 'POST',
+                data: { cartId: cartId },
+                success: function (response) {
+                    if (response.success) {
+                        // Remove the corresponding row from the table
+                        button.closest('tr').remove(); // Use the stored reference
+                        updateTotalAmount();
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function () {
+                    alert('An error occurred. Please try again later.');
+                }
+            });
+        }
+
+
+       
     });
+
+
+
+
 
     //charge modal
     $('#openChargeModalButton').on('click', function () {
@@ -327,6 +369,7 @@
     });
 
     updateTotalAmount();
+
 
 });
 
