@@ -1,10 +1,11 @@
-﻿@model ABC.Models.ViewModels.DashboardViewModel
+﻿@model List<ABC.Models.Product>
+
+@{
+    var orderDetails = (List<ABC.Models.OrderDetail>)ViewBag.OrderDetails;
+}
 
 <link rel="stylesheet" href="~/css/dashboard.css" />
 
-<script src="//cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
-<script src="~/js/dashboard.js"></script>
 
 
 <div class="container-fluid">
@@ -19,7 +20,7 @@
             <div class="small-box bg-success">
                 <div class="inner">
                     <h2>
-                        @Model.TotalCustomers
+                        @ViewBag.totalcustomers
                     </h2>
 
                     <p>No. of Customers</p>
@@ -32,7 +33,7 @@
             <div class="small-box bg-warning">
                 <div class="inner">
                     <h2>
-                        @Model.TotalUnprocessedOrders <!-- Ang bibilangin neto eh yung mga order na nasa "To process" stat palang -->
+                        @ViewBag.unprocessedOrders
                     </h2>
 
                     <p>Orders to Process</p>
@@ -45,7 +46,7 @@
             <div class="small-box bg-info">
                 <div class="inner">
                     <h2>
-                        @Model.OrdersOutForDelivery
+                        @ViewBag.ordersoutfordelivery
                     </h2>
 
                     <p>Orders to Deliver</p>  <!-- connect mo dito yung method para sa orders bale dapat TotalOrders or kung anong naming ang gusto mo -->
@@ -59,7 +60,7 @@
             <div class="small-box bg-danger">
                 <div class="inner">
                     <h2>
-                        @Model.CanceledOrders
+                        @ViewBag.cancelledOrders
                     </h2>
 
                     <p>Cancelled Orders</p>
@@ -78,9 +79,11 @@
                     <h4 class="text-primary">Sales Overview</h4>
                     <hr />
                 </div>
-                <div class="row">
-                    <div class="chart1">
-                        <canvas id="linechart"></canvas>
+                <div class="row justify-content-center">
+                    <div class="chart1" style="width: 95%; height: 30%;">
+                        <canvas id="linechart" style="max-width: 100%; max-height: 100%;"
+                                salesrevenue=" @ViewBag.SalesRevenue"
+                                costpricetotal=" @ViewBag.totalCost"></canvas>
                     </div>
                 </div>
             </div>
@@ -90,7 +93,7 @@
         <div class="col-6">
             <div class="border p-3 container shadow">
                 <!--Title-->
-                <div class="row pb-2">
+                <div class="row pb-4">
                     <h4 class="text-primary">Inventory</h4>
                     <hr />
                 </div>
@@ -99,8 +102,8 @@
                     <div class="col-5 mx-auto">
                         <div class="small-box bg-success">
                             <div class="inner text-center">
-                                <h2>@Model.TotalProducts</h2>
-                                <p>Active Products</p>
+                                <h2>@ViewBag.totalProductsInstock</h2>
+                                <p>In Stock Products</p>
                             </div>
                             <a asp-area="Admin" asp-controller="Product" asp-action="Index" class="small-box-footer text-center">More info <i class="bi bi-arrow-right-circle"></i></a>
                         </div>
@@ -108,7 +111,7 @@
                     <div class="col-5 mx-auto">
                         <div class="small-box bg-info">
                             <div class="inner text-center">
-                                <h2>@Model.TotalCategories</h2>
+                                <h2>@ViewBag.totalProdcategories</h2>
                                 <p>No. of Categories</p>
                             </div>
                             <a asp-area="Admin" asp-controller="Category" asp-action="Index" class="small-box-footer text-center">More info <i class="bi bi-arrow-right-circle"></i></a>
@@ -120,7 +123,7 @@
                         <div class="small-box bg-warning ">
                             <div class="inner">
                                 <h2>
-                                    @Model.LowStockProductCount
+                                    @ViewBag.lowstockproducts
                                 </h2>
 
                                 <p>Low Stock Products</p>
@@ -129,11 +132,11 @@
                             <a asp-area="Admin" asp-controller="Product" asp-action="Index" class="small-box-footer">More info <i class="bi bi-arrow-right-circle"></i></a>
                         </div>
                     </div>
-                    <div class="col-5 mx-auto">
+                    <div class="col-5 mx-auto pb-5">
                         <div class="small-box bg-danger">
                             <div class="inner">
                                 <h2>
-                                    @Model.OutofStockProductCount
+                                    @ViewBag.outofstockproducts
                                 </h2>
 
                                 <p>Out of Stock Products</p>
@@ -142,20 +145,19 @@
                             <a asp-area="Admin" asp-controller="Product" asp-action="Index" class="small-box-footer">More info <i class="bi bi-arrow-right-circle"></i></a>
                         </div>
                     </div>
-                    
                 </div>
             </div>
         </div>
         <div class="col-6">
             <div class="border p-3 container shadow">
                 <!--Title-->
-                <div class="row pb-2">
+                <div class="row">
                     <h4 class="text-primary">Sales Earnings by Channel</h4>
                     <hr />
                 </div>
                 <div class="row">
-                    <div class="chart2">
-                        <canvas id="piechart" ></canvas>
+                    <div class="chart2" style="width: 100%; height: 45vh;">
+                        <canvas id="piechart" style="width: 100%; height: 100%;"></canvas>
                     </div>
                 </div>
             </div>
@@ -165,29 +167,38 @@
         <div class="col-12">
             <div class="border p-3 container shadow">
                 <!-- Title -->
-                <div class="row pb-2">
-                    <h4 class="text-primary">Bestseller Products</h4>
-                    <hr />
-                </div>
-                <!-- Table -->
-                <div class="row">
-                    <table class="table table-bordered table-striped col-7">
-                        <thead>
+                <table class="table table-hover scrollable-table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Best Seller</th>
+                            <th>Qty.</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var product in Model)
+                        {
+                            var totalSold = (int)orderDetails.Where(detail => detail.ProductId == product.Id).Sum(detail => detail.Count);
+                            var totalPrice = orderDetails
+                            .Where(detail => detail.ProductId == product.Id)
+                            .Sum(detail => detail.Product != null ? (detail.Product.RetailPrice * detail.Count) : 0);
+
                             <tr>
-                                <th>Product Name</th>
-                                <th>Purchase Frequency</th>
+                                <td><img src="@product.ImageUrl" alt="Product Image" width="50" height="50"></td>
+                                <td>@product.productName</td>
+                                <td>@totalSold</td>
+                                <td>@String.Format("{0:C}", totalPrice)</td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>try</td> 
-                                <td>10 agad</td> 
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                        }
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 </div>
 
+
+<script src="//cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+<script src="~/js/dashboard.js"></script>

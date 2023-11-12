@@ -1,24 +1,13 @@
 ﻿// Line Chart
-document.addEventListener('DOMContentLoaded', function () {
-    getOrderTotalData();
-    createPieChart();
-});
+document.addEventListener("DOMContentLoaded", function () {
+    var salesCtx = document.getElementById('linechart').getContext('2d');
+    var pieCtx = document.getElementById('piechart').getContext('2d');
 
-function getOrderTotalData() {
-    $.ajax({
-        url: "/Admin/AdPage/GetOrderTotalData",
-        type: "GET",
-        success: function (data) {
-            createLineChart(data);
-        },
-        error: function (error) {
-            console.log("Error fetching data:", error);
-        }
-    });
-}
+    var salesRev = document.getElementById('linechart').getAttribute('salesrevenue');
+    var totalcostprice = document.getElementById('linechart').getAttribute('costpricetotal');
 
-function createLineChart(data) {
-    var ctx = document.getElementById('linechart').getContext('2d');
+    //hardcoded data for piechart
+    var salesByChannelData = [1000, 1500, 800, 1200];
 
     function generateLabels() {
         var labels = [];
@@ -30,62 +19,53 @@ function createLineChart(data) {
         return labels.reverse();
     }
 
-    var chart = new Chart(ctx, {
+    var linechart = new Chart(salesCtx, {
         type: 'line',
         data: {
             labels: generateLabels(),
-            datasets: [
-                {
-                    label: "Sales",
-                    backgroundColor: 'transparent',
-                    borderColor: "#0000FF",
-                    borderWidth: 2,
-                    pointBorderColor: "#0000FF",
-                    data: data,
-                    fill: true,
-                    lineTension: 0.5,
-                    showLine: true,
-                },
-                {
-                    label: "Purchase Cost",
-                    backgroundColor: 'transparent',
-                    borderColor: "#0D0D0D",
-                    borderWidth: 2,
-                    pointBorderColor: "#0D0D0D",
-                    data: data,
-                    fill: true,
-                    lineTension: 0.5,
-                    showLine: true,
-                }
-            ]
+            datasets: [{
+                label: 'Sales Revenue',
+                data: [salesRev], // Parse the attribute value as JSON array
+                backgroundColor: 'rgba(75, 192, 192, 0.7)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }, {
+                label: 'Purchase Cost',
+                data: [totalcostprice], // Parse the attribute value as JSON array
+                backgroundColor: 'rgba(255, 0, 0, 0.7)',
+                borderColor: 'rgba(255, 0, 0, 1)',
+                borderWidth: 1
+            }]
         },
         options: {
-            responsive: true,
-            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
         }
     });
-}
 
-// Pie Chart hard-coded na data
-function createPieChart() {
-    const salesChannelsData = {
-        labels: ['Walk-in', 'On-call', 'Chat-based', 'Website'],
-        datasets: [{
-            data: [5000, 3000, 2000, 3000],
-            backgroundColor: ['rgb(255, 99, 132)', 'rgb(54, 162, 235)', 'rgb(75, 192, 192)', 'rgb(255,255,153)'],
-        }]
-    };
-
-    const ctx = document.getElementById('piechart').getContext('2d');
-
-    const salesChannelsChart = new Chart(ctx, {
+    var piechart = new Chart(pieCtx, {
         type: 'pie',
-        data: salesChannelsData,
-        options: {
-            legend: {
-                display: true,
-                position: 'left',
-            },
-        },
+        data: {
+            labels: ['Walk-in', 'On Call', 'Chat-based', 'Website'],
+            datasets: [{
+                data: salesByChannelData,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.7)',
+                    'rgba(54, 162, 235, 0.7)',
+                    'rgba(255, 206, 86, 0.7)',
+                    'rgba(75, 192, 192, 0.7)',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                ],
+                borderWidth: 1
+            }]
+        }
     });
-}
+});

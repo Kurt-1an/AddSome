@@ -50,8 +50,53 @@
                     </div>
                 </div>
 
-                <div class="row">
-                    <!--table-->
+                <!--Table for purchased-->
+                <div class="row pb-2">
+                    <div class="col-12">
+                        <div class="border p-3 container shadow">
+                            <!--Title-->
+                            <div class="row pb-2">
+                                <h4 class="text-primary">Products</h4>
+                                <hr />
+                            </div>
+
+                            <div class="row pb-2">
+                                <table id="tblData" class="table table-bordered table-striped table-hover" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Cost</th>
+                                            <th>Qty</th>
+                                            <th>Total Cost</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="selectedProducts">
+                                        @if (Model.PurchasedProducts != null)
+                                        {
+                                            foreach (var product in Model.PurchasedProducts)
+                                            {
+                                                <tr>
+                                                    <td>@product.ProductName</td>
+                                                    <td>@product.Cost</td>
+                                                    <td>@product.Quantity</td>
+                                                    <td>@(product.Cost * product.Quantity)</td>
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="row pb-2 pt-2">
+                                <div class="input-group mb3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroup-sizing-default">Total Cost:</span>
+                                    </div>
+                                    <input type="number" class="form-control" id="totaldisplay" aria-label="total" aria-describedby="inputGroup-sizing-default" value="@((Model.PurchasedProducts != null) ? Model.PurchasedProducts.Sum(p => p.Cost * p.Quantity) : 0)" readonly>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

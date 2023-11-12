@@ -1,4 +1,5 @@
 ﻿using ABC.DataAccess.Data;
+using ABC.Models;
 using ABC.Models.ViewModels;
 using ABC.Utility;
 using Microsoft.AspNetCore.Authorization;
@@ -11,69 +12,66 @@ namespace AddSomeShopWeb.Areas.Admin.Controllers
     [Authorize(Roles = SD.Role_Admin + "," + SD.Role_Employee)]
     public class AdPageController : Controller
     {
-        private readonly AppDBContext _context;
+        private readonly AppDBContext _db;
 
-        public AdPageController(AppDBContext context)
+        public AdPageController(AppDBContext db)
         {
-            _context = context;
-        }
-
-        [HttpGet]
-        public IActionResult getOrderTotalData()
-        {
-            // Assuming you have a DbContext named _context
-            var orderTotalData = _context.OrderHeaders
-                .Select(o => o.OrderTotal)
-                .ToList();
-
-            return Json(orderTotalData);
-        }
-
-        /*
-        public IActionResult GetTotalPurchaseData()
-        {
-             var purchasetotaldata = _context.Purchase
-                .Select(p => p.PurchaseTotal)
-                .ToList();
-
-            return Json(purchasetotaldata);
-        } */
-
-        public int CountLowStockProducts()
-        {
-            int lowStockThreshold = 4; // Define your low stock threshold
-            int lowStockProductCount = _context.Products.Count(p => p.StockQuantity < lowStockThreshold);
-            return lowStockProductCount;
-        }
-
-        public int CountOutOfStockProducts()
-        {
-            int outOfStockProductCount = _context.Products.Count(p => p.StockQuantity == 0);
-            return outOfStockProductCount;
+            _db = db;
         }
 
         public IActionResult Index()
         {
-            int totalCustomers = _context.Customers.Count();
-            int totalUnprocessedOrders = _context.OrderHeaders.Count(o => o.OrderStatus == "Unprocessed");
-            int ordersOutForDelivery = _context.OrderHeaders.Count(o => o.OrderStatus == "Deliver Order");
-            int canceledOrders = _context.OrderHeaders.Count(o => o.OrderStatus == "Cancelled");
-            int totalProductsInStock = _context.Products.Count(p => p.StockQuantity > 0);
-            int totalProdCategories = _context.Categories.Count();
+            int totalcustomers = _db.Customers.Count();
+            int unprocessedOrders = _db.OrderHeaders.Count(o => o.OrderStatus == "To Process");
+            int ordersoutfordelivery = _db.OrderHeaders.Count(o => o.OrderStatus == "Deliver Order");
+            int cancelledOrders = _db.OrderHeaders.Count(o => o.OrderStatus == "Cancelled");
+            int totalProductsInstock = _db.Products.Count(p => p.StockQuantity > 0);
+            int lowstockproducts = _db.Products.Count(p => p.StockQuantity <= 4);
+            int outofstockproducts = _db.Products.Count(p => p.StockQuantity == 0);
+            int totalProdcategories = _db.Categories.Count();
 
-            var viewModel = new DashboardViewModel
+            ViewBag.TotalCustomers = totalcustomers;
+            ViewBag.unprocessedOrders = unprocessedOrders;
+            ViewBag.ordersoutfordelivery = ordersoutfordelivery;
+            ViewBag.cancelledOrders = cancelledOrders;
+            ViewBag.totalProductsInstock = totalProductsInstock;
+            ViewBag.lowstockproducts = lowstockproducts;
+            ViewBag.outofstockproducts = outofstockproducts;
+            ViewBag.totalProdcategories = totalProdcategories;
+
+            double salesRevenue = _db.OrderHeaders.Count(o => o.PaymentStatus == "Paid");
+            double totalCost = _db.Products.Sum(p => p.CostPrice);
+
+            var chartData = new
             {
-                TotalCustomers = totalCustomers,
-                TotalUnprocessedOrders = totalUnprocessedOrders,
-                OrdersOutForDelivery = ordersOutForDelivery,
-                CanceledOrders = canceledOrders,
-                TotalProducts = totalProductsInStock,
-                TotalCategories = totalProdCategories,
-                LowStockProductCount = CountLowStockProducts(),
-                OutofStockProductCount = CountOutOfStockProducts(),
-
+                labels = new[] { "Sales Revenue", "Total Cost" },
+                datasets = new[]
+                {
+                    new
+                    {
+                        label = "Line Chart",
+                        data = new double[] { salesRevenue, totalCost },
+                        backgroundColor = "rgba(75, 192, 192, 0.2)",
+                        borderColor = "rgba(75, 192, 192, 1)",
+                        borderWidth = 1
+                    }
+                }
             };
-            return View(viewModel);
+
+            ViewBag.ChartData = chartData;
+
+            var bestSellingProducts = _db.OrderDetails
+        .Include(detail => detail.Product)
+        .GroupBy(detail => detail.Product)
+        .OrderByDescending(group => group.Sum(detail => detail.Count))
+        .Select(group => group.Key)
+        .ToList();
+
+            ViewBag.OrderDetails = _db.OrderDetails.ToList();
+
+
+            return View(bestSellingProducts);
         }
     }
 }
+

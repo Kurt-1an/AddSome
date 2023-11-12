@@ -28,8 +28,8 @@ namespace ABC.Models
         public string PaymentTerm { get; set; }
 
         [DisplayName("Expected Delivery Date")]
-        [DataType(DataType.Date)] 
-        public DateTime ExpectedDeliveryDate { get; set; } 
+        [DataType(DataType.Date)]
+        public DateTime ExpectedDeliveryDate { get; set; }
 
         [DisplayName("Employee Name")]
         public string EmployeeName { get; set; }
@@ -39,6 +39,30 @@ namespace ABC.Models
 
         [DisplayName("Additional Note")]
         public string AdditionalNote { get; set; }
+        [DisplayName("Purchased Products")]
 
+        public List<PurchaseOrderItem> PurchasedProducts { get; set; }
+    }
+
+    public class PurchaseOrderItem
+    {
+        [Key]
+        public int Id { get; set; }
+
+        [DisplayName("Product Name")]
+        public string ProductName { get; set; }
+
+        [DisplayName("Cost")]
+        public double Cost { get; set; }
+
+        [DisplayName("Quantity")]
+        public int Quantity { get; set; }
     }
 }
+
+
+
+
+
+
+
