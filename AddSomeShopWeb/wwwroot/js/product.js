@@ -52,3 +52,5 @@ function Delete(url) {
         }
     })
 }
+
+$("#btngenerate")
