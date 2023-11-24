@@ -29,7 +29,7 @@ namespace AddSomeShopWeb.Areas.CustomerArea.Controllers
             return View();
         }
 
-        public IActionResult Shop()
+        public IActionResult Shop(string searchString)
         {
             //Get user ID of logged in User
             var claimsIdentity = (ClaimsIdentity)User.Identity;
@@ -41,7 +41,23 @@ namespace AddSomeShopWeb.Areas.CustomerArea.Controllers
                 _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == claim.Value).Count());
             }
 
-            IEnumerable<Product> productList = _unitOfWork.Product.GetAll(includeProperties: "Supplier");
+            // Get all products
+            IEnumerable<Product> productList;
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                // Filter products based on the search string
+                productList = _unitOfWork.Product.GetAll(
+                    filter: p => p.productName.Contains(searchString) || p.Brand.Contains(searchString),
+                    includeProperties: "Supplier"
+                );
+            }
+            else
+            {
+                // No search string, get all products
+                productList = _unitOfWork.Product.GetAll(includeProperties: "Supplier");
+            }
+
             return View(productList);
         }
 
@@ -115,18 +131,18 @@ namespace AddSomeShopWeb.Areas.CustomerArea.Controllers
             return View();
         }
 
-		public IActionResult ViewOrder(int orderId)
-		{
-			OrderVM = new()
-			{
-				OrderHeader = _unitOfWork.OrderHeader.Get(u => u.Id == orderId, includeProperties: "ApplicationUser"),
-				OrderDetail = _unitOfWork.OrderDetail.GetAll(u => u.OrderHeaderId == orderId, includeProperties: "Product")
-			};
-			return View(OrderVM);
-		}
+        public IActionResult ViewOrder(int orderId)
+        {
+            OrderVM = new()
+            {
+                OrderHeader = _unitOfWork.OrderHeader.Get(u => u.Id == orderId, includeProperties: "ApplicationUser"),
+                OrderDetail = _unitOfWork.OrderDetail.GetAll(u => u.OrderHeaderId == orderId, includeProperties: "Product")
+            };
+            return View(OrderVM);
+        }
 
 
-		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

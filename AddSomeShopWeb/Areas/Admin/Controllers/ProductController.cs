@@ -1,30 +1,34 @@
-﻿
-using ABC.DataAccess.Data;
+﻿using ABC.DataAccess.Data;
 using ABC.DataAccess.Repository.IRepository;
 using ABC.Models;
 using ABC.Models.ViewModels;
 using ABC.Utility;
+using DinkToPdf;
+using DinkToPdf.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
+
 namespace AddSomeShopWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
-	[Authorize(Roles = SD.Role_Admin + "," + SD.Role_Employee)]
+    [Authorize(Roles = SD.Role_Admin + "," + SD.Role_Employee)]
 
-	public class ProductController : Controller
+    public class ProductController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly IConverter _pdfConverter;
 
-        public ProductController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment, UserManager<IdentityUser> userManager)
+        public ProductController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment, UserManager<IdentityUser> userManager, IConverter pdfConverter)
         {
             _unitOfWork = unitOfWork;
             _webHostEnvironment = webHostEnvironment;
             _userManager = userManager;
+            _pdfConverter = pdfConverter;
         }
 
         //Retrieve the Data from Database
@@ -57,7 +61,7 @@ namespace AddSomeShopWeb.Areas.Admin.Controllers
             else
             {
                 //Update
-                productVM.Product = _unitOfWork.Product.Get(u=>u.Id == id);
+                productVM.Product = _unitOfWork.Product.Get(u => u.Id == id);
                 return View(productVM);
             }
 
@@ -77,17 +81,17 @@ namespace AddSomeShopWeb.Areas.Admin.Controllers
                     string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
                     string productPath = Path.Combine(wwwRootPath, @"image\product");
 
-                    if(!string.IsNullOrEmpty(productVM.Product.ImageUrl)) 
+                    if (!string.IsNullOrEmpty(productVM.Product.ImageUrl))
                     {
                         //delete old Image
                         var oldImagePath = Path.Combine(wwwRootPath, productVM.Product.ImageUrl.TrimStart('\\'));
                         if (System.IO.File.Exists(oldImagePath))
                         {
-                            System.IO.File.Delete(oldImagePath);    
+                            System.IO.File.Delete(oldImagePath);
                         }
                     }
                     //Upload Image
-                    using (var fileStream = new FileStream (Path.Combine(productPath, fileName), FileMode.Create))
+                    using (var fileStream = new FileStream(Path.Combine(productPath, fileName), FileMode.Create))
                     {
                         file.CopyTo(fileStream);
                     }
@@ -149,15 +153,42 @@ namespace AddSomeShopWeb.Areas.Admin.Controllers
                     Text = u.supplierCompanyName,
                     Value = u.Id.ToString()
                 });
-                    return View(productVM);
+                return View(productVM);
             }
         }
 
 
+        [AllowAnonymous]
+        public async Task<IActionResult> GeneratePdf()
+        {
 
-        
+            var htmlContent = $"{this.Request.Scheme}://{this.Request.Host}/Admin/Product/ProductPdf";
+
+            var pdf = new HtmlToPdfDocument()
+            {
+                GlobalSettings = new GlobalSettings()
+                {
+                    PaperSize = PaperKind.A4,
+                    Orientation = Orientation.Portrait
+                },
+                Objects = {
+                    new ObjectSettings(){
+                        Page = htmlContent
+                    }
+                }
+            };
+
+            var archivoPDF = _pdfConverter.Convert(pdf);
+            return File(archivoPDF, "application/pdf");
+        }
 
 
+        [AllowAnonymous]
+        public IActionResult ProductPdf()
+        {
+            List<Product> objProductList = _unitOfWork.Product.GetAll(includeProperties: "Supplier").ToList();
+            return View(objProductList);
+        }
 
 
         #region API CALLS
@@ -165,7 +196,7 @@ namespace AddSomeShopWeb.Areas.Admin.Controllers
         public IActionResult GetAll()
         {
             List<Product> objProductList = _unitOfWork.Product.GetAll(includeProperties: "Supplier").ToList();
-            return Json(new {data = objProductList});
+            return Json(new { data = objProductList });
         }
 
         [HttpDelete]
@@ -173,9 +204,9 @@ namespace AddSomeShopWeb.Areas.Admin.Controllers
         {
             var productToBeDeleted = _unitOfWork.Product.Get(u => u.Id == id);
 
-            if(productToBeDeleted == null)
+            if (productToBeDeleted == null)
             {
-                return Json(new { success = false, message = "Error while deleting"});
+                return Json(new { success = false, message = "Error while deleting" });
             }
 
             // LOG START: Log the Delete action
@@ -187,7 +218,7 @@ namespace AddSomeShopWeb.Areas.Admin.Controllers
                 Action = "Delete",
                 EntityName = "Product",
                 EntityKey = "Delete Product",
-                Changes = "Product deleted: " + productToBeDeleted.productName, 
+                Changes = "Product deleted: " + productToBeDeleted.productName,
                 Timestamp = DateTime.Now,
                 FormattedTime = DateTime.Now.ToString("MM/dd/yyyy hh:mm tt")
             };
@@ -195,8 +226,8 @@ namespace AddSomeShopWeb.Areas.Admin.Controllers
             _unitOfWork.AuditLog.Add(auditLogDelete);
             // LOG END
 
-            var oldImagePath = 
-            
+            var oldImagePath =
+
             //delete old Image
             Path.Combine(_webHostEnvironment.WebRootPath, productToBeDeleted.ImageUrl.TrimStart('\\'));
             if (System.IO.File.Exists(oldImagePath))

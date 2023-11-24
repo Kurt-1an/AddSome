@@ -53,4 +53,4 @@ function Delete(url) {
     })
 }
 
-$("#btngenerate")
+$("#btngenerate").attr("href", `/Admin/Product/GeneratePdf`);

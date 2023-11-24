@@ -13,10 +13,15 @@ namespace ABC.Models
     {
         public int Id { get; set; }
 
-        public string ApplicationUserId { get; set; }
+        public string? ApplicationUserId { get; set; }
         [ForeignKey("ApplicationUserId")]
         [ValidateNever]
-        public ApplicationUser ApplicationUser { get; set; }
+        public ApplicationUser? ApplicationUser { get; set; }
+
+        //public SalesChannel salesChannel { get; set; } 
+        //branch name 
+        //discount 
+        //charge 
 
         public List<OrderDetail> OrderDetails { get; set; }
 

@@ -162,9 +162,9 @@
 						</div>
 						<select class="custom-select" id="inputGroupSelect01">
 							<option selected disabled>- Choose Sales Channel -</option>
-							<option value="1">Walk-in</option>
-							<option value="2">On-call</option>
-							<option value="3">Chat-based</option>
+							@foreach (SalesChannel channel in Enum.GetValues(typeof(SalesChannel))){
+								<option value="@channel">@channel</option>
+							}
 						</select>
 					</div>
 				</div>

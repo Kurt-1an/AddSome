@@ -19,7 +19,7 @@
 
         <!-- Export Button -->
         <div class="col-2 text-center mb-3 mb-sm-0">
-            <a href="#" class="btn btn-success">
+            <a href="#" class="btn btn-success" id="btngenerate">
                 <i class="bi bi-box-arrow-up"></i> Export
             </a>
         </div>
@@ -82,3 +82,9 @@
     </table>
 
 </div>
+
+@section Scripts{
+    <script>
+        $("#btngenerate").attr("href", `/Admin/Customer/GeneratePdf`);
+    </script>
+}

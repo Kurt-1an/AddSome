@@ -118,6 +118,7 @@ namespace AddSomeShopWeb.Areas.Identity.Pages.Account
             public string? Province { get; set; }
 			public string? Barangay { get; set; }
 			public string? PostalCode { get; set; }
+			public string? Branch { get; set; }
 
 
 			[Required]

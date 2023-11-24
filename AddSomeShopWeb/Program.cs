@@ -8,10 +8,14 @@ using ABC.Utility;
 using Microsoft.AspNetCore.Authentication.Google;
 using System.Configuration;
 using ABC.DataAccess.DBInitializer;
+using DinkToPdf.Contracts;
+using DinkToPdf;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AppDBContext>(options=>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -44,6 +48,10 @@ builder.Services.AddRazorPages();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IEmailSender, EmailSender>();
 var app = builder.Build();
+
+
+
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
