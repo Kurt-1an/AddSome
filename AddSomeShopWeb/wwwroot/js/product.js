@@ -6,14 +6,16 @@ $(document).ready(function () {
 
 function loadDataTable() {
     dataTable = $('#tblData').DataTable({
-        "ajax": { url: '/admin/product/getall'},
+        "ajax": { url: '/admin/product/getall' },
         "columns": [
-            { data: 'productName', "width": "20%" },
+            { data: 'productName', "width": "10%" },
             { data: 'barcode', "width": "15%" },
-            { data: 'costPrice', "width": "10%" },
-            { data: 'retailPrice', "width": "10%" },
+            { data: 'costPrice', "width": "5%" },
+            { data: 'retailPrice', "width": "5%" },
             { data: 'stockQuantity', "width": "10%" },
             { data: 'supplier.supplierCompanyName', "width": "10%" },
+            { data: 'category.name', "width": "10%" },
+
             {
                 data: 'id',
                 "render": function (data) {

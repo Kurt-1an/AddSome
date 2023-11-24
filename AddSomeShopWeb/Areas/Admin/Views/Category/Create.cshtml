@@ -9,6 +9,16 @@
 			<hr/>
 		</div>
 
+		<!--Breadcrumb-->
+		<div class="row pb-3">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Category" asp-action="Index">Category List</a></li>
+					<li class="breadcrumb-item active" aria-current="page">Create Category</li>
+				</ol>
+			</nav>
+		</div>
+
 		<!--Displays the list of mistakes-->
 		<div asp-validation-summary="ModelOnly"></div>
 

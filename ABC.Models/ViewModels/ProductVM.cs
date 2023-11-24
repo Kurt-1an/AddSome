@@ -14,5 +14,9 @@ namespace ABC.Models.ViewModels
 
         [ValidateNever]
         public IEnumerable<SelectListItem> SuppllierList { get; set; }
+
+        [ValidateNever]
+        public IEnumerable<SelectListItem> CategoryList { get; set; }
+
     }
 }

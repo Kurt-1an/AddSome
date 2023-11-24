@@ -34,7 +34,7 @@ namespace AddSomeShopWeb.Areas.Admin.Controllers
         //Retrieve the Data from Database
         public IActionResult Index()
         {
-            List<Product> objProductList = _unitOfWork.Product.GetAll(includeProperties: "Supplier").ToList();
+            List<Product> objProductList = _unitOfWork.Product.GetAll(includeProperties: "Supplier,Category").ToList();
             return View(objProductList);
         }
 
@@ -48,6 +48,12 @@ namespace AddSomeShopWeb.Areas.Admin.Controllers
                 SuppllierList = _unitOfWork.Supplier.GetAll().Select(u => new SelectListItem
                 {
                     Text = u.supplierCompanyName,
+                    Value = u.Id.ToString()
+                }),
+
+                CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.Name,
                     Value = u.Id.ToString()
                 }),
                 Product = new Product()
@@ -153,6 +159,12 @@ namespace AddSomeShopWeb.Areas.Admin.Controllers
                     Text = u.supplierCompanyName,
                     Value = u.Id.ToString()
                 });
+
+                productVM.CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.Name,
+                    Value = u.Id.ToString()
+                });
                 return View(productVM);
             }
         }
@@ -186,7 +198,7 @@ namespace AddSomeShopWeb.Areas.Admin.Controllers
         [AllowAnonymous]
         public IActionResult ProductPdf()
         {
-            List<Product> objProductList = _unitOfWork.Product.GetAll(includeProperties: "Supplier").ToList();
+            List<Product> objProductList = _unitOfWork.Product.GetAll(includeProperties: "Supplier, Category").ToList();
             return View(objProductList);
         }
 
@@ -195,7 +207,7 @@ namespace AddSomeShopWeb.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            List<Product> objProductList = _unitOfWork.Product.GetAll(includeProperties: "Supplier").ToList();
+            List<Product> objProductList = _unitOfWork.Product.GetAll(includeProperties: "Supplier, Category").ToList();
             return Json(new { data = objProductList });
         }
 

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ABC.DataAccess.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20231105184214_addAuditLogs")]
-    partial class addAuditLogs
+    [Migration("20231124164739_initialSeed")]
+    partial class initialSeed
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -46,6 +46,14 @@ namespace ABC.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("EntityName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FormattedTime")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Role")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -189,8 +197,14 @@ namespace ABC.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<double?>("Charge")
+                        .HasColumnType("float");
+
                     b.Property<int>("Count")
                         .HasColumnType("int");
+
+                    b.Property<double?>("Discount")
+                        .HasColumnType("float");
 
                     b.Property<int>("OrderHeaderId")
                         .HasColumnType("int");
@@ -219,7 +233,6 @@ namespace ABC.DataAccess.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ApplicationUserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Barangay")
@@ -293,9 +306,8 @@ namespace ABC.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
 
                     b.Property<float>("CostPrice")
                         .HasColumnType("real");
@@ -326,18 +338,6 @@ namespace ABC.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SpecOne")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SpecThree")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SpecTwo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("StockQuantity")
                         .HasColumnType("int");
 
@@ -359,11 +359,9 @@ namespace ABC.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("subCategory")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
 
                     b.HasIndex("SupplierId");
 
@@ -375,7 +373,7 @@ namespace ABC.DataAccess.Migrations
                             Id = 1,
                             Barcode = 832175698L,
                             Brand = "HP",
-                            Category = "TBA",
+                            CategoryId = 1,
                             CostPrice = 800f,
                             Description = "Versatile all-in-one printer for printing, copying, and scanning",
                             Duration = "12 months from date of purchase",
@@ -384,23 +382,19 @@ namespace ABC.DataAccess.Migrations
                             Provider = "Third-Party Warranty Company",
                             RetailPrice = 1299f,
                             SKU = "printer-AllInOne-XYZ123",
-                            SpecOne = "Wireless connectivity",
-                            SpecThree = "Color touchscreen interface",
-                            SpecTwo = "Automatic document feeder",
                             StockQuantity = 20,
                             SupplierId = 2,
                             Type = "Extended Warranty",
                             Warehouse = "Makati",
                             addNotes = "Additional Notes is here color touchscreen interface ",
-                            productName = "XYZ123 All-in-One Printer",
-                            subCategory = "office"
+                            productName = "XYZ123 All-in-One Printer"
                         },
                         new
                         {
                             Id = 2,
                             Barcode = 954532414L,
                             Brand = "Samsung",
-                            Category = "TBA",
+                            CategoryId = 2,
                             CostPrice = 1200f,
                             Description = "Panoramic view with motion detection",
                             Duration = "7 days from date of purchase",
@@ -409,15 +403,11 @@ namespace ABC.DataAccess.Migrations
                             Provider = "Manufacturer",
                             RetailPrice = 1999f,
                             SKU = "cctv-SmartCam-360",
-                            SpecOne = "all-in-one printer (print, copy, and scan)",
-                            SpecThree = "all-in-one printer (print, copy, and scan)",
-                            SpecTwo = "all-in-one printer (print, copy, and scan)",
                             StockQuantity = 15,
                             SupplierId = 1,
                             Type = "Manufacturers Warranty",
                             Warehouse = "Pasig",
-                            productName = "SmartCam 360 Security Camera",
-                            subCategory = "wire"
+                            productName = "SmartCam 360 Security Camera"
                         });
                 });
 
@@ -479,6 +469,34 @@ namespace ABC.DataAccess.Migrations
                         });
                 });
 
+            modelBuilder.Entity("ABC.Models.PurchaseOrderItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<double>("Cost")
+                        .HasColumnType("float");
+
+                    b.Property<string>("ProductName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("PurchaseOrderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PurchaseOrderId");
+
+                    b.ToTable("PurchaseOrderItem");
+                });
+
             modelBuilder.Entity("ABC.Models.ShoppingCart", b =>
                 {
                     b.Property<int>("Id")
@@ -491,8 +509,14 @@ namespace ABC.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<double?>("Charge")
+                        .HasColumnType("float");
+
                     b.Property<int>("Count")
                         .HasColumnType("int");
+
+                    b.Property<double?>("Discount")
+                        .HasColumnType("float");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
@@ -651,7 +675,7 @@ namespace ABC.DataAccess.Migrations
                             AccessLevel = "Admin",
                             Address = "Taytay Rizal",
                             ContactNumber = 9568271611L,
-                            DateCreated = new DateTime(2023, 11, 6, 2, 42, 14, 84, DateTimeKind.Local).AddTicks(9378),
+                            DateCreated = new DateTime(2023, 11, 25, 0, 47, 38, 908, DateTimeKind.Local).AddTicks(8814),
                             Email = "neiljejomar@gmail.com",
                             FirstName = "Kurt",
                             LastName = "Alarcos",
@@ -894,7 +918,7 @@ namespace ABC.DataAccess.Migrations
             modelBuilder.Entity("ABC.Models.OrderDetail", b =>
                 {
                     b.HasOne("ABC.Models.OrderHeader", "OrderHeader")
-                        .WithMany()
+                        .WithMany("OrderDetails")
                         .HasForeignKey("OrderHeaderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -914,22 +938,35 @@ namespace ABC.DataAccess.Migrations
                 {
                     b.HasOne("ABC.Models.ApplicationUser", "ApplicationUser")
                         .WithMany()
-                        .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ApplicationUserId");
 
                     b.Navigation("ApplicationUser");
                 });
 
             modelBuilder.Entity("ABC.Models.Product", b =>
                 {
+                    b.HasOne("ABC.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("ABC.Models.Supplier", "Supplier")
                         .WithMany()
                         .HasForeignKey("SupplierId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Category");
+
                     b.Navigation("Supplier");
+                });
+
+            modelBuilder.Entity("ABC.Models.PurchaseOrderItem", b =>
+                {
+                    b.HasOne("ABC.Models.PurchaseOrder", null)
+                        .WithMany("PurchasedProducts")
+                        .HasForeignKey("PurchaseOrderId");
                 });
 
             modelBuilder.Entity("ABC.Models.ShoppingCart", b =>
@@ -1000,6 +1037,16 @@ namespace ABC.DataAccess.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("ABC.Models.OrderHeader", b =>
+                {
+                    b.Navigation("OrderDetails");
+                });
+
+            modelBuilder.Entity("ABC.Models.PurchaseOrder", b =>
+                {
+                    b.Navigation("PurchasedProducts");
                 });
 #pragma warning restore 612, 618
         }

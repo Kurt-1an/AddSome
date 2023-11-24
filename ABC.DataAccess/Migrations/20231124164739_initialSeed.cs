@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ABC.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class addTablesToDb : Migration
+    public partial class initialSeed : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -57,6 +57,26 @@ namespace ABC.DataAccess.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AuditLogs",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Action = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EntityName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EntityKey = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Changes = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Timestamp = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    FormattedTime = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Role = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AuditLogs", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -272,7 +292,7 @@ namespace ABC.DataAccess.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ShippingDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     OrderTotal = table.Column<double>(type: "float", nullable: false),
@@ -295,8 +315,28 @@ namespace ABC.DataAccess.Migrations
                         name: "FK_OrderHeaders_AspNetUsers_ApplicationUserId",
                         column: x => x.ApplicationUserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PurchaseOrderItem",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Cost = table.Column<double>(type: "float", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    PurchaseOrderId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PurchaseOrderItem", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PurchaseOrderItem_PurchaseOrders_PurchaseOrderId",
+                        column: x => x.PurchaseOrderId,
+                        principalTable: "PurchaseOrders",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -309,8 +349,7 @@ namespace ABC.DataAccess.Migrations
                     Barcode = table.Column<long>(type: "bigint", nullable: false),
                     SKU = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     productName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Category = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    subCategory = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CategoryId = table.Column<int>(type: "int", nullable: false),
                     Brand = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Warehouse = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -321,15 +360,18 @@ namespace ABC.DataAccess.Migrations
                     Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Duration = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Provider = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SpecOne = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SpecTwo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SpecThree = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     addNotes = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SupplierId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Products", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Products_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Products_Suppliers_SupplierId",
                         column: x => x.SupplierId,
@@ -346,6 +388,8 @@ namespace ABC.DataAccess.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     OrderHeaderId = table.Column<int>(type: "int", nullable: false),
                     ProductId = table.Column<int>(type: "int", nullable: false),
+                    Charge = table.Column<double>(type: "float", nullable: true),
+                    Discount = table.Column<double>(type: "float", nullable: true),
                     Count = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false)
                 },
@@ -374,7 +418,9 @@ namespace ABC.DataAccess.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProductId = table.Column<int>(type: "int", nullable: false),
                     Count = table.Column<int>(type: "int", nullable: false),
-                    ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Charge = table.Column<double>(type: "float", nullable: true),
+                    Discount = table.Column<double>(type: "float", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -426,15 +472,15 @@ namespace ABC.DataAccess.Migrations
             migrationBuilder.InsertData(
                 table: "UsersManagement",
                 columns: new[] { "Id", "AccessLevel", "Address", "ContactNumber", "DateCreated", "Email", "FirstName", "LastName", "Password" },
-                values: new object[] { 1, "Admin", "Taytay Rizal", 9568271611L, new DateTime(2023, 11, 5, 22, 22, 27, 75, DateTimeKind.Local).AddTicks(5556), "neiljejomar@gmail.com", "Kurt", "Alarcos", "Hatdog" });
+                values: new object[] { 1, "Admin", "Taytay Rizal", 9568271611L, new DateTime(2023, 11, 25, 0, 47, 38, 908, DateTimeKind.Local).AddTicks(8814), "neiljejomar@gmail.com", "Kurt", "Alarcos", "Hatdog" });
 
             migrationBuilder.InsertData(
                 table: "Products",
-                columns: new[] { "Id", "Barcode", "Brand", "Category", "CostPrice", "Description", "Duration", "ImageUrl", "MinimumStockQuantity", "Provider", "RetailPrice", "SKU", "SpecOne", "SpecThree", "SpecTwo", "StockQuantity", "SupplierId", "Type", "Warehouse", "addNotes", "productName", "subCategory" },
+                columns: new[] { "Id", "Barcode", "Brand", "CategoryId", "CostPrice", "Description", "Duration", "ImageUrl", "MinimumStockQuantity", "Provider", "RetailPrice", "SKU", "StockQuantity", "SupplierId", "Type", "Warehouse", "addNotes", "productName" },
                 values: new object[,]
                 {
-                    { 1, 832175698L, "HP", "TBA", 800f, "Versatile all-in-one printer for printing, copying, and scanning", "12 months from date of purchase", "", 5, "Third-Party Warranty Company", 1299f, "printer-AllInOne-XYZ123", "Wireless connectivity", "Color touchscreen interface", "Automatic document feeder", 20, 2, "Extended Warranty", "Makati", "Additional Notes is here color touchscreen interface ", "XYZ123 All-in-One Printer", "office" },
-                    { 2, 954532414L, "Samsung", "TBA", 1200f, "Panoramic view with motion detection", "7 days from date of purchase", "", 4, "Manufacturer", 1999f, "cctv-SmartCam-360", "all-in-one printer (print, copy, and scan)", "all-in-one printer (print, copy, and scan)", "all-in-one printer (print, copy, and scan)", 15, 1, "Manufacturers Warranty", "Pasig", null, "SmartCam 360 Security Camera", "wire" }
+                    { 1, 832175698L, "HP", 1, 800f, "Versatile all-in-one printer for printing, copying, and scanning", "12 months from date of purchase", "", 5, "Third-Party Warranty Company", 1299f, "printer-AllInOne-XYZ123", 20, 2, "Extended Warranty", "Makati", "Additional Notes is here color touchscreen interface ", "XYZ123 All-in-One Printer" },
+                    { 2, 954532414L, "Samsung", 2, 1200f, "Panoramic view with motion detection", "7 days from date of purchase", "", 4, "Manufacturer", 1999f, "cctv-SmartCam-360", 15, 1, "Manufacturers Warranty", "Pasig", null, "SmartCam 360 Security Camera" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -492,9 +538,19 @@ namespace ABC.DataAccess.Migrations
                 column: "ApplicationUserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Products_CategoryId",
+                table: "Products",
+                column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Products_SupplierId",
                 table: "Products",
                 column: "SupplierId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PurchaseOrderItem_PurchaseOrderId",
+                table: "PurchaseOrderItem",
+                column: "PurchaseOrderId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ShoppingCarts_ApplicationUserId",
@@ -526,7 +582,7 @@ namespace ABC.DataAccess.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Categories");
+                name: "AuditLogs");
 
             migrationBuilder.DropTable(
                 name: "Customers");
@@ -535,7 +591,7 @@ namespace ABC.DataAccess.Migrations
                 name: "OrderDetails");
 
             migrationBuilder.DropTable(
-                name: "PurchaseOrders");
+                name: "PurchaseOrderItem");
 
             migrationBuilder.DropTable(
                 name: "ShoppingCarts");
@@ -550,10 +606,16 @@ namespace ABC.DataAccess.Migrations
                 name: "OrderHeaders");
 
             migrationBuilder.DropTable(
+                name: "PurchaseOrders");
+
+            migrationBuilder.DropTable(
                 name: "Products");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Categories");
 
             migrationBuilder.DropTable(
                 name: "Suppliers");

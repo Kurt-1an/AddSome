@@ -133,21 +133,15 @@
                         </div>
                     </div>
 
-                    <!--Category & Sub-->
+                    <!--Category-->
                     <div class="row">
                         <div class="col-6">
-                                <span asp-validation-for="Product.Category" class="text-danger"></span>
+                            <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
                             <div class="input-group mb-3">
-                                <label asp-for="Product.Category" class="input-group-text" id="Category"></label>
-                                <input asp-for="Product.Category" type="text" class="form-control" aria-describedby="Category">
-                            </div>
-                        </div>
-
-                        <div class="col-6">
-                                <span asp-validation-for="Product.subCategory" class="text-danger"></span>
-                            <div class="input-group mb-3">
-                                <label asp-for="Product.subCategory" class="input-group-text" id="subCategory"></label>
-                                <input asp-for="Product.subCategory" type="text" class="form-control" aria-describedby="subCategory">
+                                <label class="input-group-text" id="Category">Category </label>
+                                <select asp-for="Product.CategoryId" asp-items="@Model.CategoryList" type="text" class="form-select" aria-describedby="Category">
+                                    <option disabled selected>--Select Category--</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -292,51 +286,6 @@
             </div>
         </div>
 
-        <!--Product Specifications-->
-        <div class="row pt-4 pb-3">
-            <div class="col-12">
-                <div class="border p-3 container shadow">
-                    <!--Title-->
-                    <div class="row pb-2">
-                        <h4 class="text-primary">Product Specifications</h4>
-                        <hr />
-                    </div>
-
-                    <!--Spec 1-->
-                    <div class="row">
-                        <div class="col-12">
-                                <span asp-validation-for="Product.SpecOne" class="text-danger"></span>
-                            <div class="input-group mb-3">
-                                <label asp-for="Product.SpecOne" class="input-group-text" id="SpecOne"></label>
-                                <input asp-for="Product.SpecOne" class="form-control" aria-describedby="SpecOne">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--Spec 2-->
-                    <div class="row">
-                        <div class="col-112">
-                                <span asp-validation-for="Product.SpecTwo" class="text-danger"></span>
-                            <div class="input-group mb-3">
-                                <label asp-for="Product.SpecTwo" class="input-group-text" id="SpecTwo"></label>
-                                <input asp-for="Product.SpecTwo" class="form-control" aria-describedby="SpecTwo">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--Spec 3-->
-                    <div class="row">
-                        <div class="col-12">
-                                <span asp-validation-for="Product.SpecThree" class="text-danger"></span>
-                            <div class="input-group mb-3">
-                                <label asp-for="Product.SpecThree" class="input-group-text" id="SpecThree"></label>
-                                <input asp-for="Product.SpecThree" class="form-control" aria-describedby="SpecThree">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <!--Additional Notes-->
         <div class="row pt-4 pb-3">

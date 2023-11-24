@@ -27,8 +27,7 @@ namespace ABC.DataAccess.Repository
 				objFromDB.Barcode = obj.Barcode;
                 objFromDB.SKU = obj.SKU;
                 objFromDB.productName = obj.productName;
-                objFromDB.Category = obj.Category;
-				objFromDB.subCategory = obj.subCategory;
+                objFromDB.CategoryId = obj.CategoryId;
                 objFromDB.Brand = obj.Brand;
                 objFromDB.Warehouse = obj.Warehouse;
                 objFromDB.Description = obj.Description;
@@ -39,9 +38,6 @@ namespace ABC.DataAccess.Repository
                 objFromDB.Type = obj.Type;
                 objFromDB.Duration = obj.Duration;
                 objFromDB.Provider = obj.Provider;
-                objFromDB.SpecOne = obj.SpecOne;
-                objFromDB.SpecTwo = obj.SpecTwo;
-                objFromDB.SpecThree = obj.SpecThree;
                 objFromDB.addNotes = obj.addNotes;
                 objFromDB.SupplierId = obj.SupplierId;
 

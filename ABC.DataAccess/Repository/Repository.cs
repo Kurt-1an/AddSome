@@ -11,28 +11,29 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace ABC.DataAccess.Repository
 {
-	public class Repository<T> : IRepository<T> where T : class
-	{
-		private readonly AppDBContext _db;
-		internal DbSet<T> dbSet;
+    public class Repository<T> : IRepository<T> where T : class
+    {
+        private readonly AppDBContext _db;
+        internal DbSet<T> dbSet;
         public Repository(AppDBContext db)
         {
             _db = db;
-			this.dbSet = _db.Set<T>();
-			_db.Products.Include(u => u.Supplier).Include(u => u.SupplierId);
-			//_db.Categories == dbSet
+            this.dbSet = _db.Set<T>();
+            _db.Products.Include(u => u.Supplier).Include(u => u.SupplierId).Include(u => u.Category).Include(u => u.CategoryId);
+            //_db.Categories == dbSet
         }
 
         public void Add(T entity)
-		{
-			dbSet.Add(entity);
-		}
+        {
+            dbSet.Add(entity);
+        }
 
-		public T Get(Expression<Func<T, bool>> filter, string? includeProperties = null, bool tracked = false)
-		{
+        public T Get(Expression<Func<T, bool>> filter, string? includeProperties = null, bool tracked = false)
+        {
             IQueryable<T> query;
 
-            if (tracked) {
+            if (tracked)
+            {
                 query = dbSet;
             }
             else
@@ -53,32 +54,33 @@ namespace ABC.DataAccess.Repository
         }
 
         //Supplier, SupplierID 
-		public IEnumerable<T> GetAll(Expression<Func<T, bool>>? filter, string? includeProperties = null)
-		{
-			IQueryable<T> query = dbSet;
+        public IEnumerable<T> GetAll(Expression<Func<T, bool>>? filter, string? includeProperties = null)
+        {
+            IQueryable<T> query = dbSet;
 
-            if(filter != null) { 
+            if (filter != null)
+            {
                 query = query.Where(filter);
             }
 
             if (!string.IsNullOrEmpty(includeProperties))
-			{
-                foreach (var includeProp in includeProperties.Split(new char[] {','}, StringSplitOptions.RemoveEmptyEntries))
+            {
+                foreach (var includeProp in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
                 {
-                    query = query.Include(includeProp);
+                    query = query.Include(includeProp.Trim());
                 }
             }
-			return query.ToList();
-		}
+            return query.ToList();
+        }
 
-		public void Remove(T entity)
-		{
-			dbSet.Remove(entity);
-		}
+        public void Remove(T entity)
+        {
+            dbSet.Remove(entity);
+        }
 
-		public void RemoveRange(IEnumerable<T> entities)
-		{
-			dbSet.RemoveRange(entities);
-		}
-	}
+        public void RemoveRange(IEnumerable<T> entities)
+        {
+            dbSet.RemoveRange(entities);
+        }
+    }
 }

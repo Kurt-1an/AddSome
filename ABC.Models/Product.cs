@@ -15,7 +15,7 @@ namespace ABC.Models
 		[Key]
 		public int Id { get; set; }
 
-        //Product Information
+
 
         //Product Image
         [DisplayName("For Inventory")]
@@ -28,10 +28,16 @@ namespace ABC.Models
         [Required]
         [DisplayName("Product Name")]
         public string productName { get; set; }
-		public string Category { get; set; }
 
-        [DisplayName("Sub Category")]
-        public string subCategory { get; set; }
+
+     
+        [DisplayName("Category")]
+        public int CategoryId { get; set; }
+        [ForeignKey("CategoryId")]
+        [ValidateNever]
+        public Category Category { get; set; }
+
+
         public string Brand { get; set; }
         public string Warehouse { get; set; }
         public string Description { get; set; }
@@ -66,25 +72,15 @@ namespace ABC.Models
 
 
 
-        //Prodect Specification
-        [DisplayName("Specification #1")]
-        public string SpecOne { get; set; }
-        [DisplayName("Specification #2")]
-        public string SpecTwo { get; set; }
-        [DisplayName("Specification #3")]
-        public string SpecThree { get; set; }
-
-
         //Additional Notes
         [DisplayName("Additional Notes")]
         public string? addNotes { get; set; }
 
 
 
-        //Foreign Key Relation of Supplier
-        [DisplayName("Supplier")]
+		//Foreign Key Relation of Supplier
+		[DisplayName("Supplier")]
         public int SupplierId { get; set; }
-
         [ForeignKey("SupplierId")]
         [ValidateNever]
         public Supplier Supplier { get; set; }
