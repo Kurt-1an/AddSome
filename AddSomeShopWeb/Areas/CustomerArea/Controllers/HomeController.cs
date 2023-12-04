@@ -5,6 +5,7 @@ using ABC.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Diagnostics;
 using System.Security.Claims;
 
@@ -26,40 +27,53 @@ namespace AddSomeShopWeb.Areas.CustomerArea.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            // Retrieve the list of categories
+            var categories = _unitOfWork.Category.GetAll(); 
+
+            return View(categories);
         }
 
-        public IActionResult Shop(string searchString)
+
+        public IActionResult Shop(string searchString, string categoryFilter)
         {
-            //Get user ID of logged in User
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
 
             if (claim != null)
             {
                 HttpContext.Session.SetInt32(SD.SessionCart,
-                _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == claim.Value).Count());
+                    _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == claim.Value).Count());
             }
 
-            // Get all products
-            IEnumerable<Product> productList;
+            // Retrieve the list of categories
+            var categories = _unitOfWork.Category.GetAll(); 
+            ViewBag.Categories = categories;
+
+            IEnumerable<Product> productList = _unitOfWork.Product.GetAll(includeProperties: "Supplier,Category");
 
             if (!string.IsNullOrEmpty(searchString))
             {
-                // Filter products based on the search string
-                productList = _unitOfWork.Product.GetAll(
-                    filter: p => p.productName.Contains(searchString) || p.Brand.Contains(searchString),
-                    includeProperties: "Supplier"
-                );
+                searchString = searchString.ToLower();
+                productList = productList.Where(p =>
+                    p.productName.ToLower().Contains(searchString) || p.Brand.ToLower().Contains(searchString));
             }
-            else
+
+
+
+            if (!string.IsNullOrEmpty(categoryFilter))
             {
-                // No search string, get all products
-                productList = _unitOfWork.Product.GetAll(includeProperties: "Supplier");
+                int categoryId;
+                if (int.TryParse(categoryFilter, out categoryId))
+                {
+                    productList = productList.Where(p => p.CategoryId == categoryId);
+                }
             }
 
             return View(productList);
         }
+
+
+
 
         //Details Button
         public IActionResult Details(int productId)
@@ -123,7 +137,20 @@ namespace AddSomeShopWeb.Areas.CustomerArea.Controllers
 
         public IActionResult Privacy()
         {
-            return View();
+            List<Content> objContentList = _unitOfWork.Content.GetAll().ToList();
+            return View(objContentList);
+        }
+
+        public IActionResult Vision()
+        {
+            List<Content> objContentList = _unitOfWork.Content.GetAll().ToList();
+            return View(objContentList);
+        }
+
+        public IActionResult About()
+        {
+            List<Content> objContentList = _unitOfWork.Content.GetAll().ToList();
+            return View(objContentList);
         }
 
         public IActionResult ManageOrder()

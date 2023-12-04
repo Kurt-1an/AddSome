@@ -181,7 +181,7 @@
                             <span asp-validation-for="Product.Description" class="text-danger"></span>
                         <div class="input-group mb-3">
                             <label asp-for="Product.Description" class="input-group-text"></label>
-                            <textarea asp-for="Product.Description" class="form-control" id="YourTextareaId"></textarea>
+                            <textarea asp-for="Product.Description" class="form-control descriptionBox" id="YourTextareaId"></textarea>
                         </div>
                     </div>
                 </div>
@@ -341,6 +341,7 @@
 
 @section Scripts{
     @{
+        <script src="~/js/descriptionbox.js"></script>
         <partial name="_ConfirmationModalScript" />
         <partial name="_BarcodeScript" />
     }

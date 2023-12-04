@@ -26,6 +26,8 @@ namespace ABC.DataAccess.Data
         public DbSet<OrderDetail> OrderDetails { get; set; }
 
         public DbSet<AuditLog> AuditLogs { get; set; }
+        public DbSet<Content> Contents { get; set; }
+
 
 
 

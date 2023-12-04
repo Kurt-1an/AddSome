@@ -10,8 +10,8 @@
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
     <link rel="stylesheet" href="//cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
-    <link href="~/lib/select2/css/select2.css" rel="stylesheet" />
-    <link href="~/lib/sweetalert/sweetalert.css" rel="stylesheet" />
+	<link href="~/lib/sweetalert2/package/dist/sweetalert2.min.css" rel="stylesheet" />
+	<link href="~/lib/summernote/summernote-lite.min.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -149,7 +149,6 @@
                             </div>
 
 
-
                             <!--Settings-->
                             <a class="btn btn-outline-secondary align-lefty" data-bs-toggle="collapse" href="#settings-collapse" aria-expanded="false" role="button"><i class="bi bi-gear pe-2"></i> Settings</a>
                             <div class="collapse" id="settings-collapse">
@@ -161,7 +160,7 @@
                                         <a class="btn btn-outline-secondary fw-lighter small" href="#">System Settings</a>
                                     </li>
                                     <li>
-                                        <a class="btn btn-outline-secondary fw-lighter small" href="#">Website Settings</a>
+                                        <a class="btn btn-outline-secondary fw-lighter small" asp-area="Admin" asp-controller="Content" asp-action="Index">Website Settings</a>
                                     </li>
                                 </ul>
                             </div>
@@ -183,11 +182,12 @@
     </div>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/sweetalert/sweetalert.js"></script>
+	<script src="~/lib/sweetalert2/package/dist/sweetalert2.min.js"></script>
     <script src="//cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="~/lib/select2/js/select2.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+	<script src="~/lib/summernote/summernote-lite.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

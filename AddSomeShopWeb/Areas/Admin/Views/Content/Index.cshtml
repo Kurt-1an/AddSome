@@ -1,0 +1,75 @@
+﻿@model List<Content>
+
+<div class="container">
+    <div class="row pt-4 pb-3">
+
+        <!-- Title -->
+        <div class="col-6">
+            <h2 class="text-primary">Content List</h2>
+        </div>
+    </div>
+
+    <!-- About Container -->
+    @foreach (var item in Model)
+    {
+        <!-- Button to Create Page -->
+        <div class="col-12 text-end p-4">
+            <a asp-controller="Content" asp-action="Upsert" asp-route-id="@item.Id" class="btn btn-outline-primary">
+                <i class="bi bi-plus-circle"></i> Manage Content
+            </a>
+        </div>
+
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingAbout_@item.Id">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAbout_@item.Id" aria-expanded="false" aria-controls="collapseAbout_@item.Id">
+                    <h5>About</h5>
+                </button>
+            </h2>
+            <div id="collapseAbout_@item.Id" class="accordion-collapse collapse show" aria-labelledby="headingAbout_@item.Id" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <div class="col-sm-12 pt-2 pb-3">
+                        <p>@Html.Raw(@item.About)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <!-- Vision & Mission Container -->
+    @foreach (var item in Model)
+    {
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingVision_@item.Id">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseVision_@item.Id" aria-expanded="false" aria-controls="collapseVision_@item.Id">
+                    <h5>Vision & Mission</h5>
+                </button>
+            </h2>
+            <div id="collapseVision_@item.Id" class="accordion-collapse collapse show" aria-labelledby="headingVision_@item.Id" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <div class="col-sm-12 pt-2 pb-3">
+                        <p>@Html.Raw(@item.Vision)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <!-- Privacy & Policy Container -->
+    @foreach (var item in Model)
+    {
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingPrivacy_@item.Id">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePrivacy_@item.Id" aria-expanded="false" aria-controls="collapsePrivacy_@item.Id">
+                    <h5>Privacy & Policy</h5>
+                </button>
+            </h2>
+            <div id="collapsePrivacy_@item.Id" class="accordion-collapse collapse show" aria-labelledby="headingPrivacy_@item.Id" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <div class="col-sm-12 pt-2 pb-3">
+                        <p>@Html.Raw(@item.Privacy)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

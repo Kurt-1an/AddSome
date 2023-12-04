@@ -1,0 +1,85 @@
+﻿@model Content
+
+<form method="post" id="myForm">
+	<input asp-for="Id" hidden />
+
+	<!--New Content-->
+	<div class="row pt-4 pb-3" id="topbar">
+
+		<!-- Title -->
+		<div class="col-lg-8 col-sm-12 text-start mb-3 mb-sm-0">
+			<h2 class="text-primary">Content Manager</h2>
+		</div>
+
+
+		<!-- Save Button -->
+		<div class="col-lg-12 col-sm-6 text-end mb-3 mb-sm-0">
+			@if (Model.Id != 0)
+			{
+				<button type="submit" class="btn btn-success"><i class="bi bi-floppy"></i> Update</button>
+			}
+			else
+			{
+				<button type="submit" class="btn btn-success"><i class="bi bi-floppy"></i> Create</button>
+			}
+		</div>
+	</div>
+
+	<!--========================
+	 ABOUT CONTAINER
+	========================-->
+	<div class="accordion-item">
+		<h2 class="accordion-header" id="headingOne">
+			<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+				<h5>About</h5>
+			</button>
+		</h2>
+		<div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+			<div class="accordion-body">
+				<div class="col-sm-12 pt-2 pb-3">
+					<textarea asp-for="About" class="form-control descriptionBox"></textarea>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--========================
+		 PRIVACY CONTAINER
+		========================-->
+	<div class="accordion-item">
+		<h2 class="accordion-header" id="headingOne">
+			<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseOne">
+				<h5>Vision & Mission</h5>
+			</button>
+		</h2>
+		<div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+			<div class="accordion-body">
+				<div class="col-sm-12 pt-2 pb-3">
+					<textarea asp-for="Vision" class="form-control descriptionBox"></textarea>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--========================
+		 VISION CONTAINER
+		========================-->
+	<div class="accordion-item">
+		<h2 class="accordion-header" id="headingOne">
+			<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseOne">
+				<h5>Privacy & Policy</h5>
+			</button>
+		</h2>
+		<div id="collapseThree" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+			<div class="accordion-body">
+				<div class="col-sm-12 pt-2 pb-3">
+					<textarea asp-for="Privacy" class="form-control descriptionBox"></textarea>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+
+@section Scripts{
+	<script src="~/js/descriptionbox.js"></script>
+}

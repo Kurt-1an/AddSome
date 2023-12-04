@@ -113,6 +113,28 @@ namespace ABC.DataAccess.Migrations
                         });
                 });
 
+            modelBuilder.Entity("ABC.Models.Content", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("About")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Privacy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Vision")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Contents");
+                });
+
             modelBuilder.Entity("ABC.Models.Customer", b =>
                 {
                     b.Property<int>("Id")
@@ -672,7 +694,7 @@ namespace ABC.DataAccess.Migrations
                             AccessLevel = "Admin",
                             Address = "Taytay Rizal",
                             ContactNumber = 9568271611L,
-                            DateCreated = new DateTime(2023, 11, 25, 0, 47, 38, 908, DateTimeKind.Local).AddTicks(8814),
+                            DateCreated = new DateTime(2023, 12, 1, 18, 45, 14, 769, DateTimeKind.Local).AddTicks(6323),
                             Email = "neiljejomar@gmail.com",
                             FirstName = "Kurt",
                             LastName = "Alarcos",

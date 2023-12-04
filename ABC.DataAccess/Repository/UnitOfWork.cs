@@ -23,6 +23,8 @@ namespace ABC.DataAccess.Repository
 		public IOrderHeaderRepository OrderHeader { get; private set; }
 		public IOrderDetailRepository OrderDetail { get; private set; }
 		public IAuditLogRepository AuditLog { get; private set; }
+        public IContentRepository Content { get; private set; }
+
 
 
 
@@ -41,6 +43,7 @@ namespace ABC.DataAccess.Repository
             OrderHeader = new OrderHeaderRepository(_db);
             OrderDetail = new OrderDetailRepository(_db);
 			AuditLog = new AuditLogRepository(_db);
+			Content = new ContentRepository(_db);
         }
 
 

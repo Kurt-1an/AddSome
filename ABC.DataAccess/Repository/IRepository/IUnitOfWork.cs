@@ -19,7 +19,8 @@ namespace ABC.DataAccess.Repository.IRepository
         IOrderHeaderRepository OrderHeader { get; }
         IOrderDetailRepository OrderDetail { get; }
         IAuditLogRepository AuditLog { get; }
-    
+        IContentRepository Content { get; }
+
         void Save();
 	}
 }
