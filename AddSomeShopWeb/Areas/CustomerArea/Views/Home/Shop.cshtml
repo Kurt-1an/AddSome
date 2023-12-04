@@ -1,67 +1,80 @@
 ﻿@model IEnumerable<Product>
 
+
+<form asp-controller="Home" asp-action="Shop" method="get" class="w-100">
+	<div class="row">
+		<div class="col-md-6 col-lg-12 mb-5">
+			<div class="input-group">
+				<input name="searchString" class="form-control" type="text" placeholder="Search" aria-label="Search" />
+				<div class="input-group-append">
+					<button type="submit" class="btn btn-primary">
+						<i class="bi bi-search" aria-hidden="true"></i>
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-9"></div>
+		<div class="col-md-6 col-lg-3 mb-3">
+			<!-- Dropdown for filtering by category -->
+			<div class="input-group ms-auto">
+				<select name="categoryFilter" class="form-select" id="inputCategory">
+					<option value="">All Categories</option>
+					@foreach (var category in ViewBag.Categories)
+					{
+						<option value="@category.Id">@category.Name</option>
+					}
+				</select>
+				<div class="input-group-append">
+					<button type="submit" class="btn btn-primary">
+						Apply
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+
+
+
+
 <div class="row">
-    <form asp-controller="Home" asp-action="Shop" method="get">
-        <div class="input-group md-form form-control-sm form-2 pl-0 py-5">
-            <input name="searchString" class="form-control my-0 py-1" type="text" placeholder="Search" aria-label="Search" />
-            <div class="input-group-append">
-                <span class="input-group-text lighten-3" id="basic-text1">
-                    <i class="bi bi-search" aria-hidden="true"></i>
-                </span>
-            </div>
-        </div>
+	@foreach (var product in Model)
+	{
+		<div class="col-3">
+			<div class="row p-2">
+				<div class="col-12">
 
-        <!-- Dropdown for filtering by category -->
-        <div class="input-group mb-3">
-            <select name="categoryFilter" class="custom-select" id="inputCategory">
-                <option value="">All Categories</option>
-                @foreach (var category in ViewBag.Categories)
-                {
-                    <option value="@category.Id">@category.Name</option>
-                }
-            </select>
-        </div>
+					<!--Card-->
+					<div class="card border-0 mb-3 p-3 border-top border-5 shadow rounded" width="25%">
+						<div class="d-flex justify-content-center">
+							<img src="@product.ImageUrl" class="card-img-top rounded" style="max-width: 200px; max-height: 200px;" />
+						</div>
 
-        @* <button type="submit" class="d-none">Submit</button> *@
-    </form>
-</div>
-<div class="row">
-    @foreach (var product in Model)
-    {
-        <div class="col-3">
-            <div class="row p-2">
-                <div class="col-12">
+						<div class="card-body pb-0">
+							<h6 class="card-title text-dark opacity-75 text-uppercase text-center">@product.productName</h6>
+							<h6 class="card-title text-warning text-center">@product.Brand</h6>
+							<h6 class="card-title text-secondary text-center">Stock: @product.StockQuantity</h6>
+						</div>
 
-                    <!--Card-->
-                    <div class="card border-0 mb-3 p-3 border-top border-5 shadow rounded" width="25%">
-                        <div class="d-flex justify-content-center">
-                            <img src="@product.ImageUrl" class="card-img-top rounded" style="max-width: 200px; max-height: 200px;" />
-                        </div>
+						<div class="pl-1">
+							<p class="text-dark text-opacity-75 text-center">
+								Price: <span>@product.RetailPrice.ToString("c")</span>
+							</p>
+						</div>
+						<div>
+							<a asp-action="Details" asp-route-productId="@product.Id" class="btn btn-primary bg-gradient border-0 form-control">
+								Details
+							</a>
+						</div>
+					</div>
 
-                        <div class="card-body pb-0">
-                            <h6 class="card-title text-dark opacity-75 text-uppercase text-center">@product.productName</h6>
-                            <h6 class="card-title text-warning text-center">@product.Brand</h6>
-                            <h6 class="card-title text-secondary text-center">Stock: @product.StockQuantity</h6>
-                        </div>
-
-                        <div class="pl-1">
-                            <p class="text-dark text-opacity-75 text-center">
-                                Price: <span>@product.RetailPrice.ToString("c")</span>
-                            </p>
-                        </div>
-                        <div>
-                            <a asp-action="Details" asp-route-productId="@product.Id" class="btn btn-primary bg-gradient border-0 form-control">
-                                Details
-                            </a>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    }
+				</div>
+			</div>
+		</div>
+	}
 </div>
 
 @section Scripts {
-    <script src="~/js/searchshop.js"></script>
+	<script src="~/js/searchshop.js"></script>
 }
