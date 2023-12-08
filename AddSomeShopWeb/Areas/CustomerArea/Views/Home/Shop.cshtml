@@ -1,6 +1,5 @@
 ﻿@model IEnumerable<Product>
 
-
 <form asp-controller="Home" asp-action="Shop" method="get" class="w-100">
 	<div class="row">
 		<div class="col-md-6 col-lg-12 mb-5">
@@ -59,7 +58,7 @@
 
 						<div class="pl-1">
 							<p class="text-dark text-opacity-75 text-center">
-								Price: <span>@product.RetailPrice.ToString("c")</span>
+								Price: <span>@product.RetailPrice.ToString("c", new CultureInfo("en-PH"))</span>
 							</p>
 						</div>
 						<div>
