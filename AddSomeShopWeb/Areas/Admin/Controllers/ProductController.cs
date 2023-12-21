@@ -109,8 +109,11 @@ namespace AddSomeShopWeb.Areas.Admin.Controllers
                 {
                     _unitOfWork.Product.Add(productVM.Product);
 
-                    //-- LOG START --//
-                    var user = _userManager.GetUserAsync(User).Result;
+
+					/************ 
+					   LOG START
+					 ************/
+					var user = _userManager.GetUserAsync(User).Result;
                     var auditLog = new AuditLog
                     {
                         UserName = User.Identity.Name,
@@ -124,13 +127,17 @@ namespace AddSomeShopWeb.Areas.Admin.Controllers
                     };
 
                     _unitOfWork.AuditLog.Add(auditLog);
-                    //-- LOG END --//
+                    /************ 
+					   LOG END
+					 ************/
                 }
                 else
                 {
                     _unitOfWork.Product.Update(productVM.Product);
-                    //-- LOG START --//
-                    var user = _userManager.GetUserAsync(User).Result;
+					/************ 
+					   LOG START
+					 ************/
+					var user = _userManager.GetUserAsync(User).Result;
                     var auditLog = new AuditLog
                     {
                         UserName = User.Identity.Name,
@@ -144,11 +151,13 @@ namespace AddSomeShopWeb.Areas.Admin.Controllers
                     };
 
                     _unitOfWork.AuditLog.Add(auditLog);
-                    //-- LOG END --//
-                }
+					/************ 
+					   LOG END
+					 ************/
+				}
 
 
-                _unitOfWork.Save();
+				_unitOfWork.Save();
                 TempData["toastAdd"] = "Product Updated successfully";
                 return RedirectToAction("Index");
             }
@@ -221,8 +230,10 @@ namespace AddSomeShopWeb.Areas.Admin.Controllers
                 return Json(new { success = false, message = "Error while deleting" });
             }
 
-            // LOG START: Log the Delete action
-            var user = _userManager.GetUserAsync(User).Result;
+			/************ 
+			   LOG START
+			 ************/
+			var user = _userManager.GetUserAsync(User).Result;
             var auditLogDelete = new AuditLog
             {
                 UserName = User.Identity.Name,
@@ -236,9 +247,11 @@ namespace AddSomeShopWeb.Areas.Admin.Controllers
             };
 
             _unitOfWork.AuditLog.Add(auditLogDelete);
-            // LOG END
+			/************ 
+			   LOG END
+			 ************/
 
-            var oldImagePath =
+			var oldImagePath =
 
             //delete old Image
             Path.Combine(_webHostEnvironment.WebRootPath, productToBeDeleted.ImageUrl.TrimStart('\\'));
