@@ -1,194 +1,199 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - AddSomeShopWeb</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/AddSomeShopWeb.styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
-    <link rel="stylesheet" href="//cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@ViewData["Title"] - AddSomeShopWeb</title>
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/AddSomeShopWeb.styles.css" asp-append-version="true" />
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+	<link rel="stylesheet" href="//cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
 	<link href="~/lib/summernote/summernote-lite.min.css" rel="stylesheet" />
 	<link href="~/lib/select2/css/select2.css" rel="stylesheet" />
+	<link href="~/lib/sweetalert2/package/dist/sweetalert2.min.css" rel="stylesheet" />
 </head>
 
 <body>
 
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3" style="background-color: #e3f2fd;">
-            <div class="container-fluid mx-3">
-                <div class="row align-items-center">
-                    <!--Toggle Button-->
-                    <!--pangit-->
-                    <div class="col-auto">
-                        <button type="button" class="btn btn-outline-primary" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
-                            <i class="bi bi-list-nested"></i>
-                        </button>
-                    </div>
+	<header>
+		<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3" style="background-color: #e3f2fd;">
+			<div class="container-fluid mx-3">
+				<div class="row align-items-center">
+					<!--Toggle Button-->
+					<!--pangit-->
+					<div class="col-auto">
+						<button type="button" class="btn btn-outline-primary" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
+							<i class="bi bi-list-nested"></i>
+						</button>
+					</div>
 
-                    <!--LOGO-->
-                    <div class="col-auto">
-                        <a class="navbar-brand" asp-area="CustomerArea" asp-controller="Home" asp-action="Index">
-                            <img src="~/image/logoabc.png" alt="Logo" height="50px" width="90px" class="img-fluid img-thumbnail" />
-                        </a>
-                    </div>
-                </div>
+					<!--LOGO-->
+					<div class="col-auto">
+						<a class="navbar-brand" asp-area="CustomerArea" asp-controller="Home" asp-action="Index">
+							<img src="~/image/logoabc.png" alt="Logo" height="50px" width="90px" class="img-fluid img-thumbnail" />
+						</a>
+					</div>
+				</div>
 
-                <div class="row align-items-center">
-                    <!--Notification Bell-->
-                    <div class="col-auto">
-                        <button type="button" class="btn btn-outline-primary" data-bs-toggle="popover" data-bs-placement="bottom" title="Notification" data-bs-content="And here's some amazing content. It's very engaging. Right?">
-                            <i class="bi bi-bell"></i>
-                        </button>
-                    </div>
+				<div class="row align-items-center">
+					<!--Notification Bell-->
+					<div class="col-auto">
+						<button type="button" class="btn btn-outline-primary" data-bs-toggle="popover" data-bs-placement="bottom" title="Notification" data-bs-content="And here's some amazing content. It's very engaging. Right?">
+							<i class="bi bi-bell"></i>
+						</button>
+					</div>
 
-                    <!--Profile-->
-                    <div class="col-auto">
-                        <a role="button">
-                            <img src="~/image/gray.jpg" height="32" width="32" class="rounded-circle" />
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </nav>
-
-
-        <!--Off Canvas-->
-        <div class="offcanvas offcanvas-start bg-light" data-bs-scroll="true" tabindex="-1" data-bs-backdrop="true" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
-
-            <!--Off Header-->
-            <div class="offcanvas-header mx-3 mb-2 mt-2">
-                <button type="button" class="btn btn-outline-primary" data-bs-dismiss="offcanvas" aria-label="Close"><i class="bi bi-list-nested"></i></button>
-                <a class="navbar-brand mx-3" asp-area="CustomerArea" asp-controller="Home" asp-action="Index">
-                    <img src="~/image/logoabc.png" alt="Logo" height="50px" width="90px" class="img-fluid img-thumbnail" />
-                </a>
-            </div>
-
-            <!--Off Body-->
-            <div class="offcanvas-body bd-links">
-                <ul class="list-unstyled mb-0 py-3 pt-md-1">
-                    <li class="mb-1">
-                        <div class="d-grid gap-2">
-
-                            <!--Dashboard-->
-                            <a class="btn btn-outline-secondary" asp-area="Admin" asp-controller="AdPage" asp-action="Index" role="button">
-                                <span class="align-lefty"><i class="bi bi-speedometer2 pe-2"></i> Dashboard</span>
-                            </a>
-
-                            <!--Sales-->
-                            <a class="btn btn-outline-secondary align-lefty" data-bs-toggle="collapse" href="#sales-collapse" aria-expanded="false" role="button"><i class="bi bi-cash pe-2"></i> Sales</a>
-                            <div class="collapse" id="sales-collapse">
-                                <ul class="list-unstyled pb-1">
-                                    <li>
-                                        <a class="btn btn-outline-secondary fw-lighter small" asp-area="Admin" asp-controller="POS" asp-action="Index">Point of Sales</a>
-                                    </li>
-                                    <li>
-                                        <a class="btn btn-outline-secondary fw-lighter small" asp-area="Admin" asp-controller="Order" asp-action="Index">Manage Order</a>
-                                    </li>
-                                    <li>
-                                        <a class="btn btn-outline-secondary fw-lighter small" href="#">Sales Record</a>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <!--Inventory-->
-                            <a class="btn btn-outline-secondary align-lefty" data-bs-toggle="collapse" href="#inventory-collapse" aria-expanded="false" role="button"><i class="bi bi-box pe-2"></i> Inventory</a>
-                            <div class="collapse" id="inventory-collapse">
-                                <ul class="list-unstyled pb-1">
-                                    <li>
-                                        <a class="btn btn-outline-secondary fw-lighter small" asp-area="Admin" asp-controller="Product" asp-action="Index">Product list</a>
-                                    </li>
-                                    <li>
-                                        <a class="btn btn-outline-secondary fw-lighter small" asp-area="Admin" asp-controller="PurchaseOrder" asp-action="Index">Purchase Order</a>
-                                    </li>
-                                    <li>
-                                        <a class="btn btn-outline-secondary fw-lighter small" asp-area="Admin" asp-controller="StockTransfer" asp-action="Index">StockTransfer</a>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <!--People-->
-                            <a class="btn btn-outline-secondary align-lefty" data-bs-toggle="collapse" href="#people-collapse" aria-expanded="false" role="button"><i class="bi bi-people pe-2"></i> People</a>
-                            <div class="collapse" id="people-collapse">
-                                <ul class="list-unstyled pb-1">
-                                    <li>
-                                        <a class="btn btn-outline-secondary fw-lighter small" asp-area="Admin" asp-controller="Customer" asp-action="Index">Customers</a>
-                                    </li>
-                                    <li>
-                                        <a class="btn btn-outline-secondary fw-lighter small" asp-area="Admin" asp-controller="Supplier" asp-action="Index">Suppliers</a>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <!--Report & Analytics-->
-                            <a class="btn btn-outline-secondary align-lefty" data-bs-toggle="collapse" href="#report-collapse" aria-expanded="false" role="button"><i class="bi bi-clipboard-data pe-2"></i>Reports</a>
-                            <div class="collapse" id="report-collapse">
-                                <ul class="list-unstyled pb-1">
-                                    <li>
-                                        <a class="btn btn-outline-secondary fw-lighter small" asp-area="Admin" asp-controller="Report" asp-action="Index">Sales Report</a>
-                                    </li>
-                                    <li>
-                                        <a class="btn btn-outline-secondary fw-lighter small" asp-area="Admin" asp-controller="Report" asp-action="InvIndex">Inventory Report</a>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <!--Security-->
-                            <a class="btn btn-outline-secondary align-lefty" data-bs-toggle="collapse" href="#security-collapse" aria-expanded="false" role="button"><i class="bi bi-shield pe-2"></i> Security</a>
-                            <div class="collapse" id="security-collapse">
-                                <ul class="list-unstyled pb-1">
-                                    <li>
-                                        <a class="btn btn-outline-secondary fw-lighter small" asp-area="Admin" asp-controller="User" asp-action="Index">User Management</a>
-                                    </li>
-                                    <li>
-                                        <a class="btn btn-outline-secondary fw-lighter small" asp-area="Admin" asp-controller="AuditLog" asp-action="Index">Audit Trail</a>
-                                    </li>
-                                </ul>
-                            </div>
+					<!--Profile-->
+					<div class="col-auto">
+						<a role="button">
+							<img src="~/image/gray.jpg" height="32" width="32" class="rounded-circle" />
+						</a>
+					</div>
+				</div>
+			</div>
+		</nav>
 
 
-                            <!--Settings-->
-                            <a class="btn btn-outline-secondary align-lefty" data-bs-toggle="collapse" href="#settings-collapse" aria-expanded="false" role="button"><i class="bi bi-gear pe-2"></i> Settings</a>
-                            <div class="collapse" id="settings-collapse">
-                                <ul class="list-unstyled pb-1">
-                                    <li>
-                                        <a class="btn btn-outline-secondary fw-lighter small" href="#">Company Settings</a>
-                                    </li>
-                                    <li>
-                                        <a class="btn btn-outline-secondary fw-lighter small" href="#">System Settings</a>
-                                    </li>
-                                    <li>
-                                        <a class="btn btn-outline-secondary fw-lighter small" asp-area="Admin" asp-controller="Content" asp-action="Index">Website Settings</a>
-                                    </li>
-                                </ul>
-                            </div>
+		<!--Off Canvas-->
+		<div class="offcanvas offcanvas-start bg-light" data-bs-scroll="true" tabindex="-1" data-bs-backdrop="true" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
 
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </header>
+			<!--Off Header-->
+			<div class="offcanvas-header mx-3 mb-2 mt-2">
+				<button type="button" class="btn btn-outline-primary" data-bs-dismiss="offcanvas" aria-label="Close"><i class="bi bi-list-nested"></i></button>
+				<a class="navbar-brand mx-3" asp-area="CustomerArea" asp-controller="Home" asp-action="Index">
+					<img src="~/image/logoabc.png" alt="Logo" height="50px" width="90px" class="img-fluid img-thumbnail" />
+				</a>
+			</div>
 
-    <!-- Main Component -->
-    <div class="container-fluid">
-        <!--Content-->
-        <div class="container">
-            <partial name="_Notification" />
-            @RenderBody()
-        </div>
-    </div>
+			<!--Off Body-->
+			<div class="offcanvas-body bd-links">
+				<ul class="list-unstyled mb-0 py-3 pt-md-1">
+					<li class="mb-1">
+						<div class="d-grid gap-2">
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+							<!--Dashboard-->
+							<a class="btn btn-outline-secondary" asp-area="Admin" asp-controller="AdPage" asp-action="Index" role="button">
+								<span class="align-lefty"><i class="bi bi-speedometer2 pe-2"></i> Dashboard</span>
+							</a>
+
+							<!--Sales-->
+							<a class="btn btn-outline-secondary align-lefty" data-bs-toggle="collapse" href="#sales-collapse" aria-expanded="false" role="button"><i class="bi bi-cash pe-2"></i> Sales</a>
+							<div class="collapse" id="sales-collapse">
+								<ul class="list-unstyled pb-1">
+									<li>
+										<a class="btn btn-outline-secondary fw-lighter small" asp-area="Admin" asp-controller="POS" asp-action="Index">Point of Sales</a>
+									</li>
+									<li>
+										<a class="btn btn-outline-secondary fw-lighter small" asp-area="Admin" asp-controller="Order" asp-action="Index">Manage Order</a>
+									</li>
+									<li>
+										<a class="btn btn-outline-secondary fw-lighter small" href="#">Sales Record</a>
+									</li>
+								</ul>
+							</div>
+
+							@if (User.IsInRole(SD.Role_Admin))
+							{
+								<!--Inventory-->
+								<a class="btn btn-outline-secondary align-lefty" data-bs-toggle="collapse" href="#inventory-collapse" aria-expanded="false" role="button"><i class="bi bi-box pe-2"></i> Inventory</a>
+								<div class="collapse" id="inventory-collapse">
+									<ul class="list-unstyled pb-1">
+										<li>
+											<a class="btn btn-outline-secondary fw-lighter small" asp-area="Admin" asp-controller="Product" asp-action="Index">Product list</a>
+										</li>
+										<li>
+											<a class="btn btn-outline-secondary fw-lighter small" asp-area="Admin" asp-controller="PurchaseOrder" asp-action="Index">Purchase Order</a>
+										</li>
+										<li>
+											<a class="btn btn-outline-secondary fw-lighter small" asp-area="Admin" asp-controller="StockTransfer" asp-action="Index">StockTransfer</a>
+										</li>
+									</ul>
+								</div>
+
+
+								<!--People-->
+								<a class="btn btn-outline-secondary align-lefty" data-bs-toggle="collapse" href="#people-collapse" aria-expanded="false" role="button"><i class="bi bi-people pe-2"></i> People</a>
+								<div class="collapse" id="people-collapse">
+									<ul class="list-unstyled pb-1">
+										<li>
+											<a class="btn btn-outline-secondary fw-lighter small" asp-area="Admin" asp-controller="Customer" asp-action="Index">Customers</a>
+										</li>
+										<li>
+											<a class="btn btn-outline-secondary fw-lighter small" asp-area="Admin" asp-controller="Supplier" asp-action="Index">Suppliers</a>
+										</li>
+									</ul>
+								</div>
+
+
+								<!--Report & Analytics-->
+								<a class="btn btn-outline-secondary align-lefty" data-bs-toggle="collapse" href="#report-collapse" aria-expanded="false" role="button"><i class="bi bi-clipboard-data pe-2"></i>Reports</a>
+								<div class="collapse" id="report-collapse">
+									<ul class="list-unstyled pb-1">
+										<li>
+											<a class="btn btn-outline-secondary fw-lighter small" asp-area="Admin" asp-controller="Report" asp-action="Index">Sales Report</a>
+										</li>
+										<li>
+											<a class="btn btn-outline-secondary fw-lighter small" asp-area="Admin" asp-controller="Report" asp-action="InvIndex">Inventory Report</a>
+										</li>
+									</ul>
+								</div>
+
+								<!--Security-->
+								<a class="btn btn-outline-secondary align-lefty" data-bs-toggle="collapse" href="#security-collapse" aria-expanded="false" role="button"><i class="bi bi-shield pe-2"></i> Security</a>
+								<div class="collapse" id="security-collapse">
+									<ul class="list-unstyled pb-1">
+										<li>
+											<a class="btn btn-outline-secondary fw-lighter small" asp-area="Admin" asp-controller="User" asp-action="Index">User Management</a>
+										</li>
+										<li>
+											<a class="btn btn-outline-secondary fw-lighter small" asp-area="Admin" asp-controller="AuditLog" asp-action="Index">Audit Trail</a>
+										</li>
+									</ul>
+								</div>
+							}
+
+							<!--Settings-->
+							<a class="btn btn-outline-secondary align-lefty" data-bs-toggle="collapse" href="#settings-collapse" aria-expanded="false" role="button"><i class="bi bi-gear pe-2"></i> Settings</a>
+							<div class="collapse" id="settings-collapse">
+								<ul class="list-unstyled pb-1">
+									<li>
+										<a class="btn btn-outline-secondary fw-lighter small" href="#">Company Settings</a>
+									</li>
+									<li>
+										<a class="btn btn-outline-secondary fw-lighter small" href="#">System Settings</a>
+									</li>
+									<li>
+										<a class="btn btn-outline-secondary fw-lighter small" asp-area="Admin" asp-controller="Content" asp-action="Index">Website Settings</a>
+									</li>
+								</ul>
+							</div>
+
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</header>
+
+	<!-- Main Component -->
+	<div class="container-fluid">
+		<!--Content-->
+		<div class="container">
+			<partial name="_Notification" />
+			@RenderBody()
+		</div>
+	</div>
+
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
 	<script src="~/lib/sweetalert2/package/dist/sweetalert2.min.js"></script>
-    <script src="//cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-    <script src="~/lib/select2/js/select2.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+	<script src="//cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+	<script src="~/lib/select2/js/select2.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 	<script src="~/lib/summernote/summernote-lite.min.js"></script>
 
-    @await RenderSectionAsync("Scripts", required: false)
+	@await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

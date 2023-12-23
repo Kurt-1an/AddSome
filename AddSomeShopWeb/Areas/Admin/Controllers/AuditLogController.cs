@@ -1,10 +1,13 @@
 ﻿using ABC.DataAccess.Repository.IRepository;
 using ABC.Models;
+using ABC.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AddSomeShopWeb.Areas.Admin.Controllers
 {
 	[Area("Admin")]
+	[Authorize(Roles = SD.Role_Admin)]
 	public class AuditLogController : Controller
 	{
 		private readonly IUnitOfWork _unitOfWork;

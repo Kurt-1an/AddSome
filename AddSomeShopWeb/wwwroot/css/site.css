@@ -53,3 +53,7 @@ html {
     max-height: 200px; /* Set your desired height here */
     overflow-y: auto;
 }
+
+.equal-width {
+    width: 100%;
+}

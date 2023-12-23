@@ -75,14 +75,23 @@
 							<label asp-for="Input.PhoneNumber" class="ms-2 text-muted">Phone Number</label>
 							<span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
 						</div>
+
+
 						<div class="form-floating mb-3 col-md-6">
-							<input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-							<label asp-for="Input.Password" class="ms-2 text-muted">Password</label>
+							<label asp-for="Input.Password" class="form-label">Password</label>
+							<div class="input-group">
+								<input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Password" />
+								<button type="button" class="btn btn-outline-secondary" onclick="togglePasswordVisibility('Input.Password')"><i class="bi bi-eye"></i></button>
+							</div>
 							<span asp-validation-for="Input.Password" class="text-danger"></span>
 						</div>
+
 						<div class="form-floating mb-3 col-md-6">
-							<input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-							<label asp-for="Input.ConfirmPassword" class="ms-2 text-muted">Confirm Password</label>
+							<label asp-for="Input.ConfirmPassword" class="form-label">ConfirmPassword</label>
+							<div class="input-group">
+								<input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Confirm password" />
+								<button type="button" class="btn btn-outline-secondary" onclick="togglePasswordVisibility('Input.ConfirmPassword')"><i class="bi bi-eye"></i></button>
+							</div>
 							<span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
 						</div>
 
@@ -172,16 +181,22 @@ else
 										<span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
 									</div>
 									<div class="form-floating mb-3 col-md-6">
-										<input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-										<label asp-for="Input.Password" class="ms-2 text-muted">Password</label>
+										<label asp-for="Input.Password" class="form-label">Password</label>
+										<div class="input-group">
+											<input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Password" />
+											<button type="button" class="btn btn-outline-secondary" onclick="togglePasswordVisibility('Input.Password')"><i class="bi bi-eye"></i></button>
+										</div>
 										<span asp-validation-for="Input.Password" class="text-danger"></span>
 									</div>
+
 									<div class="form-floating mb-3 col-md-6">
-										<input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-										<label asp-for="Input.ConfirmPassword" class="ms-2 text-muted">Confirm Password</label>
+										<label asp-for="Input.ConfirmPassword" class="form-label">ConfirmPassword</label>
+										<div class="input-group">
+											<input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Confirm password" />
+											<button type="button" class="btn btn-outline-secondary" onclick="togglePasswordVisibility('Input.ConfirmPassword')"><i class="bi bi-eye"></i></button>
+										</div>
 										<span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
 									</div>
-
 									<div class="form-floating mb-3 col-md-6">
 										<input asp-for="Input.StreetName" class="form-control" placeholder="name@example.com" />
 										<label asp-for="Input.StreetName" class="ms-2 text-muted">Street Name</label>
@@ -256,5 +271,20 @@ else
 
 @section Scripts {
 	<partial name="_ValidationScriptsPartial" />
+	<script>
+		function togglePasswordVisibility(inputName) {
+			var passwordInput = document.querySelector('input[name="' + inputName + '"]');
+			var buttonIcon = document.querySelector('button[onclick="togglePasswordVisibility(\'' + inputName + '\')"] i');
 
+			if (passwordInput.type === 'password') {
+				passwordInput.type = 'text';
+				buttonIcon.classList.remove('bi-eye');
+				buttonIcon.classList.add('bi-eye-slash');
+			} else {
+				passwordInput.type = 'password';
+				buttonIcon.classList.remove('bi-eye-slash');
+				buttonIcon.classList.add('bi-eye');
+			}
+		}
+	</script>
 }

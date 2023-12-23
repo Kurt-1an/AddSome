@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 namespace AddSomeShopWeb.Areas.Admin.Controllers
 {
 	[Area("Admin")]
-	[Authorize(Roles = SD.Role_Admin + "," + SD.Role_Employee)]
+	[Authorize(Roles = SD.Role_Admin)]
 	public class ReportController : Controller
 	{
 		private readonly AppDBContext _db;

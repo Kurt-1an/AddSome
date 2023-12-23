@@ -18,25 +18,33 @@
                             Use a local account to log in.
                         </h3>
                         <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+
                         <div class="form-floating mb-3">
-                            <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                            <input asp-for="Input.Email" class="form-control equal-width" autocomplete="username" aria-required="true" placeholder="name@example.com" />
                             <label asp-for="Input.Email" class="form-label">Email</label>
                             <span asp-validation-for="Input.Email" class="text-danger"></span>
                         </div>
+
                         <div class="form-floating mb-3">
-                            <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="password" />
                             <label asp-for="Input.Password" class="form-label">Password</label>
+                            <div class="input-group">
+                                <input asp-for="Input.Password" class="form-control equal-width" autocomplete="current-password" aria-required="true" placeholder="Password" />
+                                <button type="button" class="btn btn-outline-secondary" onclick="togglePasswordVisibility('Input.Password')"><i class="bi bi-eye"></i></button>
+                            </div>
                             <span asp-validation-for="Input.Password" class="text-danger"></span>
                         </div>
+
                         <div class="checkbox mb-3">
                             <label asp-for="Input.RememberMe" class="form-label">
                                 <input class="form-check-input" asp-for="Input.RememberMe" />
                                 @Html.DisplayNameFor(m => m.Input.RememberMe)
                             </label>
                         </div>
+
                         <div>
                             <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
                         </div>
+
                         <div class="d-flex justify-content-between pt-2">
                             <p>
                                 <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
@@ -49,6 +57,7 @@
                             </p>
                         </div>
                     </form>
+
                 </section>
             </div>
             <div class="col-md-12 text-center">
@@ -90,4 +99,20 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script>
+        function togglePasswordVisibility(inputName) {
+            var passwordInput = document.querySelector('input[name="' + inputName + '"]');
+            var buttonIcon = document.querySelector('button[onclick="togglePasswordVisibility(\'' + inputName + '\')"] i');
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                buttonIcon.classList.remove('bi-eye');
+                buttonIcon.classList.add('bi-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                buttonIcon.classList.remove('bi-eye-slash');
+                buttonIcon.classList.add('bi-eye');
+            }
+        }
+    </script>
 }

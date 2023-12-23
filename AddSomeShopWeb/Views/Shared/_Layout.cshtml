@@ -42,15 +42,6 @@
 							<li class="nav-item">
 								<a class="nav-link" asp-area="CustomerArea" asp-controller="Home" asp-action="Shop">Shop</a>
 							</li>
-							<li class="nav-item">
-								<a class="nav-link" asp-area="CustomerArea" asp-controller="Home" asp-action="Privacy">Privacy</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" asp-area="CustomerArea" asp-controller="Home" asp-action="Vision">Vision</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" asp-area="CustomerArea" asp-controller="Home" asp-action="About">About</a>
-							</li>
 							@if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_Employee))
 							{
 								<li class="nav-item">
@@ -99,7 +90,7 @@
 
 
 
-	<footer style="background-color: #deded5;">
+	<footer class="mt-5 " style="background-color: #e3f2fd;">
 		<div class="container p-4">
 			<div class="row">
 				<div class="col-lg-6 col-md-12 mb-4">
@@ -114,16 +105,13 @@
 					<h5 class="mb-3" style="letter-spacing: 2px; color: #818963;">links</h5>
 					<ul class="list-unstyled mb-0">
 						<li class="mb-1">
-							<a href="#!" style="color: #4f4f4f;">Frequently Asked Questions</a>
+							<a asp-area="CustomerArea" asp-controller="Home" asp-action="Privacy" style="color: #4f4f4f;">Privacy</a>
 						</li>
 						<li class="mb-1">
-							<a href="#!" style="color: #4f4f4f;">Delivery</a>
+							<a asp-area="CustomerArea" asp-controller="Home" asp-action="Vision" style="color: #4f4f4f;">Vision</a>
 						</li>
 						<li class="mb-1">
-							<a href="#!" style="color: #4f4f4f;">Pricing</a>
-						</li>
-						<li>
-							<a href="#!" style="color: #4f4f4f;">Where we deliver?</a>
+							<a asp-area="CustomerArea" asp-controller="Home" asp-action="About" style="color: #4f4f4f;">About</a>
 						</li>
 					</ul>
 				</div>
@@ -145,8 +133,8 @@
 			</div>
 		</div>
 		<div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-			© 2020 Copyright:
-			<a class="text-dark" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+			© 2024 Copyright:
+			<a class="text-dark" href="#">ABC</a>
 		</div>
 		<!-- Copyright -->
 	</footer>
