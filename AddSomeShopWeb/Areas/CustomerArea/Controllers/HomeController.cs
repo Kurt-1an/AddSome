@@ -1,4 +1,5 @@
-﻿using ABC.DataAccess.Repository.IRepository;
+﻿using ABC.DataAccess.Data;
+using ABC.DataAccess.Repository.IRepository;
 using ABC.Models;
 using ABC.Models.ViewModels;
 using ABC.Utility;
@@ -8,6 +9,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Diagnostics;
 using System.Security.Claims;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace AddSomeShopWeb.Areas.CustomerArea.Controllers
 {
@@ -16,22 +19,45 @@ namespace AddSomeShopWeb.Areas.CustomerArea.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly AppDBContext _db;
         [BindProperty]
         public OrderVM OrderVM { get; set; }
 
-        public HomeController(ILogger<HomeController> logger, IUnitOfWork unitOfWork)
+        public HomeController(ILogger<HomeController> logger, IUnitOfWork unitOfWork, AppDBContext db)
         {
             _logger = logger;
             _unitOfWork = unitOfWork;
+            _db = db;
         }
 
         public IActionResult Index()
         {
             // Retrieve the list of categories
-            var categories = _unitOfWork.Category.GetAll(); 
+            var categories = _unitOfWork.Category.GetAll();
 
-            return View(categories);
+            // Retrieve the list of products
+            var products = _unitOfWork.Product.GetAll();
+
+            // Retrieve best-selling products
+            var bestSellingProducts = _db.OrderDetails
+                .Include(detail => detail.Product)
+                .GroupBy(detail => detail.Product)
+                .OrderByDescending(group => group.Sum(detail => detail.Count)) // Use Quantity or any appropriate property for the product count
+                .Select(group => group.Key)
+                .ToList();
+
+
+            // Include best-selling products in the view model
+            var viewModel = new CategoryProductVM
+            {
+                Categories = categories,
+                Products = products,
+                BestSellingProducts = bestSellingProducts
+            };
+
+            return View(viewModel);
         }
+
 
 
         public IActionResult Shop(string searchString, string categoryFilter)

@@ -28,6 +28,13 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
 });
 
+builder.Services.AddAuthentication("cookie")
+	.AddCookie("cookie", o => {
+		o.Cookie.Name = "userSession";
+	});
+builder.Services.AddHttpContextAccessor();
+
+
 //Google Login
 builder.Services.AddAuthentication().AddGoogle(GoogleOptions =>
 {
@@ -67,6 +74,7 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
+//anti forgery
 app.UseSession();
 SeedDatabase();
 app.MapRazorPages();

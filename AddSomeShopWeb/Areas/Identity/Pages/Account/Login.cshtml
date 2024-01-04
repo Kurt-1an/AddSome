@@ -28,8 +28,8 @@
                         <div class="form-floating mb-3">
                             <label asp-for="Input.Password" class="form-label">Password</label>
                             <div class="input-group">
-                                <input asp-for="Input.Password" class="form-control equal-width" autocomplete="current-password" aria-required="true" placeholder="Password" />
-                                <button type="button" class="btn btn-outline-secondary" onclick="togglePasswordVisibility('Input.Password')"><i class="bi bi-eye"></i></button>
+                                <input asp-for="Input.Password" class="form-control border-end-0" autocomplete="current-password" aria-required="true" placeholder="Password" />
+                                <button type="button" class="btn border border-start-0" onclick="togglePasswordVisibility('Input.Password')"><i class="bi bi-eye"></i></button>
                             </div>
                             <span asp-validation-for="Input.Password" class="text-danger"></span>
                         </div>
