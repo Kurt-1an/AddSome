@@ -1,4 +1,8 @@
 ﻿$(document).ready(function () {
+
+    /* ====================
+       SELECT2 GETS DATA 
+    ===================== */
     $('#productSearch').select2({
         ajax: {
             url: '/Admin/POS/GetProduct',
@@ -21,7 +25,9 @@
     });
 
 
-    // Handle the selection event
+    /* ====================
+           SELECT 2
+    ===================== */
     $('#productSearch').on('select2:select', function (e) {
         var selectedProduct = e.params.data;
 

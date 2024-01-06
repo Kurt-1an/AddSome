@@ -101,7 +101,7 @@ namespace AddSomeShopWeb.Areas.CustomerArea.Controllers
 
 
 
-        //Details Button
+        //Details Button from Shop
         public IActionResult Details(int productId)
         {
             ShoppingCart cart = new()
