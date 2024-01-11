@@ -1,22 +1,21 @@
 ﻿@page
 @model LoginModel
 
-<div class="card shadow border-0 mt-4">
-    <div class="card-header bg-primary bg-gradient ml-0 py-4">
+<div class="card shadow border-0 col-md-5 mt-4 mb-4 mx-auto">
+    <div class="card-header bg-primary bg-gradient ml-0 py-2">
         <div class="row">
-            <div class="col-12 text-center">
-                <h2 class="py-2 text-white">Log in</h2>
+            <div class="col-12= text-center">
+                <h1 class="py-2 text-white">Welcome!</h1>
             </div>
         </div>
     </div>
+
+
     <div class="card-body p-4">
         <div class="row">
             <div class="col-md-12">
                 <section>
                     <form id="account" method="post">
-                        <h3 class="border-bottom pb-3 mb-4 text-secondary text-center">
-                            Use a local account to log in.
-                        </h3>
                         <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
 
                         <div class="form-floating mb-3">
@@ -34,32 +33,42 @@
                             <span asp-validation-for="Input.Password" class="text-danger"></span>
                         </div>
 
-                        <div class="checkbox mb-3">
+                        <div class="d-flex justify-content-center my-4">
+                            <button id="login-submit" type="submit" class="w-50 btn btn-lg btn-primary">Log in</button>
+                        </div>
+
+                        <div class="checkbox d-flex justify-content-center">
                             <label asp-for="Input.RememberMe" class="form-label">
                                 <input class="form-check-input" asp-for="Input.RememberMe" />
                                 @Html.DisplayNameFor(m => m.Input.RememberMe)
                             </label>
                         </div>
 
-                        <div>
-                            <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
-                        </div>
+                        <div class="d-flex justify-content-center pt-2">
+                            <div class="mx-3">
+                                <p style="font-size: 11px;">
+                                    <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+                                </p>
+                            </div>
 
-                        <div class="d-flex justify-content-between pt-2">
-                            <p>
-                                <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
-                            </p>
-                            <p>
-                                <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
-                            </p>
-                            <p>
-                                <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
-                            </p>
+                            <div class="mx-3">
+                                <p style="font-size: 11px;">
+                                    <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+                                </p>
+                            </div>
+
+                            @* <div class="mx-3">
+                                <p style="font-size: 11px;">
+                                    <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
+                                </p>
+                            </div> *@
                         </div>
+                        
                     </form>
 
                 </section>
             </div>
+
             <div class="col-md-12 text-center">
                 <section>
                     <p class="divider-text d-flex pt-3">or</p>
@@ -94,6 +103,8 @@
             </div>
         </div>
     </div>
+
+
 </div>
 
 
