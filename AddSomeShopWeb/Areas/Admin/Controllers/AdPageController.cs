@@ -29,6 +29,9 @@ namespace AddSomeShopWeb.Areas.Admin.Controllers
             int lowstockproducts = _db.Products.Count(p => p.StockQuantity <= 4);
             int outofstockproducts = _db.Products.Count(p => p.StockQuantity == 0);
             int totalProdcategories = _db.Categories.Count();
+            double salesRevenue = _db.OrderHeaders.Count(o => o.PaymentStatus == "Paid");
+            double totalCost = _db.Products.Sum(p => p.CostPrice);
+
 
             ViewBag.TotalCustomers = totalcustomers;
             ViewBag.unprocessedOrders = unprocessedOrders;
@@ -38,27 +41,9 @@ namespace AddSomeShopWeb.Areas.Admin.Controllers
             ViewBag.lowstockproducts = lowstockproducts;
             ViewBag.outofstockproducts = outofstockproducts;
             ViewBag.totalProdcategories = totalProdcategories;
+            ViewBag.SalesRevenue = salesRevenue;
+            ViewBag.TotalCost = totalCost;
 
-            double salesRevenue = _db.OrderHeaders.Count(o => o.PaymentStatus == "Paid");
-            double totalCost = _db.Products.Sum(p => p.CostPrice);
-
-            var chartData = new
-            {
-                labels = new[] { "Sales Revenue", "Total Cost" },
-                datasets = new[]
-                {
-                    new
-                    {
-                        label = "Line Chart",
-                        data = new double[] { salesRevenue, totalCost },
-                        backgroundColor = "rgba(75, 192, 192, 0.2)",
-                        borderColor = "rgba(75, 192, 192, 1)",
-                        borderWidth = 1
-                    }
-                }
-            };
-
-            ViewBag.ChartData = chartData;
 
             var bestSellingProducts = _db.OrderDetails
         .Include(detail => detail.Product)

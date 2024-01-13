@@ -71,24 +71,25 @@
         </div>
     </div>
 
-    <div class="row pt-2 pb-2">
-        <div class="col-12">
+    <div class=" pt-2 pb-2">
+        <div class="col-8 mx-auto">
             <div class="border p-3 container shadow">
                 <!--Title-->
-                <div class="row pb-2">
-					<h4 style="color: #223442;"><b>Sales Overview</b></h4>
+                <div class="pb-2">
+                    <h4 style="color: #223442;"><b>Sales Overview</b></h4>
                     <hr />
                 </div>
-                <div class="row justify-content-center">
-                    <div class="chart1" style="width: 95%; height: 30%;">
-                        <canvas id="linechart" style="max-width: 100%; max-height: 100%;"
-                                salesrevenue=" @ViewBag.SalesRevenue"
-                                costpricetotal=" @ViewBag.totalCost"></canvas>
-                    </div>
+
+                <div >
+                    <canvas id="myChart" salesrevenue="@ViewBag.SalesRevenue" costpricetotal="@ViewBag.totalCost"></canvas>
                 </div>
+
             </div>
         </div>
     </div>
+
+
+
     <div class="row pt-4 pb-2">
         <div class="col-6 d-flex align-items-lg-stretch">
             <div class="border p-3 container shadow">
