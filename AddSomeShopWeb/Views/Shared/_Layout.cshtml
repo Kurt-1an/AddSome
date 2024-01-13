@@ -22,7 +22,7 @@
 <body>
 	<header>
 
-		<nav class="navbar navbar-light navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3" style="background-color: #e3f2fd;">
+		<nav class="navbar navbar-light navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3" style="background-color: #223442;">
 			<div class="container">
 				<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
 					<img src="~/image/logoabc.png" alt="Logo" height="50px" width="90px" class="img-fluid img-thumbnail" />
@@ -37,22 +37,22 @@
 					<div class="d-flex justify-content-center ">
 						<ul class="navbar-nav me-auto">
 							<li class="nav-item">
-								<a class="nav-link" asp-area="CustomerArea" asp-controller="Home" asp-action="Index">Home</a>
+								<a class="nav-link" asp-area="CustomerArea" asp-controller="Home" asp-action="Index" style="color: white;">Home</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" asp-area="CustomerArea" asp-controller="Home" asp-action="Shop">Shop</a>
+								<a class="nav-link" asp-area="CustomerArea" asp-controller="Home" asp-action="Shop" style="color: white;">Shop</a>
 							</li>
 							@if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_Employee))
 							{
 								<li class="nav-item">
-									<a class="nav-link" asp-area="Admin" asp-controller="AdPage" asp-action="Index">Admin Page</a>
+									<a class="nav-link" asp-area="Admin" asp-controller="AdPage" asp-action="Index" style="color: white;">Admin Page</a>
 								</li>
 							}
 
 							@if (User.IsInRole(SD.Role_Customer))
 							{
 								<li class="nav-item">
-									<a class="nav-link" asp-area="CustomerArea" asp-controller="Home" asp-action="ManageOrder">Manage Order</a>
+									<a class="nav-link" asp-area="CustomerArea" asp-controller="Home" asp-action="ManageOrder" style="color: white;">Manage Order</a>
 								</li>
 							}
 

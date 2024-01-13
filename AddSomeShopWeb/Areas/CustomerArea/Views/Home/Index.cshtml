@@ -1,7 +1,6 @@
 ﻿@model CategoryProductVM
 
 
-
 <!--hero-->
 <div class="container-fluid my-5">
     <div class="container rounded-3 text-center p-4" style="background-image: url('image/cctv.png'); background-position:bottom; background-size: cover; height: 300px; position: relative;">
@@ -15,12 +14,12 @@
 </div>
 
 <!--Categories-->
-<div class="container">
+<div class="container" style="background-color: #e3f2fd;">
     <div class="text-start p-4 mt-5">
-        <h4>Shop by Category</h4>
+        <h4 style="color: #223442;"><b>Shop by Category</b></h4>
 
         <!--Start of Cards-->
-        <div class="container">
+        <div class="container pt-2">
             <div class="row">
                 @foreach (var category in Model.Categories)
                 {
@@ -36,63 +35,6 @@
             </div>
             <!--End of Cards-->
         </div>
-    </div>
-</div>
-
-
-
-
-<!--feautures-->
-<div class="container-fluid my-4 rounded-3" style="background-color: #e3f2fd;">
-    <div class="container">
-    <div class="text-start p-4 mt-5">
-        <div class="row">
-            <div class="col">
-                <p class="p-2">Our Mission & Values</p>
-                <h4>Safer spaces, for healthier people.</h4>
-            </div>
-
-            <div class="col">
-                <h6>An ecosystem for better health</h6>
-                <p>Breathe cleaner, drink cleaner, and wash cleaner. Life is an ecosystem, and so is ABC.</p>
-            </div>
-
-            <div class="col">
-                <h6>Proud partners of 1% for the Planet</h6>
-                <p>When the planet is healthy, so are we. That's why ABC donates 1% of annual sales to environmental nonprofits.</p>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-4"></div>
-
-            <div class="col">
-                <h6>An ecosystem for better health</h6>
-                <p>Breathe cleaner, drink cleaner, and wash cleaner. Life is an ecosystem, and so is ABC.</p>
-            </div>
-
-            <div class="col">
-                <h6>Proud partners of 1% for the Planet</h6>
-                <p>When the planet is healthy, so are we. That's why ABC donates 1% of annual sales to environmental nonprofits.</p>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col text-center">
-            <i class="bi bi-houses" style="font-size: 2rem; color: cornflowerblue;"></i>
-            <i class="bi bi-backpack3 mx-3" style="font-size: 2rem; color: cornflowerblue;"></i>
-            <i class="bi bi-book mx-3" style="font-size: 2rem; color: cornflowerblue;"></i>
-            <i class="bi bi-camera mx-3" style="font-size: 2rem; color: cornflowerblue;"></i>
-            <i class="bi bi-cart mx-3" style="font-size: 2rem; color: cornflowerblue;"></i>
-            <i class="bi bi-chat-dots mx-3" style="font-size: 2rem; color: cornflowerblue;"></i>
-            <i class="bi bi-envelope mx-3" style="font-size: 2rem; color: cornflowerblue;"></i>
-            <i class="bi bi-heart mx-3" style="font-size: 2rem; color: cornflowerblue;"></i>
-            <i class="bi bi-lightning mx-3" style="font-size: 2rem; color: cornflowerblue;"></i>
-            <i class="bi bi-music-note mx-3" style="font-size: 2rem; color: cornflowerblue;"></i>
-            <i class="bi bi-person mx-3" style="font-size: 2rem; color: cornflowerblue;"></i>
-            <i class="bi bi-watch mx-3" style="font-size: 2rem; color: cornflowerblue;"></i>
-        </div>
-    </div>
     </div>
 </div>
 
@@ -126,7 +68,7 @@
                                     </div>
 
                                     <div class="pl-1">
-                                        <p class="text-dark text-opacity-75 text-center">
+                                           <p class="text-dark text-opacity-75 text-center">
                                             Price: <span>@product.RetailPrice.ToString("c", new CultureInfo("en-PH"))</span>
                                         </p>
                                     </div>
@@ -144,70 +86,5 @@
             </div>
         </div>
         <!-- End of Best Seller Cards -->
-    </div>
-</div>
-
-
-<!--ads-->
-<div class="p-3 list-group my-4" style="background-color: #e3f2fd;">
-    <h4 class="text-center">Improve Your Eveyday</h4>
-
-    <div class="text-start mt-3">
-        <!--Start of Cards-->
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <h5>Peace of Mind</h5>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none rounded-3" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
-                        <rect width="100%" height="100%" fill="#868e96"></rect>
-                        <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text>
-                    </svg>
-                    <div class="card-body">
-                        <p class="card-text">
-                            Experience an upgrade in security that's not just reassuring, but reliable, too.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <h5>Productivity</h5>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none rounded-3" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
-                        <rect width="100%" height="100%" fill="#868e96"></rect>
-                        <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text>
-                    </svg>
-                    <div class="card-body">
-                        <p class="card-text">
-                            Enjoy a boost in productivity with our top-of-the-line security system that allows you to focus on what really matters.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <h5>Organize</h5>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none rounded-3" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
-                        <rect width="100%" height="100%" fill="#868e96"></rect>
-                        <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text>
-                    </svg>
-                    <div class="card-body">
-                        <p class="card-text">
-                            Declutter and organize your computer cables, reducing interference and ensuring worry-free work.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <h5>Personalize</h5>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none rounded-3" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
-                        <rect width="100%" height="100%" fill="#868e96"></rect>
-                        <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text>
-                    </svg>
-                    <div class="card-body">
-                        <p class="card-text">
-                            Declutter and organize your computer cables, reducing interference and ensuring worry-free work.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </div>

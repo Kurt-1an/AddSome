@@ -6,15 +6,14 @@
         <input asp-for="Product.ImageUrl" hidden/>
 
         <!--New Product-->
-        <div class="row pt-4 pb-3" id="topbar">
+        <div class="row pt-2 pb-1" id="topbar">
             <!-- Title -->
             <div class="col-lg-8 col-sm-12 text-start mb-3 mb-sm-0">
-                <h2 class="text-primary">@(Model.Product.Id!=0?"Update":"Create") Product</h2>
+                <h1 style="color: #223442;"><b>@(Model.Product.Id != 0 ? "Edit" : "Create") Product Details</b></h1>
             </div>
 
-
             <!-- Save Button -->
-            <div class="col-lg-2 col-sm-6 text-center mb-3 mb-sm-0">
+            <div class="col-lg-2 col-sm-6 text-end mb-3 mb-sm-0">
                 @if(Model.Product.Id != 0)
                 {
                     <button type="submit" class="btn btn-success"><i class="bi bi-floppy"></i> Update</button>
@@ -26,7 +25,7 @@
             </div>
 
             <!-- Save as draft Button -->
-            <div class="col-lg-2 col-sm-6 text-center mb-3 mb-sm-0">
+            <div class="col-lg-2 col-sm-6 text-end mb-3 mb-sm-0">
                 <a href="#" class="btn btn-primary">
                     <i class="bi bi-floppy"></i> Save as draft
                 </a>
@@ -34,7 +33,7 @@
         </div>
 
         <!--Breadcrumb-->
-        <div class="row pb-3">
+        <div class="row pb-2">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Product" asp-action="Index">Product List</a></li>
@@ -44,19 +43,19 @@
         </div>
 
         <!--Product Images-->
-        <div class="row pt-4 pb-3">
+        <div class="row pb-4">
             <div class="col-12">
                 <div class="border p-3 container shadow">
                     <!--Title-->
                     <div class="row pb-2">
-                        <h4 class="text-primary">Product Images</h4>
+                        <h4 style="color: #223442;"><b>Product Images</b></h4>
                         <hr />
                     </div>
 
                     <!--Product Images-->
                     <div class="row">
                         <div class="col-4">
-                            <label id="formFileone" class="form-label mt-2"><strong>For Inventory </strong> <br/> <span class="text-muted">upload new img to delete the one displayed</span> </label>
+                            <label id="formFileone" class="form-label mt-2"><strong>For Inventory </strong> <br/> <span class="text-muted">Upload new image to remove the current image</span> </label>
                             <input type="file" name="file" class="form-control" aria-describedby="formFileone">
                         </div>
 
@@ -95,12 +94,12 @@
         </div>
 
         <!--Product Information-->
-        <div class="row pt-4 pb-3">
+        <div class="row pb-3">
             <div class="col-12">
                 <div class="border p-3 container shadow">
                     <!--Title-->
                     <div class="row pb-2">
-                        <h4 class="text-primary">Product Information</h4>
+                        <h4 style="color: #223442;"><b>Product Information</b></h4>
                         <hr />
                     </div>
 
@@ -189,14 +188,13 @@
         </div>
 
         <!--Pricing & Waranty-->
-        <div class="row pt-4 pb-3">
+        <div class="row pt-2 pb-3">
             <div class="col-6">
                 <!--Pricing-->
-
                 <div class="border p-3 container shadow">
                     <!--Title-->
                     <div class="row pb-2">
-                        <h4 class="text-primary">Pricing</h4>
+						<h4 style="color: #223442;"><b>Pricing</b></h4>
                         <hr />
                     </div>
 
@@ -224,7 +222,7 @@
                 <!--Warranty-->
                 <div class="border p-3 container mt-3 shadow">
                     <div class="row pb-2">
-                        <h4 class="text-primary">Warranty</h4>
+						<h4 style="color: #223442;"><b>Warranty</b></h4>
                         <hr />
                     </div>
 
@@ -261,7 +259,7 @@
                 <div class="border p-3 container shadow">
                     <!--Title-->
                     <div class="row pb-2">
-                        <h4 class="text-primary">Inventory</h4>
+						<h4 style="color: #223442;"><b>Inventory</b></h4>
                         <hr />
                     </div>
 
@@ -288,12 +286,12 @@
 
 
         <!--Additional Notes-->
-        <div class="row pt-4 pb-3">
+        <div class="row pt-3 pb-5">
             <div class="col-12">
                 <div class="border p-3 container shadow">
                     <!--Title-->
                     <div class="row pb-2">
-                        <h4 class="text-primary">Additional Notes</h4>
+                        <h4 style="color: #223442;"><b>Additional Notes</b></h4>
                         <hr />
                     </div>
 

@@ -8,20 +8,20 @@
 
 
 
-<div class="container-fluid">
-    <div class="row pt-4 pb-3">
+<div class="container-fluid pt-2 pb-5">
+    <div class="row pb-3">
         <div class="col-lg-6 col-sm-12 text-start mb-3 mb-sm-0">
-            <h2 class="text-primary">Dashboard</h2>
+			<h1 style="color: #223442;"><b>Dashboard</b></h1>
         </div>
     </div>
-    <div class="row pb-1">
+    <div class="row pb-3">
         <div class="col-lg-3 col-6">
             <!-- small box -->
             <div class="small-box bg-success">
                 <div class="inner">
-                    <h2>
-                        @ViewBag.totalcustomers
-                    </h2>
+                    <h1>
+                        <b>@ViewBag.totalcustomers</b>
+                    </h1>
 
                     <p>No. of Customers</p>
                 </div>
@@ -32,9 +32,9 @@
             <!-- small box -->
             <div class="small-box bg-warning">
                 <div class="inner">
-                    <h2>
-                        @ViewBag.unprocessedOrders
-                    </h2>
+                    <h1>
+						<b>@ViewBag.unprocessedOrders</b>
+                    </h1>
 
                     <p>Orders to Process</p>
                 </div>
@@ -45,9 +45,9 @@
             <!-- small box -->
             <div class="small-box bg-info">
                 <div class="inner">
-                    <h2>
-                        @ViewBag.ordersoutfordelivery
-                    </h2>
+                    <h1>
+						<b>@ViewBag.ordersoutfordelivery</b>
+                    </h1>
 
                     <p>Orders to Deliver</p>  <!-- connect mo dito yung method para sa orders bale dapat TotalOrders or kung anong naming ang gusto mo -->
                     <!-- Ang bibilangin neto eh yung mga order na nasa "To deliver" stat palang -->
@@ -59,9 +59,9 @@
             <!-- small box -->
             <div class="small-box bg-danger">
                 <div class="inner">
-                    <h2>
-                        @ViewBag.cancelledOrders
-                    </h2>
+                    <h1>
+                        <b>@ViewBag.cancelledOrders</b>
+                    </h1>
 
                     <p>Cancelled Orders</p>
                     <!-- Ang bibilangin neto eh yung mga nacancel sa loob ng isang buwan, kahit anong sales channel pa yan kasama sa bilang neto-->
@@ -71,12 +71,12 @@
         </div>
     </div>
 
-    <div class="row pt-2 pb-1">
+    <div class="row pt-2 pb-2">
         <div class="col-12">
             <div class="border p-3 container shadow">
                 <!--Title-->
                 <div class="row pb-2">
-                    <h4 class="text-primary">Sales Overview</h4>
+					<h4 style="color: #223442;"><b>Sales Overview</b></h4>
                     <hr />
                 </div>
                 <div class="row justify-content-center">
@@ -89,17 +89,17 @@
             </div>
         </div>
     </div>
-    <div class="row pt-3 pb-1">
-        <div class="col-6">
+    <div class="row pt-4 pb-2">
+        <div class="col-6 d-flex align-items-lg-stretch">
             <div class="border p-3 container shadow">
                 <!--Title-->
                 <div class="row pb-4">
-                    <h4 class="text-primary">Inventory</h4>
+					<h4 style="color: #223442;"><b>Inventory</b></h4>
                     <hr />
                 </div>
                 <div class="row">
                     <!-- Small boxes with centered content -->
-                    <div class="col-5 mx-auto">
+                    <div class="col-5 mx-auto p-0">
                         <div class="small-box bg-success">
                             <div class="inner text-center">
                                 <h2>@ViewBag.totalProductsInstock</h2>
@@ -108,7 +108,7 @@
                             <a asp-area="Admin" asp-controller="Product" asp-action="Index" class="small-box-footer text-center">More info <i class="bi bi-arrow-right-circle"></i></a>
                         </div>
                     </div>
-                    <div class="col-5 mx-auto">
+                    <div class="col-5 mx-auto p-0">
                         <div class="small-box bg-info">
                             <div class="inner text-center">
                                 <h2>@ViewBag.totalProdcategories</h2>
@@ -119,7 +119,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-5 mx-auto">
+                    <div class="col-5 mx-auto p-0">
                         <div class="small-box bg-warning ">
                             <div class="inner">
                                 <h2>
@@ -132,7 +132,7 @@
                             <a asp-area="Admin" asp-controller="Product" asp-action="Index" class="small-box-footer">More info <i class="bi bi-arrow-right-circle"></i></a>
                         </div>
                     </div>
-                    <div class="col-5 mx-auto pb-5">
+                    <div class="col-5 mx-auto p-0">
                         <div class="small-box bg-danger">
                             <div class="inner">
                                 <h2>
@@ -148,11 +148,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-6">
-            <div class="border p-3 container shadow">
+        <div class="col-6 d-flex align-items-stretch">
+            <div class="border p-3 container shadow" style="width:100;">
                 <!--Title-->
                 <div class="row">
-                    <h4 class="text-primary">Sales Earnings by Channel</h4>
+                    <h4 style="color: #223442;"><b>Sales Earnings per channel</b></h4>
                     <hr />
                 </div>
                 <div class="row">
@@ -163,15 +163,19 @@
             </div>
         </div>
     </div>
-    <div class="row pt-3 pb-3">
+    <div class="row pt-4 pb-4">
         <div class="col-12">
             <div class="border p-3 container shadow">
                 <!-- Title -->
+                <div class="row">
+                    <h4 style="color: #223442;"><b>Best Selling Items</b></h4>
+                    <hr/>
+                </div>
                 <table class="table table-hover scrollable-table">
                     <thead>
                         <tr>
                             <th></th>
-                            <th>Best Seller</th>
+                            <th>Product Name</th>
                             <th>Qty.</th>
                             <th>Total</th>
                         </tr>

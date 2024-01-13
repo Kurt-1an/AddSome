@@ -18,13 +18,13 @@
 <body>
 
 	<header>
-		<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3" style="background-color: #e3f2fd;">
+		<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3" style="background-color: #223442;">
 			<div class="container-fluid mx-3">
 				<div class="row align-items-center">
 					<!--Toggle Button-->
 					<!--pangit-->
 					<div class="col-auto">
-						<button type="button" class="btn btn-outline-primary" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
+						<button type="button" class="btn btn-outline-light" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
 							<i class="bi bi-list-nested"></i>
 						</button>
 					</div>
@@ -40,8 +40,8 @@
 				<div class="row align-items-center">
 					<!--Notification Bell-->
 					<div class="col-auto">
-						<button type="button" class="btn btn-outline-primary" data-bs-toggle="popover" data-bs-placement="bottom" title="Notification" data-bs-content="And here's some amazing content. It's very engaging. Right?">
-							<i class="bi bi-bell"></i>
+						<button type="button" class="btn btn-outline-light" data-bs-toggle="popover" data-bs-placement="bottom" title="Notification" data-bs-content="And here's some amazing content. It's very engaging. Right?">
+							<i class="bi bi-bell-fill"></i>
 						</button>
 					</div>
 
@@ -57,11 +57,11 @@
 
 
 		<!--Off Canvas-->
-		<div class="offcanvas offcanvas-start bg-light" data-bs-scroll="true" tabindex="-1" data-bs-backdrop="true" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+		<div class="offcanvas offcanvas-start bg-light" data-bs-scroll="true" tabindex="-1" data-bs-backdrop="true" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel" style="width:250px;">
 
 			<!--Off Header-->
 			<div class="offcanvas-header mx-3 mb-2 mt-2">
-				<button type="button" class="btn btn-outline-primary" data-bs-dismiss="offcanvas" aria-label="Close"><i class="bi bi-list-nested"></i></button>
+				<button type="button" class="btn btn-outline-dark" data-bs-dismiss="offcanvas" aria-label="Close"><i class="bi bi-list-nested"></i></button>
 				<a class="navbar-brand mx-3" asp-area="CustomerArea" asp-controller="Home" asp-action="Index">
 					<img src="~/image/logoabc.png" alt="Logo" height="50px" width="90px" class="img-fluid img-thumbnail" />
 				</a>
@@ -75,20 +75,20 @@
 
 							<!--Dashboard-->
 							<a class="btn btn-outline-secondary" asp-area="Admin" asp-controller="AdPage" asp-action="Index" role="button">
-								<span class="align-lefty"><i class="bi bi-speedometer2 pe-2"></i> Dashboard</span>
+								<span class="align-lefty"><i class="bi bi-speedometer2 pe-2"></i><b>Dashboard</b></span>
 							</a>
 
 							<!--Sales-->
-							<a class="btn btn-outline-secondary align-lefty" data-bs-toggle="collapse" href="#sales-collapse" aria-expanded="false" role="button"><i class="bi bi-cash pe-2"></i> Sales</a>
+							<a class="btn btn-outline-secondary align-lefty" data-bs-toggle="collapse" href="#sales-collapse" aria-expanded="false" role="button"><i class="bi bi-cash pe-2"></i><b>Sales</b></a>
 							<div class="collapse" id="sales-collapse">
 								<ul class="list-unstyled pb-1">
-									<li>
+									<li class="ms-4">
 										<a class="btn btn-outline-secondary fw-lighter small" asp-area="Admin" asp-controller="POS" asp-action="Index">Point of Sales</a>
 									</li>
-									<li>
+									<li class="ms-4">
 										<a class="btn btn-outline-secondary fw-lighter small" asp-area="Admin" asp-controller="Order" asp-action="Index">Manage Order</a>
-									</li>
-									<li>
+									</li class="ms-4">
+									<li class="ms-4">
 										<a class="btn btn-outline-secondary fw-lighter small" href="#">Sales Record</a>
 									</li>
 								</ul>
@@ -97,16 +97,16 @@
 							@if (User.IsInRole(SD.Role_Admin))
 							{
 								<!--Inventory-->
-								<a class="btn btn-outline-secondary align-lefty" data-bs-toggle="collapse" href="#inventory-collapse" aria-expanded="false" role="button"><i class="bi bi-box pe-2"></i> Inventory</a>
+								<a class="btn btn-outline-secondary align-lefty" data-bs-toggle="collapse" href="#inventory-collapse" aria-expanded="false" role="button"><i class="bi bi-box pe-2"></i><b>Inventory</b></a>
 								<div class="collapse" id="inventory-collapse">
 									<ul class="list-unstyled pb-1">
-										<li>
+										<li class="ms-4">
 											<a class="btn btn-outline-secondary fw-lighter small" asp-area="Admin" asp-controller="Product" asp-action="Index">Product list</a>
 										</li>
-										<li>
+										<li class="ms-4">
 											<a class="btn btn-outline-secondary fw-lighter small" asp-area="Admin" asp-controller="PurchaseOrder" asp-action="Index">Purchase Order</a>
 										</li>
-										<li>
+										<li class="ms-4">
 											<a class="btn btn-outline-secondary fw-lighter small" asp-area="Admin" asp-controller="StockTransfer" asp-action="Index">StockTransfer</a>
 										</li>
 									</ul>
@@ -114,13 +114,13 @@
 
 
 								<!--People-->
-								<a class="btn btn-outline-secondary align-lefty" data-bs-toggle="collapse" href="#people-collapse" aria-expanded="false" role="button"><i class="bi bi-people pe-2"></i> People</a>
+								<a class="btn btn-outline-secondary align-lefty" data-bs-toggle="collapse" href="#people-collapse" aria-expanded="false" role="button"><i class="bi bi-people pe-2"></i><b>People</b></a>
 								<div class="collapse" id="people-collapse">
 									<ul class="list-unstyled pb-1">
-										<li>
+										<li class="ms-4">
 											<a class="btn btn-outline-secondary fw-lighter small" asp-area="Admin" asp-controller="Customer" asp-action="Index">Customers</a>
 										</li>
-										<li>
+										<li class="ms-4">
 											<a class="btn btn-outline-secondary fw-lighter small" asp-area="Admin" asp-controller="Supplier" asp-action="Index">Suppliers</a>
 										</li>
 									</ul>
@@ -128,26 +128,26 @@
 
 
 								<!--Report & Analytics-->
-								<a class="btn btn-outline-secondary align-lefty" data-bs-toggle="collapse" href="#report-collapse" aria-expanded="false" role="button"><i class="bi bi-clipboard-data pe-2"></i>Reports</a>
+								<a class="btn btn-outline-secondary align-lefty" data-bs-toggle="collapse" href="#report-collapse" aria-expanded="false" role="button"><i class="bi bi-clipboard-data pe-2"></i><b>Reports</b></a>
 								<div class="collapse" id="report-collapse">
 									<ul class="list-unstyled pb-1">
-										<li>
+										<li class="ms-4">
 											<a class="btn btn-outline-secondary fw-lighter small" asp-area="Admin" asp-controller="Report" asp-action="Index">Sales Report</a>
 										</li>
-										<li>
+										<li class="ms-4">
 											<a class="btn btn-outline-secondary fw-lighter small" asp-area="Admin" asp-controller="Report" asp-action="InvIndex">Inventory Report</a>
 										</li>
 									</ul>
 								</div>
 
 								<!--Security-->
-								<a class="btn btn-outline-secondary align-lefty" data-bs-toggle="collapse" href="#security-collapse" aria-expanded="false" role="button"><i class="bi bi-shield pe-2"></i> Security</a>
+								<a class="btn btn-outline-secondary align-lefty" data-bs-toggle="collapse" href="#security-collapse" aria-expanded="false" role="button"><i class="bi bi-shield pe-2"></i><b>Security</b></a>
 								<div class="collapse" id="security-collapse">
 									<ul class="list-unstyled pb-1">
-										<li>
+										<li class="ms-4">
 											<a class="btn btn-outline-secondary fw-lighter small" asp-area="Admin" asp-controller="User" asp-action="Index">User Management</a>
 										</li>
-										<li>
+										<li class="ms-4">
 											<a class="btn btn-outline-secondary fw-lighter small" asp-area="Admin" asp-controller="AuditLog" asp-action="Index">Audit Trail</a>
 										</li>
 									</ul>
@@ -155,16 +155,16 @@
 							}
 
 							<!--Settings-->
-							<a class="btn btn-outline-secondary align-lefty" data-bs-toggle="collapse" href="#settings-collapse" aria-expanded="false" role="button"><i class="bi bi-gear pe-2"></i> Settings</a>
+							<a class="btn btn-outline-secondary align-lefty" data-bs-toggle="collapse" href="#settings-collapse" aria-expanded="false" role="button"><i class="bi bi-gear pe-2"></i><b>Settings</b></a>
 							<div class="collapse" id="settings-collapse">
 								<ul class="list-unstyled pb-1">
-									<li>
+									<li class="ms-4">
 										<a class="btn btn-outline-secondary fw-lighter small" href="#">Company Settings</a>
 									</li>
-									<li>
+									<li class="ms-4">
 										<a class="btn btn-outline-secondary fw-lighter small" href="#">System Settings</a>
 									</li>
-									<li>
+									<li class="ms-4">
 										<a class="btn btn-outline-secondary fw-lighter small" asp-area="Admin" asp-controller="Content" asp-action="Index">Website Settings</a>
 									</li>
 								</ul>

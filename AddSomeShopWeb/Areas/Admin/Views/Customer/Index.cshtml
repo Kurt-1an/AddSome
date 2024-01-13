@@ -1,24 +1,24 @@
 ﻿@model List<Customer> 
 
-<div class="container-fluid">
-    <div class="row pt-4 pb-3">
+<div class="container-fluid pt-2 pb-5">
+    <div class="row pb-3">
         <!-- Title -->
         <div class="col-8 text-start mb-3 mb-sm-0">
-            <h2 class="text-primary">Customers </h2>
+			<h1 style="color: #223442;"><b>Customers</b></h1>
         </div>
 
 		<!-- New Customer Button-->
         <div class="col-2 text-center mb-3 mb-sm-0">
-            <div class="d-flex justify-content-center">
+            <div class="d-flex justify-content-end">
                 <a class="btn btn-primary" asp-area="Admin" asp-controller="Customer" asp-action="Create" role="button">
-                    <i class="bi bi-plus-square"></i> New Customer
+                    <i class="bi bi-plus-lg"></i> New Customer
                 </a>
             </div>
         </div>
 
 
         <!-- Export Button -->
-        <div class="col-2 text-center mb-3 mb-sm-0">
+        <div class="col-2 text-end mb-3 mb-sm-0">
             <a href="#" class="btn btn-success" id="btngenerate">
                 <i class="bi bi-box-arrow-up"></i> Export
             </a>
@@ -26,7 +26,7 @@
 
     </div>
 
-    <div class="row pt-4 pb-3">
+    <div class="row pt-2 pb-4">
         <!-- Search Bar -->
         <div class="col-12">
             <form class="d-flex">

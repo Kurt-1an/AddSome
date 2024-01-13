@@ -1,22 +1,21 @@
 ﻿@model PurchaseOrder
 
-<div class="container">
+<div class="container pt-2 pb-5">
     <form method="post" id="myForm">
         <!--New Product-->
-        <div class="row pt-4 pb-3" id="topbar">
+        <div class="row pb-2" id="topbar">
             <!-- Title -->
             <div class="col-lg-8 col-sm-12 text-start mb-3 mb-sm-0">
-                <h2 class="text-primary">New PO</h2>
+                <h2 style="color: #223442;"><b>New Purchase Order</b></h2>
             </div>
 
-
             <!-- Save Button -->
-            <div class="col-lg-2 col-sm-6 text-center mb-3 mb-sm-0">
+            <div class="col-lg-2 col-sm-6 text-end mb-3 mb-sm-0">
                 <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Save and Send</button>
             </div>
 
             <!-- Export Button -->
-            <div class="col-lg-2 col-sm-6 text-center mb-3 mb-sm-0">
+            <div class="col-lg-2 col-sm-6 text-end mb-3 mb-sm-0">
                 <a href="#" class="btn btn-success">
                     <i class="bi bi-box-arrow-up"></i> Export
                 </a>
@@ -28,7 +27,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="PurchaseOrder" asp-action="Index">Purchase Order</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">New Po</li>
+                    <li class="breadcrumb-item active" aria-current="page">New Purchase Order</li>
                 </ol>
             </nav>
         </div>
@@ -39,7 +38,7 @@
                 <div class="border p-3 container shadow">
                     <!--Title-->
                     <div class="row pb-2">
-                        <h4 class="text-primary">Information</h4>
+						<h4 style="color: #223442;"><b>Information</b></h4>
                         <hr />
                     </div>
 
@@ -93,8 +92,8 @@
                         </div>
                     </div>
 
-                    <div class="row">
-                        <h5 class="text-primary">Contact Person</h5>
+                    <div class="row pt-2">
+						<h5 class="text-primary"><b>Contact Person</b></h5>
 
                         <div class="col-6">
                             <div class="input-group mb-3">
@@ -116,37 +115,24 @@
 
         </div>
 
-        <!--Product/s to adjust stock-->
-        <div class="row pb-2">
+        <!--Product/s to buy-->
+        <div class="row pt-3 pb-2">
             <div class="col-12">
                 <div class="border p-3 container shadow">
                     <!--Title-->
                     <div class="row pb-2">
-                        <h4 class="text-primary">Product</h4>
+                        <h4 style="color: #223442;">Products to purchase</h4>
                         <hr />
                     </div>
 
                     <div class="row pb-2">
-                        <div class="col-6">
+                        <div class="col-12">
                             <label for="productSearch">Search for a Product:</label>
                             <select id="productSearch" class="form-control"></select>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
 
-        <!--Table for purchased-->
-        <div class="row pb-2">
-            <div class="col-12">
-                <div class="border p-3 container shadow">
-                    <!--Title-->
-                    <div class="row pb-2">
-                        <h4 class="text-primary">Products</h4>
-                        <hr />
-                    </div>
-
-                    <div class="row pb-2">
+                    <div class="row pt-3 pb-2 px-3">
                         <table id="tblData" class="table table-bordered table-striped table-hover" style="width:100%">
                             <thead>
                                 <tr>
@@ -177,12 +163,12 @@
         </div>
 
         <!--Additional Note-->
-        <div class="row pb-2">
+        <div class="row pt-3 pb-5">
             <div class="col-12">
                 <div class="border p-3 container shadow">
                     <!--Title-->
                     <div class="row pb-2">
-                        <h4 class="text-primary">Additional Note</h4>
+                        <h4 style="color: #223442;">Additional Note</h4>
                         <hr />
                     </div>
 

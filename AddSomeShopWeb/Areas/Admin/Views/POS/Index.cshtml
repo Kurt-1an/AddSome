@@ -4,15 +4,15 @@
 
 <link rel="stylesheet" type="text/css" href="~/css/PosIndex.css">
 
-<div class="container-fluid">
+<div class="container-fluid pt-2 pb-5">
 
 	<!-- TITLE -->
-	<div class="row pt-4 pb-2">
+	<div class="row pb-3">
 		<div class="col-lg-8 col-sm-12 text-start mb-3 mb-sm-0">
-			<h2 class="text-primary">Point of Sales</h2>
+			<h1 style="color: #223442;"><b>Point of Sales</b></h1>
 		</div>
-		<div class="col-lg-4 col-sm-4 mb-3 mb-sm-0 justify-content-between">
-			<button id="newSaleButton" class="btn btn-success"> New Sale</button>
+		<div class="col-lg-4 col-sm-4 mb-3 mb-sm-0 text-end">
+			<button id="newSaleButton" class="btn btn-success">New Sale</button>
 		</div>
 	</div>
 
@@ -22,7 +22,7 @@
 	<div class="accordion-item">
 		<h2 class="accordion-header" id="headingOne">
 			<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-				<h5>Customer Information</h5>
+				<h4><b>Customer Information</b></h4>
 			</button>
 		</h2>
 		<div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
@@ -37,7 +37,7 @@
 							<input type="text" class="form-control" id="lastName" placeholder="Last Name" required />
 						</div>
 					</div>
-					<div class="row pt-2 pb-1">
+					<div class="row pt-2 pb-2">
 						<div class="col-6">
 							<input type="email" class="form-control" id="emailAdd" placeholder="Email address" />
 						</div>
@@ -47,7 +47,8 @@
 					</div>
 					<div class="row pt-3 pb-1 justify-content-center">
 						<div class="row pb-1">
-							<h7>Billing Address</h7>
+							<hr/>
+							<h6><b>Billing Address</b></h6>
 						</div>
 						<div class="row pt-1 pb-1">
 							<div class="col-4">
@@ -89,7 +90,7 @@
 		<div class="col-sm-8 pt-2 pb-3">
 			<div class="border p-3 container shadow">
 				<div class="row pb-1">
-					<h5>Products</h5> <hr />
+					<h4>Products</h4> <hr />
 				</div>
 
 				<div class="row pb-1">
@@ -132,18 +133,14 @@
 		<div class="col-sm-4 pt-2 pb-3">
 			<div class="border p-3 container shadow justify-content-center">
 				<div class="row pb-1">
-					<h5>Details</h5>
+					<h4>Details</h4>
 					<hr />
 				</div>
 
-				<!--Order Summary-->
+				@* <!--Order Summary-->
 				<div class="col-12 pb-2">
 					<h5 class="text-primary text-start">Order Summary:</h5>
-				</div>
-
-			
-
-
+				</div>*@
 
 				<div class="row pb-1">
 					<div class="input-group mb-3">
