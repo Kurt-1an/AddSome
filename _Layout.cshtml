@@ -1,0 +1,150 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+
+@{
+	int cartCount = HttpContextAccessor.HttpContext.Session.GetInt32(SD.SessionCart) ?? 0;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@ViewData["Title"] - AddSomeShopWeb</title>
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+	<link rel="icon" href="~/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/AddSomeShopWeb.styles.css" asp-append-version="true" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+	<link rel="stylesheet" href="//cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+</head>
+<body>
+	<header>
+
+		<nav class="navbar navbar-light navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3" style="background-color: #223442;">
+			<div class="container">
+				<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+					<img src="~/image/logoabc.png" alt="Logo" height="50px" width="90px" class="img-fluid img-thumbnail" />
+				</a>
+
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+						aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+					<div class="d-flex justify-content-center ">
+						<ul class="navbar-nav me-auto">
+							<li class="nav-item">
+								<a class="nav-link" asp-area="CustomerArea" asp-controller="Home" asp-action="Index" style="color: white;">Home</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" asp-area="CustomerArea" asp-controller="Home" asp-action="About" style="color: white;">About</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" asp-area="CustomerArea" asp-controller="Home" asp-action="Privacy" style="color: white;">Policies</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" asp-area="CustomerArea" asp-controller="Home" asp-action="Shop" style="color: white;">Shop</a>
+							</li>
+							@if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_Employee))
+							{
+								<li class="nav-item">
+									<a class="nav-link" asp-area="Admin" asp-controller="AdPage" asp-action="Index" style="color: white;">Admin Page</a>
+								</li>
+							}
+
+							@if (User.IsInRole(SD.Role_Customer))
+							{
+								<li class="nav-item">
+									<a class="nav-link" asp-area="CustomerArea" asp-controller="Home" asp-action="ManageOrder" style="color: white;">Manage Order</a>
+								</li>
+							}
+
+							@if (User.IsInRole(SD.Role_Customer))
+							{
+								<li class="nav-item">
+									<a class="nav-link position-relative" asp-area="CustomerArea" asp-controller="Cart" asp-action="Index">
+										<i class="bi bi-cart ms-2"></i>
+										@if (cartCount > 0)
+										{
+											<span class="position-absolute top-90 start-90 translate-middle badge rounded-pill bg-danger">
+												@cartCount
+											</span>
+										}
+									</a>
+								</li>
+							}
+						</ul>
+					</div>
+
+					<div class="d-flex ml-auto">
+						<partial name="_LoginPartial" />
+					</div>
+				</div>
+
+			</div>
+		</nav>
+
+	</header>
+
+	<div class="container">
+		<partial name="_Notification" />
+		@RenderBody()
+	</div>
+
+
+
+	<footer class="mt-5" style="background-color: #223442;">
+		<div class="container p-4">
+			<div class="row">
+				<div class="col-lg-6 col-md-12 mb-4">
+					@* <h5 class="mb-3" style="letter-spacing: 2px; color: #818963;">footer content</h5> *@
+					<p style="color:white;">
+						Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis
+						molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae aliquam
+						voluptatem veniam, est atque cumque eum delectus sint!
+					</p>
+				</div>
+				<div class="col-lg-3 col-md-6 mb-4">
+					<h5 class="mb-3" style="letter-spacing: 2px; color: #968C37;"><b>Page</b></h5>
+					<ul class="list-unstyled mb-0">
+						<li class="mb-1">
+							<a asp-area="CustomerArea" asp-controller="Home" asp-action="Vision" style="color: white;">Vision</a>
+						</li>
+					</ul>
+				</div>
+				<div class="col-lg-3 col-md-6 mb-4">
+					<h5 class="mb-1" style="letter-spacing: 2px; color:#968C37;"><b>Opening hours</b></h5>
+					<table class="table" style="color: white; border-color: #968C37;">
+						<tbody>
+							<tr>
+								<td>Mon - Fri:</td>
+								<td>8am - 9pm</td>
+							</tr>
+							<tr>
+								<td>Sat - Sun:</td>
+								<td>8am - 1am</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="text-center p-3" style="background-color:#1E2E3B; color:#968C37;">
+			© 2024 Copyright:
+			<a style="color:#968C37;" href="#">Addsome Business Corporation</a>
+		</div>
+		<!-- Copyright -->
+	</footer>
+
+
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="//cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+	<script src="~/js/site.js" asp-append-version="true"></script>
+	@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

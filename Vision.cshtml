@@ -1,0 +1,29 @@
+﻿@model List<Content>
+
+<div class="container">
+    <!--New Product-->
+    <div class="row pt-4 pb-3" id="topbar">
+        <!-- Title -->
+        <div class="col-lg-12 col-sm-12 text-start mb-3 mb-sm-0">
+            <h1 class="text" style="color: #223442;"><b>Vision</b></h1>
+        </div>
+    </div>
+
+    @* <!--Breadcrumb-->
+    <div class="row pb-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-area="CustomerArea" asp-controller="Home" asp-action="Index">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Vision</li>
+            </ol>
+        </nav>
+    </div>
+ *@
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-12 pt-2 pb-3">
+            <p>@Html.Raw(@item.Vision)</p>
+        </div>
+    }
+</div>
+
