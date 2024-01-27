@@ -6,15 +6,15 @@
     <div class="container rounded-3 text-center p-4" style="background-image: url('image/cctv.png'); background-position:bottom; background-size: cover; height: 300px; position: relative;">
         <div class="overlay"></div>
         <div class="d-flex flex-column justify-content-center align-items-center" style="height: 100%; position: relative; z-index: 1;">
-            <h1 class="text-light">Security That Never Sleeps</h1>
-            <p class="text-light">Safer household and peace of mind.</p>
-            <a role="button" class="btn btn-dark" asp-area="CustomerArea" asp-controller="Home" asp-action="Shop" >Shop Now</a>
+            <h1 class="text-light"><b>Elevate Your Tech Experience</b></h1>
+            <p class="text-light">Discover. Upgrade. Secure.</p>
+            <a role="button" class="btn btn-lg" style="background-color:#223442; color:white;" asp-area="CustomerArea" asp-controller="Home" asp-action="Shop">Shop Now</a>
         </div>
     </div>
 </div>
 
 <!--Categories-->
-<div class="container" style="background-color: #e3f2fd;">
+<div class="container" style="border-radius: 10px; background-color: #e3f2fd;">
     <div class="text-start p-4 mt-5">
         <h4 style="color: #223442;"><b>Shop by Category</b></h4>
 
@@ -44,9 +44,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-3">
-                    <h4>Best Selling Items</h4>
+                    <h3><b>Best Selling Items</b></h3>
                     <p>Easiest way to a secured home</p>
-                    <a role="button" class="btn btn-primary" asp-area="CustomerArea" asp-controller="Home" asp-action="Shop">Shop now <i class="bi bi-arrow-right"></i></a>
+                    <a role="button" class="btn" style="background-color:#223442; color:white;" asp-area="CustomerArea" asp-controller="Home" asp-action="Shop">Shop now <i class="bi bi-arrow-right"></i></a>
                 </div>
 
                 <!-- Iterate over the best-selling products and display them in cards -->
@@ -68,7 +68,7 @@
                                     </div>
 
                                     <div class="pl-1">
-                                           <p class="text-dark text-opacity-75 text-center">
+                                        <p class="text-dark text-opacity-75 text-center">
                                             Price: <span>@product.RetailPrice.ToString("c", new CultureInfo("en-PH"))</span>
                                         </p>
                                     </div>

@@ -151,19 +151,17 @@ else
 	<div class="container">
 		<div class="row">
 			<div class="col-md-6 mx-auto">
-				<div class="card shadow border-0 mt-4">
-					<div class="card-header bg-primary bg-gradient ml-0 py-2">
-						<div class="row">
-							<div class="col-12 text-center">
-								<h2 class="py-2 text-white">Create an account</h2>
-							</div>
-						</div>
-					</div>
+				<div class="card shadow border-2 mt-4">
 					<div class="card-body p-4">
 						<div class="row pt-3">
 							<div class="col-md-12">
 								<form id="registerForm" class="row" asp-route-returnUrl="@Model.ReturnUrl" method="post">
 									<div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+
+									<div class="mt-1 pb-4" style="color:#223442; text-align: center;">
+										<h1><b>SIGN UP</b></h1>
+										<p>Create your account and start shopping!</p>
+									</div>
 
 									<div class="form-floating mb-3 col-md-12">
 										<input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
@@ -234,8 +232,8 @@ else
 										</div>
 									}
 
-									<div class="col-12 mt-4">
-										<button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+									<div class="col-12 mt-4 mb-4 d-flex justify-content-center">
+										<button id="registerSubmit" type="submit" class="w-50 btn btn-lg" style="border-radius: 30px; background-color:#223442; color:white;">Sign up</button>
 									</div>
 								</form>
 							</div>

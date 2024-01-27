@@ -57,3 +57,7 @@ html {
 .equal-width {
     width: 100%;
 }
+
+.minHeight {
+    min-height: calc(100vh - 395px);
+}
