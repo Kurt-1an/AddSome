@@ -1,0 +1,112 @@
+﻿@model List<ABC.Models.Product>
+
+@{
+    var orderDetails = (List<ABC.Models.OrderDetail>)ViewBag.OrderDetails;
+}
+
+<link rel="stylesheet" href="~/css/report.css" />
+
+<div class="container-fluid pt-2 pb-5">
+    <div class="row pb-1">
+        <div class="col-lg-8 col-sm-12 text-start mb-3 mb-sm-0">
+            <h1 style="color: #223442;"><b>Inventory Report</b></h1>
+        </div>
+        <!-- Export Button -->
+        <div class="col-lg-4 col-sm-4 mb-3 mb-sm-0 text-end">
+            <a href="#" class="btn btn-success" id="btngenerate">
+                <i class="bi bi-box-arrow-up"></i> Export
+            </a>
+        </div>
+    </div>
+    <!--Breadcrumb-->
+    <div class="row pb-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page">Inventory Report</li>
+                <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Report" asp-action="Index">Sales Report</a></li>
+            </ol>
+        </nav>
+    </div>
+    <div class="row pt-1 pb-2">
+        <div class="col-3">
+            <div class="smallbox">
+                <p>Inventory Value</p>
+                <h2><strong>@ViewBag.TotalProducts</strong></h2>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="smallbox">
+                <p>Product Count</p>
+                <h2><strong>@ViewBag.TotalProducts</strong></h2>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="smallbox">
+                <p>Purchase Order Created</p>
+                <h2><strong>@ViewBag.TotalPurOrders</strong></h2>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="smallbox">
+                <p>Transferred Stocks</p>
+                <h2><strong>@ViewBag.TotalProducts</strong></h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="row pt-3 pb-2">
+        <div class="col-7">
+            <div class="border p-3 container shadow">
+                <!--Title-->
+                <div class="row">
+                    <h4 style="color: #223442;">Performance</h4>
+                    <hr />
+                </div>
+                <div class="chart2">
+                    <canvas id="inventoryChart"
+                            data-instock-products="@ViewBag.InstockProducts"
+                            data-low-stock-products="@ViewBag.LowStockProducts"
+                            data-out-of-stock-products="@ViewBag.OutOfStockProducts"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-5">
+            <div class="border p-3 container shadow">
+                <!-- Title -->
+                <div class="row">
+                    <h4 style="color: #223442;">Fast-Moving Items</h4>
+                    <hr />
+                </div>
+                <table class="table table-hover scrollable-table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Product</th>
+                            <th>Quantity Sold</th>
+                        </tr>
+                    </thead>
+                    @* <tbody>
+                        @foreach (var product in Model)
+                        {
+                            var totalSold = (int)orderDetails.Where(detail => detail.ProductId == product.Id).Sum(detail => detail.Count);
+                            var totalPrice = orderDetails
+                            .Where(detail => detail.ProductId == product.Id)
+                            .Sum(detail => detail.Product != null ? (detail.Product.RetailPrice * detail.Count) : 0);
+
+                            <tr>
+                                <td><img src="@product.ImageUrl" alt="Product Image" width="50" height="50"></td>
+                                <td>@product.productName</td>
+                                <td>@totalSold</td>
+                            </tr>
+                        }
+                    </tbody> *@
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="//cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+<script src="~/js/reportindex.js"></script>
+

@@ -1,90 +1,143 @@
-﻿@model CategoryProductVM
+﻿@model List<ABC.Models.Product>
 
+@{
+    var orderDetails = (List<ABC.Models.OrderDetail>)ViewBag.OrderDetails;
+}
 
-<!--hero-->
-<div class="container-fluid my-5">
-    <div class="container rounded-3 text-center p-4" style="background-image: url('image/cctv.png'); background-position:bottom; background-size: cover; height: 300px; position: relative;">
-        <div class="overlay"></div>
-        <div class="d-flex flex-column justify-content-center align-items-center" style="height: 100%; position: relative; z-index: 1;">
-            <h1 class="text-light"><b>Elevate Your Tech Experience</b></h1>
-            <p class="text-light">Discover. Upgrade. Secure.</p>
-            <a role="button" class="btn btn-lg" style="background-color:#223442; color:white;" asp-area="CustomerArea" asp-controller="Home" asp-action="Shop">Shop Now</a>
+<link rel="stylesheet" href="~/css/report.css" />
+
+<div class="container-fluid pt-2 pb-5">
+    <!--TITLE-->
+    <div class="row pb-1">
+        <div class="col-lg-8 col-sm-12 text-start mb-3 mb-sm-0">
+            <h1 style="color: #223442;"><b>Sales Report</b></h1>
+        </div>
+        <!-- Export Button -->
+        <div class="col-lg-4 col-sm-4 mb-3 mb-sm-0 text-end">
+            <a href="#" class="btn btn-success" id="btngenerate">
+                <i class="bi bi-box-arrow-up"></i> Export
+            </a>
         </div>
     </div>
-</div>
-
-<!--Categories-->
-<div class="container" style="border-radius: 10px; background-color: #e3f2fd;">
-    <div class="text-start p-4 mt-5">
-        <h4 style="color: #223442;"><b>Shop by Category</b></h4>
-
-        <!--Start of Cards-->
-        <div class="container pt-2">
-            <div class="row">
-                @foreach (var category in Model.Categories)
-                {
-                    <div class="col-sm-3">
-                        <a href="@Url.Action("Shop", "Home", new { categoryFilter = category.Id })">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none rounded-3" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
-                                <rect width="100%" height="100%" fill="#868e96"></rect>
-                                <text x="50%" y="50%" fill="#dee2e6" dy=".3em">@category.Name</text>
-                            </svg>
-                        </a>
-                    </div>
-                }
+    <!--Breadcrumb-->
+    <div class="row pb-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page">Sales Report</li>
+                <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Report" asp-action="InvIndex">Inventory Report</a></li>
+            </ol>
+        </nav>
+    </div>
+    <div class="row pt-1 pb-2">
+        <div class="col-4">
+            <div class="smallbox">
+                <p>Total Revenue</p>
+                <h2 style="color: #305B78;">
+                    <strong>Php @ViewBag.SalesRevenue</strong>
+                </h2>
             </div>
-            <!--End of Cards-->
+        </div>
+        <div class="col-4">
+            <div class="smallbox">
+                <span>
+                    <p>Total Sales</p>
+                    <h2 style="color: #B5603A;"><strong>@ViewBag.NumberOfItemsSold</strong></h2>
+                </span>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="smallbox">
+                <p>Total Profit</p>
+                <h2 style="color: #146128;"><strong>Php @ViewBag.Profit</strong></h1>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="container my-4">
-    <div class="text-start p-4 mt-5">
-        <!-- Start of Best Seller Cards -->
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-3">
-                    <h3><b>Best Selling Items</b></h3>
-                    <p>Easiest way to a secured home</p>
-                    <a role="button" class="btn" style="background-color:#223442; color:white;" asp-area="CustomerArea" asp-controller="Home" asp-action="Shop">Shop now <i class="bi bi-arrow-right"></i></a>
+    <div class="row pt-3 pb-2">
+        <div class="col-7">
+            <div class="border p-3 container shadow">
+                <!--Title-->
+                <div class="row pb-3">
+                    <h4 style="color: #223442;">Revenue</h4>
+                    <hr />
                 </div>
-
-                <!-- Iterate over the best-selling products and display them in cards -->
-                @foreach (var product in Model.BestSellingProducts.Take(3))
-                {
-                    <div class="col-3">
-                        <div class="row p-2">
-                            <div class="col-12">
-
-                                <!--Card-->
-                                <div class="card border-0 mb-3 p-3 border-top border-5 shadow rounded" width="25%">
-                                    <div class="d-flex justify-content-center">
-                                        <img src="@product.ImageUrl" class="card-img-top rounded" style="max-width: 200px; max-height: 200px;" />
-                                    </div>
-
-                                    <div class="card-body pb-0" style="height: 150px;">
-                                        <h6 class="card-title text-dark opacity-75 text-uppercase text-center">@product.productName</h6>
-                                        <!-- Add other details as needed -->
-                                    </div>
-
-                                    <div class="pl-1">
-                                           <p class="text-dark text-opacity-75 text-center">
-                                            Price: <span>@product.RetailPrice.ToString("c", new CultureInfo("en-PH"))</span>
-                                        </p>
-                                    </div>
-                                    <div>
-                                        <a asp-action="Details" asp-route-productId="@product.Id" class="btn btn-primary bg-gradient border-0 form-control">
-                                            Details
-                                        </a>
-                                    </div>
-                                </div>
-
-                            </div>
+                <div>
+                    <canvas id="myChart" salesrevenue="@ViewBag.SalesRevenue" costpricetotal="@ViewBag.totalCost"></canvas>
+                </div>
+                
+                <div class="row pt-2">
+                    <div class="col-6">
+                        <div class="smallbox">
+                            <p>Walkin</p>
+                            <h5 style="color: #223442;"><b>Php</b></h5>
                         </div>
                     </div>
-                }
+                    <div class="col-6">
+                        <div class="smallbox">
+                            <p>On-call</p>
+                            <h5 style="color: #223442;"><b>Php</b></h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="row pt-2 pb-3">
+                    <div class="col-6">
+                        <div class="smallbox">
+                            <p>Chat-based</p>
+                            <h5 style="color: #223442;"><b>Php</b></h5>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="smallbox">
+                            <p>Website</p>
+                            <h5 style="color: #223442;"><b>Php</b></h5>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <!-- End of Best Seller Cards -->
+        <div class="col-5">
+            <div class="border p-3 container shadow">
+                <!-- Title -->
+                <div class="row">
+                    <h4 style="color: #223442;">Best Selling Items</h4>
+                    <hr />
+                </div>
+                <table class="table table-hover scrollable-table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Product</th>
+                            <th>Qty.</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var product in Model)
+                        {
+                            var totalSold = (int)orderDetails.Where(detail => detail.ProductId == product.Id).Sum(detail => detail.Count);
+                            var totalPrice = orderDetails
+                            .Where(detail => detail.ProductId == product.Id)
+                            .Sum(detail => detail.Product != null ? (detail.Product.RetailPrice * detail.Count) : 0);
+
+                            <tr>
+                                <td><img src="@product.ImageUrl" alt="Product Image" width="50" height="50"></td>
+                                <td>@product.productName</td>
+                                <td>@totalSold</td>
+                                <td>@String.Format("{0:C}", totalPrice)</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
+
+
+
+@section Scripts{
+    <script src="//cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+    <script src="~/js/salesRep.js"></script>
+}
+
