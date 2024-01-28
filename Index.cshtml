@@ -57,12 +57,12 @@
         <div class="col-7">
             <div class="border p-3 container shadow">
                 <!--Title-->
-                <div class="row pb-3">
+                <div class="row pb-2">
                     <h4 style="color: #223442;">Revenue</h4>
                     <hr />
                 </div>
-                <div>
-                    <canvas id="myChart" salesrevenue="@ViewBag.SalesRevenue" costpricetotal="@ViewBag.totalCost"></canvas>
+                <div class="barchart pb-3">
+                    <canvas id="salesChart" salesRevenue="@ViewBag.SalesRevenue"></canvas>
                 </div>
                 
                 <div class="row pt-2">
@@ -138,6 +138,6 @@
 @section Scripts{
     <script src="//cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
-    <script src="~/js/salesRep.js"></script>
+    <script src="~/js/ReportSales.js"></script>
 }
 

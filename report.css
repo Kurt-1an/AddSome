@@ -1,0 +1,16 @@
+﻿.smallbox {
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 2px;
+    border: 1px solid #E6E6E6;
+}
+
+.smallbox p{
+    font-size: 15px;
+    color: grey;
+}
+
+.minHeight {
+    min-height: calc(100vh - 395px);
+}
